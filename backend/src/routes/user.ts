@@ -14,6 +14,8 @@ router.post("/signup", function (req, res) {
         email: req.body.email,
         password: req.body.password,
         region: req.body.region,
+        matches: [],
+        albums: []
     };
     User.create(user)
         .then(data => {
