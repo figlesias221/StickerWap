@@ -1,7 +1,8 @@
-const express = require("express");
+import express from "express";
 const app = express();
 const port = 3000;
-const userRouter = require("./routes/user");
+import userRouter from "./routes/user";
+import db from "./models";
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -9,9 +10,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-const dbs = require("./models");
-
-dbs.mongoose
+db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

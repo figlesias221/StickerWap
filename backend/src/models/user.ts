@@ -2,7 +2,7 @@ export {};
 
 let mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -21,11 +21,12 @@ const userSchema = mongoose.Schema({
   region: { type: String, required: true },
   matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   albums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
+  tokens: [],
 });
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: user._id.toString() }, "casanova");
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -44,6 +45,16 @@ userSchema.statics.findByCredentials = async (email, password) => {
   }
   return user;
 };
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
+});
 
 const User = mongoose.model("User", userSchema);
 

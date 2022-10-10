@@ -9,6 +9,4 @@ const db = {
   users: require("./user")(mongoose),
 };
 
-module.exports = {
-  db,
-};
+export default db;
