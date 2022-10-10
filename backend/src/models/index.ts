@@ -4,9 +4,11 @@ let mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const db = {
-    mongoose,
-    url: dbConfig.url,
-    users: require("./user")(mongoose),
+  mongoose,
+  url: dbConfig.url,
+  users: require("./user")(mongoose),
 };
 
-module.exports = db;
+module.exports = {
+  db,
+};
