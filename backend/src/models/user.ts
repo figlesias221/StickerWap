@@ -17,6 +17,8 @@ const userSchema = mongoose.Schema({
     },
     password: { type: String, required: true },
     region: { type: String, required: true },
+    matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    albums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
 });
 
 module.exports = mongoose.model('User', userSchema);
