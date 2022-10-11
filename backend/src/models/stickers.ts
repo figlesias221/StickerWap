@@ -9,4 +9,6 @@ const stickerSchema = mongoose.Schema({
   count: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("Sticker", stickerSchema);
+const Sticker = mongoose.model("Sticker", stickerSchema);
+
+module.exports = Sticker;
