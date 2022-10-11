@@ -1,24 +1,61 @@
-export { };
+export {};
 
 let mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const userSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-    },
-    password: { type: String, required: true },
-    region: { type: String, required: true },
-    matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    albums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
+  _id: mongoose.Schema.Types.ObjectId,
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+  },
+  password: { type: String, required: true },
+  region: { type: String, required: true },
+  matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  albums: [{ type: mongoose.Schema.Types.ObjectId, ref: "Album" }],
+  tokens: [],
 });
 
-module.exports = mongoose.model('User', userSchema);
+userSchema.methods.generateAuthToken = async function () {
+  const user = this;
+  const token = jwt.sign({ _id: user._id.toString() }, "casanova");
+
+  user.tokens = user.tokens.concat({ token });
+  await user.save();
+
+  return token;
+};
+
+userSchema.statics.findByCredentials = async (email, password) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("Unable to login");
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error("Unable to login");
+  }
+  return user;
+};
+
+userSchema.pre("save", async function (next) {
+  const user = this;
+
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
+});
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
