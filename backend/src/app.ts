@@ -2,6 +2,8 @@ import express from "express";
 const app = express();
 const port = 3000;
 import userRouter from "./routes/user";
+import stickersRouter from "./routes/stickers";
+import albumRouter from "./routes/album";
 import db from "./models";
 
 app.get("/", (req, res) => {
@@ -24,6 +26,8 @@ db.mongoose
   });
 
 app.use("/users", userRouter);
+app.use("/stickers", stickersRouter);
+app.use("/albums", albumRouter);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
