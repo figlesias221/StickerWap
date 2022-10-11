@@ -58,6 +58,14 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
+userSchema.statics.getRandomUser = async function (region) {
+  const user = await User.aggregate([
+    { $match: { region: region } },
+    { $sample: { size: 1 } },
+  ]);
+  return user;
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

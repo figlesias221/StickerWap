@@ -73,7 +73,7 @@ export const createQatarStickerList = () => {
   let j = 0;
   // Create 8 special stickers
   for (let i = 0; i <= 7; i++) {
-    stickers["FWC_" + i] = {
+    stickers[j] = {
       name: "FWC_" + i,
       country: "FWC",
       count: 0,
@@ -85,7 +85,7 @@ export const createQatarStickerList = () => {
 
   // Create 10 stadium stickers and Ball
   for (let i = 0; i <= 10; i++) {
-    stickers["STADIUM_" + i] = {
+    stickers[j] = {
       name: "STADIUM_" + i,
       country: "STADIUM",
       count: 0,
@@ -99,7 +99,7 @@ export const createQatarStickerList = () => {
   // For each country, create 12 sticker with id `country` + `_` + `number` (1-19)
   for (let country of countries) {
     for (let i = 1; i < 20; i++) {
-      stickers[countryAbreviationDictonary[country] + "_" + i] = {
+      stickers[j] = {
         name: country,
         country: country,
         count: 0,
@@ -112,7 +112,7 @@ export const createQatarStickerList = () => {
 
   // Create 11 museum stickers
   for (let i = 0; i <= 11; i++) {
-    stickers["MUSEUM_" + i] = {
+    stickers[j] = {
       name: "MUSEUM_" + i,
       country: "MUSEUM",
       count: 0,
