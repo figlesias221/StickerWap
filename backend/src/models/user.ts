@@ -1,3 +1,5 @@
+import { buildAlbum } from "../scripts/createStickers";
+
 export {};
 
 let mongoose = require("mongoose");
@@ -20,7 +22,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   region: { type: String, required: true },
   matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  album: [],
+  album: { type: {}, default: buildAlbum() },
   tokens: [],
 });
 
