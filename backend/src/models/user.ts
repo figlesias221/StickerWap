@@ -1,3 +1,5 @@
+import { buildAlbum } from "../scripts/createStickers";
+
 export {};
 
 let mongoose = require("mongoose");
@@ -20,7 +22,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   region: { type: String, required: true },
   matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  album: [],
+  album: { type: {}, default: buildAlbum() },
   tokens: [],
 });
 
@@ -52,7 +54,8 @@ userSchema.pre("save", async function (next) {
   if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
-
+  console.log("just before saving");
+  console.log(user);
   next();
 });
 

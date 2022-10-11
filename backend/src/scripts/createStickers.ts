@@ -1,9 +1,3 @@
-// Build dictonary with all world cup album sticker's ids
-
-import mongoose from "mongoose";
-
-// Countries participating in the 2022 Soccer World Cup
-
 const countries = [
   "Qatar",
   "Ecuador",
@@ -74,57 +68,66 @@ const countryAbreviationDictonary = {
   "South Korea": "KOR",
 };
 
-const stickers = {};
-let j = 0;
-// Create 8 special stickers
-for (let i = 0; i <= 7; i++) {
-  stickers["FWC_" + i] = {
-    name: "FWC_" + i,
-    country: "FWC",
-    count: 0,
-    img: "FWC_" + i + ".png",
-    id: j,
-  };
-  j++;
-}
-
-// Create 10 stadium stickers and Ball
-for (let i = 0; i <= 11; i++) {
-  stickers["STADIUM_" + i] = {
-    name: "STADIUM_" + i,
-    country: "STADIUM",
-    count: 0,
-    img: "STADIUM_" + i + ".png",
-    id: j,
-  };
-  j++;
-}
-
-// Create a dictionary with all stickers to save in mongoDB
-// For each country, create 12 sticker with id `country` + `_` + `number` (0-11)
-
-for (let country of countries) {
-  for (let i = 0; i < 20; i++) {
-    stickers[countryAbreviationDictonary[country] + "_" + i] = {
-      name: country,
-      country: country,
+export const createQatarStickerList = () => {
+  const stickers = {};
+  let j = 0;
+  // Create 8 special stickers
+  for (let i = 0; i <= 7; i++) {
+    stickers["FWC_" + i] = {
+      name: "FWC_" + i,
+      country: "FWC",
       count: 0,
-      img: country + "_" + i + ".png",
+      img: "FWC_" + i + ".png",
+      id: j,
     };
     j++;
   }
-}
 
-// Create 11 museum stickers
-for (let i = 0; i <= 11; i++) {
-  stickers["MUSEUM_" + i] = {
-    name: "MUSEUM_" + i,
-    country: "MUSEUM",
-    count: 0,
-    img: "MUSEUM_" + i + ".png",
-    id: j,
-  };
-  j++;
-}
+  // Create 10 stadium stickers and Ball
+  for (let i = 0; i <= 10; i++) {
+    stickers["STADIUM_" + i] = {
+      name: "STADIUM_" + i,
+      country: "STADIUM",
+      count: 0,
+      img: "STADIUM_" + i + ".png",
+      id: j,
+    };
+    j++;
+  }
 
-console.log(stickers);
+  // Create a dictionary with all stickers to save in mongoDB
+  // For each country, create 12 sticker with id `country` + `_` + `number` (1-19)
+  for (let country of countries) {
+    for (let i = 1; i < 20; i++) {
+      stickers[countryAbreviationDictonary[country] + "_" + i] = {
+        name: country,
+        country: country,
+        count: 0,
+        img: country + "_" + i + ".png",
+        id: j,
+      };
+      j++;
+    }
+  }
+
+  // Create 11 museum stickers
+  for (let i = 0; i <= 11; i++) {
+    stickers["MUSEUM_" + i] = {
+      name: "MUSEUM_" + i,
+      country: "MUSEUM",
+      count: 0,
+      img: "MUSEUM_" + i + ".png",
+      id: j,
+    };
+    j++;
+  }
+  return stickers;
+};
+
+export const buildAlbum = () => {
+  const album = {};
+  for (let j = 0; j < 638; j++) {
+    album[j] = 0;
+  }
+  return album;
+};

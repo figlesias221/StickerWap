@@ -5,7 +5,7 @@ let mongoose = require("mongoose");
 const albumSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   name: { type: String, required: true },
-  stickerList: [],
+  stickerList: {},
 });
 
 albumSchema.statics.findByName = async function (name: any) {

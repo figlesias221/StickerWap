@@ -16,35 +16,35 @@ router.get("/", auth, async (req: any, res) => {
 });
 
 // Post sticker to album
-router.post("/:stickerId", auth, async (req: any, res) => {
+router.post("/:id", auth, async (req: any, res) => {
   try {
-    const stickerId = req.parms.stickerId;
-    const sticker = await Sticker.findById(stickerId);
-    if (!sticker) {
-      return res.status(404).send();
-    }
-    sticker.count += 1;
+    const stickerId = req.params.id;
+    const album = req.user.album;
+    album[stickerId] = album[stickerId] + 1;
+    req.user.markModified("album");
     await req.user.save();
-    res.send(sticker);
+    res.send(album);
   } catch (e) {
+    console.log(e);
     res.status(500).send();
   }
 });
 
 // Delete sticker from album
-router.delete("/:stickerId", auth, async (req: any, res) => {
+router.delete("/:id", auth, async (req: any, res) => {
   try {
-    const stickerId = req.parms.stickerId;
-    const sticker = await Sticker.findById(stickerId);
-    if (!sticker) {
+    const stickerId = req.params.id;
+    const album = req.user.album;
+    if (!album) {
       return res.status(404).send();
     }
-    if (sticker.count === 0) {
+    if (album[stickerId] === 0) {
       return res.status(400).send();
     }
-    sticker.count -= 1;
+    album[stickerId] -= 1;
+    req.user.markModified("album");
     await req.user.save();
-    res.send(sticker);
+    res.send(album);
   } catch (e) {
     res.status(500).send();
   }
