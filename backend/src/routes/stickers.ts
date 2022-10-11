@@ -7,7 +7,6 @@ const router = express.Router();
 // Get stickers from album
 router.get("/", auth, async (req: any, res) => {
   try {
-    console.log(req.user);
     const album = req.user.album;
     res.send({ album });
   } catch (e) {
