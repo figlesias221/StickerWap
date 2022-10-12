@@ -1,3 +1,6 @@
+import mongoose from "mongoose";
+const Sticker = require("../models/stickers");
+
 const countries = [
   "Qatar",
   "Ecuador",
@@ -71,27 +74,28 @@ const countryAbreviationDictonary = {
 export const createQatarStickerList = () => {
   const stickers = {};
   let j = 0;
+
   // Create 8 special stickers
   for (let i = 0; i <= 7; i++) {
-    stickers[j] = {
+    const sticker = new Sticker({
+      _id: new mongoose.Types.ObjectId(),
       name: "FWC_" + i,
-      country: "FWC",
-      count: 0,
-      img: "FWC_" + i + ".png",
+      category: "FWC",
       id: j,
-    };
+    });
+    stickers[j] = sticker;
     j++;
   }
 
   // Create 10 stadium stickers and Ball
   for (let i = 0; i <= 10; i++) {
-    stickers[j] = {
+    const sticker = new Sticker({
+      _id: new mongoose.Types.ObjectId(),
       name: "STADIUM_" + i,
-      country: "STADIUM",
-      count: 0,
-      img: "STADIUM_" + i + ".png",
+      category: "STADIUM",
       id: j,
-    };
+    });
+    stickers[j] = sticker;
     j++;
   }
 
@@ -99,26 +103,26 @@ export const createQatarStickerList = () => {
   // For each country, create 12 sticker with id `country` + `_` + `number` (1-19)
   for (let country of countries) {
     for (let i = 1; i < 20; i++) {
-      stickers[j] = {
-        name: country,
-        country: country,
-        count: 0,
-        img: country + "_" + i + ".png",
+      const sticker = new Sticker({
+        _id: new mongoose.Types.ObjectId(),
+        name: countryAbreviationDictonary[country] + "_" + i,
+        category: country,
         id: j,
-      };
+      });
+      stickers[j] = sticker;
       j++;
     }
   }
 
   // Create 11 museum stickers
   for (let i = 0; i <= 11; i++) {
-    stickers[j] = {
+    const sticker = new Sticker({
+      _id: new mongoose.Types.ObjectId(),
       name: "MUSEUM_" + i,
-      country: "MUSEUM",
-      count: 0,
-      img: "MUSEUM_" + i + ".png",
+      category: "MUSEUM",
       id: j,
-    };
+    });
+    stickers[j] = sticker;
     j++;
   }
   return stickers;
@@ -126,7 +130,7 @@ export const createQatarStickerList = () => {
 
 export const buildAlbum = () => {
   const album = {};
-  for (let j = 0; j < 638; j++) {
+  for (let j = 0; j <= 638; j++) {
     album[j] = 0;
   }
   return album;

@@ -1,7 +1,6 @@
 import express from "express";
 
 import auth from "../middleware/auth";
-const Sticker = require("../models/stickers");
 const router = express.Router();
 
 // Get stickers from album
