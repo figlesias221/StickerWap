@@ -130,7 +130,7 @@ export const createQatarStickerList = () => {
 
 export const buildAlbum = () => {
   const album = {};
-  for (let j = 0; j < 638; j++) {
+  for (let j = 0; j <= 638; j++) {
     album[j] = 0;
   }
   return album;
