@@ -31,7 +31,7 @@ router.post("/signup", async function (req, res) {
     );
   } catch (error) {
     if (error.code === 11000) {
-      res.status(400).send({ response: "Usuario ya existe" });
+      res.status(400).send({ error: "Usuario ya existe" });
     }
   }
 });
@@ -55,8 +55,8 @@ router.post("/login", async (req, res) => {
       region: user.region,
       token: token,
     });
-  } catch (e) {
-    res.status(400).send();
+  } catch (error) {
+    res.status(400).send({ error: error.message });
   }
 });
 
