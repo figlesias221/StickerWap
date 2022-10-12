@@ -6,6 +6,7 @@ import stickersRouter from "./routes/stickers";
 import albumRouter from "./routes/album";
 import swipeRouter from "./routes/swipe";
 import messagesRouter from "./routes/messages";
+import regionsRouter from "./routes/regions";
 const Album = require("./models/album");
 import db from "./models";
 import { createQatarStickerList } from "./scripts/createStickers";
@@ -48,6 +49,7 @@ app.use("/stickers", stickersRouter);
 app.use("/albums", albumRouter);
 app.use("/swipe", swipeRouter);
 app.use("/messages", messagesRouter);
+app.use("/regions", regionsRouter);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
