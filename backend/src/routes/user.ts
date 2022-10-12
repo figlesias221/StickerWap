@@ -12,7 +12,7 @@ router.post("/signup", async function (req, res) {
     !req.body.password ||
     !req.body.region
   ) {
-    res.status(400).send({ message: "Content can not be empty!" });
+    res.status(400).send({ message: "Campos incompletos" });
     return;
   }
   try {
@@ -30,7 +30,9 @@ router.post("/signup", async function (req, res) {
       })
     );
   } catch (error) {
-    res.status(400).send(error);
+    if (error.code === 11000) {
+      res.status(400).send({ response: "Usuario ya existe" });
+    }
   }
 });
 
@@ -40,6 +42,11 @@ router.post("/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
+    if (!user) {
+      return res
+        .status(401)
+        .send({ error: "Error de autenticación. Intenta de nuevo." });
+    }
     const token = await user.generateAuthToken();
     res.send({
       id: user._id,
@@ -59,7 +66,7 @@ router.post("/logout", auth, async (req: any, res) => {
       return token.token !== req.token;
     });
     await req.user.save();
-    res.send();
+    res.send({ message: "Logout exitoso" });
   } catch (e) {
     res.status(500).send();
   }
@@ -86,7 +93,7 @@ router.put("/me", auth, async (req: any, res) => {
     allowedUpdates.includes(update)
   );
   if (!isValidOperation) {
-    return res.status(400).send({ error: "Invalid updates!" });
+    return res.status(400).send({ error: "Campos inválidos" });
   }
   try {
     const user = req.user;
