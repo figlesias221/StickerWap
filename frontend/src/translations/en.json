@@ -1,0 +1,14 @@
+{
+  "collection": {
+    "title": "Collection"
+  },
+  "swipe": {
+    "title": "Swipe"
+  },
+  "settings": {
+    "title": "Profile"
+  },
+  "chat": {
+    "title": "Chat"
+  }
+}
