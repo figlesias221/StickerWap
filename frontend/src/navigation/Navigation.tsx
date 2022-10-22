@@ -19,7 +19,7 @@ const Navigation = () => {
       <StatusBar
         barStyle={Platform.OS === 'ios' ? 'dark-content' : 'default'}
       />
-      {false ? (
+      {true ? (
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
           initialRouteName={UNAUTH_STACK}

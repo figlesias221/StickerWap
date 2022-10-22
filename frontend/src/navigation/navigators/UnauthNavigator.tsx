@@ -11,7 +11,7 @@ import { COLLECTION, LOGIN } from 'utils/route';
 const Stack = createStackNavigator();
 
 const UnauthNavigator = () => {
-  const { neverSignedIn } = useSelector((state: RootState) => state.appData);
+  // const { neverSignedIn } = useSelector((state: RootState) => state.appData);
 
   return (
     <Stack.Navigator

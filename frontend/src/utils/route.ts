@@ -9,3 +9,4 @@ export const SETTINGS = 'settings_screen';
 export const SETTINGS_STACK = 'settings_stack';
 export const CHAT = 'chat_screen';
 export const CHAT_STACK = 'chat_stack';
+export const SIGN_IN = 'sign_in_screen';
