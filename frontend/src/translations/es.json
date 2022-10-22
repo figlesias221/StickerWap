@@ -21,5 +21,18 @@
     "emailPlaceholder": "Correo electrónico",
     "dontHaveAccount": "¿No tienes una cuenta?",
     "signup": "Regístrate"
+  },
+  "signup": {
+    "title": "Regístrate",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Regístrate",
+    "passwordPlaceholder": "Contraseña",
+    "emailPlaceholder": "Correo electrónico",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signin": "Iniciar sesión",
+    "username": "Nombre de usuario",
+    "usernamePlaceholder": "Nombre de usuario",
+    "region": "Región"
   }
 }

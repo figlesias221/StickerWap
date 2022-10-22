@@ -21,5 +21,18 @@
     "emailPlaceholder": "Email",
     "dontHaveAccount": "Don't have an account?",
     "signup": "Sign Up"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign Up",
+    "passwordPlaceholder": "Password",
+    "emailPlaceholder": "Email",
+    "alreadyHaveAccount": "Already have an account?",
+    "signin": "Sign In",
+    "username": "Username",
+    "usernamePlaceholder": "Username",
+    "region": "Region"
   }
 }

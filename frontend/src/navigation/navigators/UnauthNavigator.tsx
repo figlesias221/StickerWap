@@ -16,7 +16,7 @@ const UnauthNavigator = () => {
   return (
     <Stack.Navigator
       // implement welcome and login screens
-      initialRouteName={false ? SIGNUP : SIGNIN}
+      initialRouteName={SIGNIN}
       screenOptions={screenOptions}
     >
       {unauthScreens.map(({ name, component }) => (

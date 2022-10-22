@@ -19,15 +19,17 @@ import { loginSuccess } from 'redux/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { SIGNUP } from 'utils/route';
 
-const SignIn = () => {
+const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');
+  const [region, setRegion] = React.useState('');
   const { dispatch } = store;
   const { navigate } = useNavigation();
 
-  const SignInAttempt = () => {
-    fetch('http://localhost:3000/users/login', {
+  const SignUpAttempt = () => {
+    fetch('http://localhost:3000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,10 +37,13 @@ const SignIn = () => {
       body: JSON.stringify({
         email: email,
         password: password,
+        name: username,
+        region: region,
       }),
     })
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         if (data.error) {
           Alert.alert(data.error);
         }
@@ -50,8 +55,36 @@ const SignIn = () => {
             }),
           );
         }
-      })
+      }
+    )
   };
+
+  const fields = [
+    {
+      label: 'username',
+      value: username,
+      onChange: setUsername,
+      placeholder: 'usernamePlaceholder',
+    },
+    {
+      label: 'email',
+      value: email,
+      onChange: setEmail,
+      placeholder: 'emailPlaceholder'
+    },
+    {
+      label: 'password',
+      value: password,
+      onChange: setPassword,
+      placeholder: 'passwordPlaceholder'
+    },
+    {
+      label: 'region',
+      value: region,
+      onChange: setRegion,
+      placeholder: 'regionPlaceholder'
+    },
+  ]
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
@@ -63,34 +96,29 @@ const SignIn = () => {
         <View style={styles.backgroundStyle}>
           <View style={styles.sectionContainer}>
             <View style={styles.componentContainer}>
-              <Text style={styles.subtitle}>{i18n.t('signin.title')}</Text>
+              <Text style={styles.subtitle}>{i18n.t('signup.title')}</Text>
 
-              <Text style={styles.label}>{i18n.t('signin.email')}:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={i18n.t('signin.emailPlaceholder')}
-                placeholderTextColor={colors.placeholder}
-                onChangeText={text => setEmail(text)}
-                value={email}
-              />
-              <Text style={styles.label}>{i18n.t('signin.password')}:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={i18n.t('signin.passwordPlaceholder')}
-                placeholderTextColor={colors.placeholder}
-                onChangeText={text => setPassword(text)}
-                value={password}
-              />
-              <Text style={styles.label}>
-                {i18n.t('signin.dontHaveAccount')}
-                <Text style={styles.link} onPress={() => navigate(SIGNUP as never)}> {i18n.t('signin.signup')}</Text>
-              </Text>
+              {
+                fields.map((field, index) => (
+                  <View key={index}>
+                    <Text style={styles.label}>{i18n.t('signup.'+field.label)}:</Text>
+                    <TextInput
+                      style={styles.input}
+                      placeholder={i18n.t('signup.'+field.placeholder)}
+                      value={field.value}
+                      onChangeText={field.onChange}
+                    />  
+                  </View>
+                ))
+              }
+
               <View style={styles.buttonContainer}>
                 <Button
-                  label={i18n.t('signin.submit')}
-                  onPress={() => SignInAttempt()}
+                  label={i18n.t('signup.submit')}
+                  onPress={() => SignUpAttempt()}
                 />
               </View>
+              
             </View>
           </View>
         </View>
@@ -99,4 +127,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
