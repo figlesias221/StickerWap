@@ -3,9 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserTokens {
   accessToken: string;
-  refreshToken: string;
-  idToken: string;
-  expiresAt: string;
 }
 export interface AuthSliceState {
   user: UserTokens;
@@ -13,10 +10,7 @@ export interface AuthSliceState {
 
 const authInitialState: AuthSliceState = {
   user: {
-    accessToken: '',
-    refreshToken: '',
-    idToken: '',
-    expiresAt: '',
+    accessToken: ''
   },
 };
 

@@ -6,9 +6,20 @@
     "title": "Swipe"
   },
   "settings": {
-    "title": "Perfil"
+    "title": "Perfil",
+    "logout": "Cerrar sesión"
   },
   "chat": {
     "title": "Mensajes"
+  },
+  "signin": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión",
+    "passwordPlaceholder": "Contraseña",
+    "emailPlaceholder": "Correo electrónico",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "signup": "Regístrate"
   }
 }

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import screenOptions from 'navigation/screenOptions';
 import unauthScreens from 'navigation/screens/unauthScreens';
 import { RootState } from 'redux/store';
-import { COLLECTION, LOGIN } from 'utils/route';
+import { SIGNIN, SIGNUP } from 'utils/route';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +16,7 @@ const UnauthNavigator = () => {
   return (
     <Stack.Navigator
       // implement welcome and login screens
-      initialRouteName={true ? COLLECTION : LOGIN}
+      initialRouteName={false ? SIGNUP : SIGNIN}
       screenOptions={screenOptions}
     >
       {unauthScreens.map(({ name, component }) => (

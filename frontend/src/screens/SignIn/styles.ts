@@ -81,12 +81,45 @@ const styles = StyleSheet.create({
     fontSize: baseFontSize,
     fontWeight: '600',
     color: black,
-    marginBottom: 12,
+    marginBottom: 48,
   },
   title: {
     fontSize: largeHeaderFontSize,
     fontWeight: '600',
   },
+  label: {
+    fontSize: baseFontSize,
+    fontWeight: '600',
+    color: black,
+    marginBottom: 12,
+    marginTop: 12,
+  },
+  input: {
+    fontSize: baseFontSize,
+    fontWeight: '400',
+    color: black,
+    marginBottom: 12,
+    marginTop: 12,
+  },
+  link: {
+    fontSize: baseFontSize,
+    fontWeight: '400',
+    color: black,
+    marginBottom: 12,
+    marginTop: 12,
+    textDecorationLine: 'underline',
+  },
+  buttonContainer: {
+    marginTop: 36,
+    marginBottom: 36,
+  },
 });
 
-export default styles;
+const colors = {
+  placeholder: '#9B9B9B',
+}
+
+export { 
+  styles,
+  colors,
+};
