@@ -6,7 +6,6 @@ import {
 } from '@react-navigation/bottom-tabs';
 
 import TabBar from 'components/TabBar';
-import * as Route from 'utils/route';
 import tabScreens from 'navigation/screens/tabScreens';
 import tabOptions from 'navigation/tabOptions';
 

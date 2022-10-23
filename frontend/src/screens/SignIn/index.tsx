@@ -8,16 +8,18 @@ import {
   ScrollView,
   Alert,
   TextInput,
+  Image,
 } from 'react-native';
 
 import Button from 'components/Button';
 import i18n from 'translations';
 import { styles, colors } from './styles';
-import axios from 'axios';
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import { SIGNUP } from 'utils/route';
+import { Logo } from 'assets';
+import spacingStyles from 'styles/spacing';
 
 const SignIn = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -43,54 +45,61 @@ const SignIn = () => {
           Alert.alert(data.error);
         }
         if (data.token) {
-          Alert.alert('Success');
           dispatch(
             loginSuccess({
-              accessToken: data.token
+              accessToken: data.token,
             }),
           );
         }
-      })
+      });
   };
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaView style={spacingStyles.mainScreen}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.backgroundStyle}
-      >
-        <View style={styles.backgroundStyle}>
-          <View style={styles.sectionContainer}>
-            <View style={styles.componentContainer}>
-              <Text style={styles.subtitle}>{i18n.t('signin.title')}</Text>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View style={styles.componentContainer}>
+          <View style={styles.logoContainer}>
+            <Text style={styles.logoText}>{i18n.t('signin.stickerwap')}</Text>
+            <Image source={Logo} style={styles.logo} />
+          </View>
 
-              <Text style={styles.label}>{i18n.t('signin.email')}:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={i18n.t('signin.emailPlaceholder')}
-                placeholderTextColor={colors.placeholder}
-                onChangeText={text => setEmail(text)}
-                value={email}
+          <View style={styles.formContainer}>
+            <Text style={styles.subtitle}>{i18n.t('signin.title')}</Text>
+
+            <Text style={styles.label}>{i18n.t('signin.email')}:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder={i18n.t('signin.emailPlaceholder')}
+              placeholderTextColor={colors.placeholder}
+              onChangeText={text => setEmail(text)}
+              value={email}
+            />
+            <Text style={styles.label}>{i18n.t('signin.password')}:</Text>
+            <TextInput
+              style={styles.input}
+              placeholder={i18n.t('signin.passwordPlaceholder')}
+              placeholderTextColor={colors.placeholder}
+              onChangeText={text => setPassword(text)}
+              value={password}
+            />
+
+            <View style={styles.buttonContainer}>
+              <Button
+                label={i18n.t('signin.submit')}
+                onPress={() => SignInAttempt()}
               />
-              <Text style={styles.label}>{i18n.t('signin.password')}:</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={i18n.t('signin.passwordPlaceholder')}
-                placeholderTextColor={colors.placeholder}
-                onChangeText={text => setPassword(text)}
-                value={password}
-              />
-              <Text style={styles.label}>
+            </View>
+            <View style={styles.createAccountContainer}>
+              <Text style={styles.createLabel}>
                 {i18n.t('signin.dontHaveAccount')}
-                <Text style={styles.link} onPress={() => navigate(SIGNUP as never)}> {i18n.t('signin.signup')}</Text>
               </Text>
-              <View style={styles.buttonContainer}>
-                <Button
-                  label={i18n.t('signin.submit')}
-                  onPress={() => SignInAttempt()}
-                />
-              </View>
+              <Text
+                style={styles.link}
+                onPress={() => navigate(SIGNUP as never)}
+              >
+                {i18n.t('signin.signup')}
+              </Text>
             </View>
           </View>
         </View>

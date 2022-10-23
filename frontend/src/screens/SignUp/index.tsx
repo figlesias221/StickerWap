@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,23 +8,25 @@ import {
   ScrollView,
   Alert,
   TextInput,
+  useWindowDimensions,
 } from 'react-native';
 
 import Button from 'components/Button';
 import i18n from 'translations';
-import { styles, colors } from './styles';
-import axios from 'axios';
+
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
-import { SIGNUP } from 'utils/route';
+import spacingStyles from 'styles/spacing';
+import { styles } from './styles';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [username, setUsername] = React.useState('');
-  const [region, setRegion] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [region, setRegion] = useState('');
+  const [phone, setPhone] = useState('');
   const { dispatch } = store;
   const { navigate } = useNavigation();
 
@@ -43,7 +45,7 @@ const SignUp = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
         if (data.error) {
           Alert.alert(data.error);
         }
@@ -51,12 +53,11 @@ const SignUp = () => {
           Alert.alert('Success');
           dispatch(
             loginSuccess({
-              accessToken: data.token
+              accessToken: data.token,
             }),
           );
         }
-      }
-    )
+      });
   };
 
   const fields = [
@@ -70,56 +71,59 @@ const SignUp = () => {
       label: 'email',
       value: email,
       onChange: setEmail,
-      placeholder: 'emailPlaceholder'
+      placeholder: 'emailPlaceholder',
     },
     {
       label: 'password',
       value: password,
       onChange: setPassword,
-      placeholder: 'passwordPlaceholder'
+      placeholder: 'passwordPlaceholder',
     },
     {
       label: 'region',
       value: region,
       onChange: setRegion,
-      placeholder: 'regionPlaceholder'
+      placeholder: 'regionPlaceholder',
     },
-  ]
+    {
+      label: 'phone',
+      value: phone,
+      onChange: setPhone,
+      placeholder: 'phonePlaceholder',
+    },
+  ];
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
+    <SafeAreaView style={spacingStyles.mainScreen}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.backgroundStyle}
-      >
-        <View style={styles.backgroundStyle}>
-          <View style={styles.sectionContainer}>
-            <View style={styles.componentContainer}>
-              <Text style={styles.subtitle}>{i18n.t('signup.title')}</Text>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        {/* <View style={styles.logoContainer}>
+          <Text style={styles.logoText}>{i18n.t('signin.stickerwap')}</Text>
+          <Image source={Logo} style={styles.logo} />
+        </View> */}
 
-              {
-                fields.map((field, index) => (
-                  <View key={index}>
-                    <Text style={styles.label}>{i18n.t('signup.'+field.label)}:</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder={i18n.t('signup.'+field.placeholder)}
-                      value={field.value}
-                      onChangeText={field.onChange}
-                    />  
-                  </View>
-                ))
-              }
+        <View style={styles.formContainer}>
+          <Text style={styles.subtitle}>{i18n.t('signup.title')}</Text>
 
-              <View style={styles.buttonContainer}>
-                <Button
-                  label={i18n.t('signup.submit')}
-                  onPress={() => SignUpAttempt()}
-                />
-              </View>
-              
+          {fields.map((field, index) => (
+            <View key={index}>
+              <Text style={styles.label}>
+                {i18n.t('signup.' + field.label)}:
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder={i18n.t('signup.' + field.placeholder)}
+                value={field.value}
+                onChangeText={field.onChange}
+              />
             </View>
+          ))}
+
+          <View style={styles.buttonContainer}>
+            <Button
+              label={i18n.t('signup.submit')}
+              onPress={() => SignUpAttempt()}
+            />
           </View>
         </View>
       </ScrollView>

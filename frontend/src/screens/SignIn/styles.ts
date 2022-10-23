@@ -1,125 +1,85 @@
 import { StyleSheet } from 'react-native';
-import { black } from 'styles/theme';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import {
-  baseFontSize,
-  smallFontSize,
-  largeHeaderFontSize,
-  largeFontSize,
-} from 'styles/typography';
+import { green, black, screenHeight } from 'styles/theme';
+import { baseFontSize, largeHeaderFontSize } from 'styles/typography';
 
 const styles = StyleSheet.create({
-  backgroundStyle: {
-    backgroundColor: Colors.lighter,
+  formContainer: {
+    width: '80%',
+    alignSelf: 'center',
   },
-  close: {
-    height: 34,
-    width: 34,
-    position: 'absolute',
-    top: 12,
-    right: 12,
-  },
-  closeImage: {
-    shadowColor: black,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    height: '100%',
-    width: '100%',
-  },
-  componentContainer: {
-    paddingBottom: 40,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  modalText: {
-    fontSize: smallFontSize,
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  modalTitle: {
-    fontSize: baseFontSize,
-    fontWeight: '600',
-    color: black,
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  modalView: {
-    position: 'relative',
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
+  logoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '90%',
-    minHeight: '50%',
-    shadowColor: black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    marginTop: screenHeight * 0.01,
+    marginBottom: '15%',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  logo: {
+    height: screenHeight * 0.05,
+    width: screenHeight * 0.05,
   },
-  sectionTitle: {
-    fontSize: largeFontSize,
-    fontWeight: '600',
+  logoText: {
+    fontSize: screenHeight * 0.03,
+    fontWeight: 'bold',
+    color: green,
+    fontFamily: 'Avenir',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: largeHeaderFontSize,
-    fontWeight: '400',
+  componentContainer: {
+    paddingVertical: 20,
   },
   subtitle: {
-    fontSize: baseFontSize,
-    fontWeight: '600',
-    color: black,
-    marginBottom: 48,
+    fontWeight: 'bold',
+    color: green,
+    marginBottom: screenHeight * 0.03,
+    fontSize: screenHeight * 0.05,
   },
   title: {
     fontSize: largeHeaderFontSize,
     fontWeight: '600',
   },
   label: {
-    fontSize: baseFontSize,
-    fontWeight: '600',
-    color: black,
-    marginBottom: 12,
-    marginTop: 12,
+    fontSize: screenHeight * 0.02,
+    fontWeight: '300',
+    marginBottom: screenHeight * 0.012,
+    marginTop: screenHeight * 0.012,
+    fontFamily: 'Avenir',
+  },
+  createLabel: {
+    fontSize: screenHeight * 0.02,
+    fontWeight: '300',
+    marginBottom: screenHeight * 0.012,
+    marginTop: screenHeight * 0.012,
+    fontFamily: 'Avenir',
+    color: '#898989',
   },
   input: {
     fontSize: baseFontSize,
     fontWeight: '400',
-    color: black,
-    marginBottom: 12,
-    marginTop: 12,
+    marginBottom: screenHeight * 0.005,
+    marginTop: screenHeight * 0.005,
+    borderWidth: 0.5,
+    padding: 12,
+    borderRadius: 4,
   },
   link: {
-    fontSize: baseFontSize,
-    fontWeight: '400',
+    fontSize: screenHeight * 0.015,
+    fontWeight: '600',
     color: black,
-    marginBottom: 12,
-    marginTop: 12,
-    textDecorationLine: 'underline',
+    marginLeft: '2%',
   },
   buttonContainer: {
-    marginTop: 36,
-    marginBottom: 36,
+    marginTop: screenHeight * 0.04,
+    marginBottom: '3%',
+    width: '100%',
+  },
+  createAccountContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 
 const colors = {
   placeholder: '#9B9B9B',
-}
-
-export { 
-  styles,
-  colors,
 };
+
+export { styles, colors };

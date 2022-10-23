@@ -16,11 +16,12 @@
     "title": "Iniciar sesión",
     "email": "Correo electrónico",
     "password": "Contraseña",
-    "submit": "Iniciar sesión",
+    "submit": "Ingresar",
     "passwordPlaceholder": "Contraseña",
     "emailPlaceholder": "Correo electrónico",
     "dontHaveAccount": "¿No tienes una cuenta?",
-    "signup": "Regístrate"
+    "signup": "Crear cuenta",
+    "stickerwap": "StickerWap"
   },
   "signup": {
     "title": "Regístrate",
@@ -33,6 +34,9 @@
     "signin": "Iniciar sesión",
     "username": "Nombre de usuario",
     "usernamePlaceholder": "Nombre de usuario",
-    "region": "Región"
+    "region": "Región",
+    "regionPlaceholder": "Región",
+    "phone": "Teléfono",
+    "phonePlaceholder": "Teléfono"
   }
 }

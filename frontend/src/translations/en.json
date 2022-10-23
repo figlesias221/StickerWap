@@ -20,7 +20,8 @@
     "passwordPlaceholder": "Password",
     "emailPlaceholder": "Email",
     "dontHaveAccount": "Don't have an account?",
-    "signup": "Sign Up"
+    "signup": "Create Account",
+    "stickerwap": "StickerWap"
   },
   "signup": {
     "title": "Sign Up",
@@ -33,6 +34,9 @@
     "signin": "Sign In",
     "username": "Username",
     "usernamePlaceholder": "Username",
-    "region": "Region"
+    "region": "Region",
+    "regionPlaceholder": "Region",
+    "phone": "Phone",
+    "phonePlaceholder": "Phone"
   }
 }
