@@ -11,8 +11,8 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		6172F2D35A4C3AA820D92908 /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-StickerWap.a */; };
-		7EF68E3733C33B6898317E18 /* libPods-StickerWap-StickerWapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-StickerWap-StickerWapTests.a */; };
+		147D5A9FDD876F94CA60F597 /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */; };
+		2BFD15881A762606B21ADC78 /* libPods-StickerWap-StickerWapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BD86FB45E37C2D7068AB30 /* libPods-StickerWap-StickerWapTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -30,21 +30,21 @@
 		00E356EE1AD99517003FC87E /* StickerWapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickerWapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* StickerWapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StickerWapTests.m; sourceTree = "<group>"; };
-		073515A130F381B829969F24 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.staging.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.staging.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* StickerWap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerWap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = StickerWap/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = StickerWap/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = StickerWap/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = StickerWap/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = StickerWap/main.m; sourceTree = "<group>"; };
-		1D0AE47A65C8663E3B452821 /* Pods-StickerWap-StickerWapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.release.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.release.xcconfig"; sourceTree = "<group>"; };
-		6423831EA8574132BED9D8CC /* libPods-StickerWap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StickerWap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		64D43CFA405431B74FB2FB45 /* Pods-StickerWap.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.staging.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.staging.xcconfig"; sourceTree = "<group>"; };
-		6C97AB639B58BBB4B15BBE30 /* Pods-StickerWap-StickerWapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.debug.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.debug.xcconfig"; sourceTree = "<group>"; };
+		17E028AB7B784909071FD9F5 /* Pods-StickerWap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.release.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.release.xcconfig"; sourceTree = "<group>"; };
+		2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StickerWap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		580CB04A86EF9852E16B8A9A /* Pods-StickerWap-StickerWapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.debug.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.debug.xcconfig"; sourceTree = "<group>"; };
+		76442FE62ADC5017009CBC17 /* Pods-StickerWap-StickerWapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.release.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = StickerWap/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ABFE59519B596E51CEFDCCC0 /* libPods-StickerWap-StickerWapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StickerWap-StickerWapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0A881CF5CF3F2B244570E2A /* Pods-StickerWap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.debug.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.debug.xcconfig"; sourceTree = "<group>"; };
-		D00AAFFCFCFDA5787532823F /* Pods-StickerWap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.release.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.release.xcconfig"; sourceTree = "<group>"; };
+		8D04939A4993022DF2C37EC6 /* Pods-StickerWap.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.staging.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.staging.xcconfig"; sourceTree = "<group>"; };
+		A5BD86FB45E37C2D7068AB30 /* libPods-StickerWap-StickerWapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StickerWap-StickerWapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B78DD04939309928318ED045 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.staging.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.staging.xcconfig"; sourceTree = "<group>"; };
+		DCBC7FD643DC1F97A2E8538C /* Pods-StickerWap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.debug.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -53,7 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EF68E3733C33B6898317E18 /* libPods-StickerWap-StickerWapTests.a in Frameworks */,
+				2BFD15881A762606B21ADC78 /* libPods-StickerWap-StickerWapTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6172F2D35A4C3AA820D92908 /* libPods-StickerWap.a in Frameworks */,
+				147D5A9FDD876F94CA60F597 /* libPods-StickerWap.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,8 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				6423831EA8574132BED9D8CC /* libPods-StickerWap.a */,
-				ABFE59519B596E51CEFDCCC0 /* libPods-StickerWap-StickerWapTests.a */,
+				2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */,
+				A5BD86FB45E37C2D7068AB30 /* libPods-StickerWap-StickerWapTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,12 +142,12 @@
 		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C0A881CF5CF3F2B244570E2A /* Pods-StickerWap.debug.xcconfig */,
-				D00AAFFCFCFDA5787532823F /* Pods-StickerWap.release.xcconfig */,
-				6C97AB639B58BBB4B15BBE30 /* Pods-StickerWap-StickerWapTests.debug.xcconfig */,
-				1D0AE47A65C8663E3B452821 /* Pods-StickerWap-StickerWapTests.release.xcconfig */,
-				64D43CFA405431B74FB2FB45 /* Pods-StickerWap.staging.xcconfig */,
-				073515A130F381B829969F24 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */,
+				DCBC7FD643DC1F97A2E8538C /* Pods-StickerWap.debug.xcconfig */,
+				17E028AB7B784909071FD9F5 /* Pods-StickerWap.release.xcconfig */,
+				8D04939A4993022DF2C37EC6 /* Pods-StickerWap.staging.xcconfig */,
+				580CB04A86EF9852E16B8A9A /* Pods-StickerWap-StickerWapTests.debug.xcconfig */,
+				76442FE62ADC5017009CBC17 /* Pods-StickerWap-StickerWapTests.release.xcconfig */,
+				B78DD04939309928318ED045 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -159,12 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "StickerWapTests" */;
 			buildPhases = (
-				A130D646172E58E1D159D8F2 /* [CP] Check Pods Manifest.lock */,
+				065FD2753D0150CA64EA6D16 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */,
-				CD3FEF73FC9BB68DEA0D1AAA /* [CP] Embed Pods Frameworks */,
+				0D419493DFD1CE279503CA58 /* [CP] Embed Pods Frameworks */,
+				51F1D05FA95741F6171CAD96 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -180,14 +180,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "StickerWap" */;
 			buildPhases = (
-				3E482C27206C4DEF2FE45063 /* [CP] Check Pods Manifest.lock */,
+				9E4772B2EE941960EE32E1BD /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
-				8D184F32670F26C876361D21 /* [CP] Embed Pods Frameworks */,
+				3CEC11B6F5B675A4FBEE31FF /* [CP] Embed Pods Frameworks */,
+				EC0AD1638C1E0025E987C3BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -268,63 +268,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		3E482C27206C4DEF2FE45063 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StickerWap-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D184F32670F26C876361D21 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A130D646172E58E1D159D8F2 /* [CP] Check Pods Manifest.lock */ = {
+		065FD2753D0150CA64EA6D16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -346,24 +290,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CD3FEF73FC9BB68DEA0D1AAA /* [CP] Embed Pods Frameworks */ = {
+		0D419493DFD1CE279503CA58 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -378,6 +305,79 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3CEC11B6F5B675A4FBEE31FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51F1D05FA95741F6171CAD96 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E4772B2EE941960EE32E1BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StickerWap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC0AD1638C1E0025E987C3BB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StickerWap/Pods-StickerWap-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -432,7 +432,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C97AB639B58BBB4B15BBE30 /* Pods-StickerWap-StickerWapTests.debug.xcconfig */;
+			baseConfigurationReference = 580CB04A86EF9852E16B8A9A /* Pods-StickerWap-StickerWapTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -459,7 +459,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D0AE47A65C8663E3B452821 /* Pods-StickerWap-StickerWapTests.release.xcconfig */;
+			baseConfigurationReference = 76442FE62ADC5017009CBC17 /* Pods-StickerWap-StickerWapTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -483,7 +483,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0A881CF5CF3F2B244570E2A /* Pods-StickerWap.debug.xcconfig */;
+			baseConfigurationReference = DCBC7FD643DC1F97A2E8538C /* Pods-StickerWap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -509,7 +509,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D00AAFFCFCFDA5787532823F /* Pods-StickerWap.release.xcconfig */;
+			baseConfigurationReference = 17E028AB7B784909071FD9F5 /* Pods-StickerWap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -592,7 +592,7 @@
 		};
 		7B36B105276B893500E2F8E7 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64D43CFA405431B74FB2FB45 /* Pods-StickerWap.staging.xcconfig */;
+			baseConfigurationReference = 8D04939A4993022DF2C37EC6 /* Pods-StickerWap.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -616,7 +616,7 @@
 		};
 		7B36B106276B893500E2F8E7 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 073515A130F381B829969F24 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */;
+			baseConfigurationReference = B78DD04939309928318ED045 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;

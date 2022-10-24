@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { Image, Platform, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { BackArrow } from 'assets';
 import { primary } from 'styles/theme';
 
@@ -15,10 +15,9 @@ const screenOptions: StackNavigationOptions = {
   headerTitle: '',
   headerTransparent: true,
   headerBackImage: () => (
-    <View style={{ marginTop: Platform.OS === 'ios' ? 45 : undefined }}>
+    <View style={{ paddingTop: '15%', paddingLeft: '10%' }}>
       <Image
         resizeMode="contain"
-        resizeMethod="resize"
         source={BackArrow}
         style={{
           alignSelf: 'center',

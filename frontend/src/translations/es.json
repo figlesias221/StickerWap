@@ -6,9 +6,37 @@
     "title": "Swipe"
   },
   "settings": {
-    "title": "Perfil"
+    "title": "Perfil",
+    "logout": "Cerrar sesión"
   },
   "chat": {
     "title": "Mensajes"
+  },
+  "signin": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Ingresar",
+    "passwordPlaceholder": "Contraseña",
+    "emailPlaceholder": "Correo electrónico",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "signup": "Crear cuenta",
+    "stickerwap": "StickerWap"
+  },
+  "signup": {
+    "title": "Regístrate",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Regístrate",
+    "passwordPlaceholder": "Contraseña",
+    "emailPlaceholder": "Correo electrónico",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "signin": "Iniciar sesión",
+    "username": "Nombre de usuario",
+    "usernamePlaceholder": "Nombre de usuario",
+    "region": "Región",
+    "regionPlaceholder": "Región",
+    "phone": "Teléfono",
+    "phonePlaceholder": "Teléfono"
   }
 }

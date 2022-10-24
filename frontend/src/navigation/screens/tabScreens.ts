@@ -57,16 +57,6 @@ const tabScreens: ITabScreens[] = [
     title: i18n.t('swipe.title'),
   },
   {
-    component: SettingsStack,
-    default: SETTINGS,
-    images: {
-      active: InfoCircle,
-      inactive: InfoCircleInactive,
-    },
-    name: SETTINGS_STACK,
-    title: i18n.t('settings.title'),
-  },
-  {
     component: ChatStack,
     default: CHAT,
     images: {
@@ -75,6 +65,16 @@ const tabScreens: ITabScreens[] = [
     },
     name: CHAT_STACK,
     title: i18n.t('chat.title'),
+  },
+  {
+    component: SettingsStack,
+    default: SETTINGS,
+    images: {
+      active: InfoCircle,
+      inactive: InfoCircleInactive,
+    },
+    name: SETTINGS_STACK,
+    title: i18n.t('settings.title'),
   },
 ];
 
