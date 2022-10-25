@@ -6,6 +6,7 @@ import auth from "../middleware/auth";
 const router = express.Router();
 
 router.post("/signup", async function (req, res) {
+  console.log(req.body);
   if (
     !req.body.name ||
     !req.body.email ||
@@ -20,18 +21,20 @@ router.post("/signup", async function (req, res) {
     user._id = new mongoose.Types.ObjectId();
     await user.save();
     const token = await user.generateAuthToken();
-    res.status(201).send(
-      res.send({
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        region: user.region,
-        token: token,
-      })
-    );
+    res.status(201).send({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      region: user.region,
+      token: token,
+    });
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).send({ error: "Usuario ya existe" });
+    } else if (error._message) {
+      res.status(400).send({ error: "Email ya en uso" });
+    } else {
+      res.status(500).send({ error: "Algo salio mal" });
     }
   }
 });

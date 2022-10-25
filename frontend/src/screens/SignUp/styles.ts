@@ -19,6 +19,14 @@ const styles = StyleSheet.create({
     marginTop: screenHeight * 0.012,
     fontFamily: 'Avenir',
   },
+  error: {
+    color: 'red',
+    fontSize: screenHeight * 0.02,
+    fontWeight: '300',
+    marginBottom: screenHeight * 0.012,
+    marginTop: screenHeight * 0.012,
+    fontFamily: 'Avenir',
+  },
   subtitle: {
     fontWeight: 'bold',
     color: green,
