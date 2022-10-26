@@ -13,9 +13,9 @@ interface ITabBarIcon {
 const TabBarIcon = ({ isActive, tab }: ITabBarIcon) => (
   <View style={styles.container}>
     <Image
-      style={styles.icon}
+      style={[styles.icon, isActive ? styles.activeIcon : styles.inactiveIcon]}
       resizeMode="contain"
-      source={isActive ? tab.images.active : tab.images.inactive}
+      source={tab.images.active}
     />
     <Text style={[isActive ? styles.textActive : styles.textInactive]}>
       {tab.title}

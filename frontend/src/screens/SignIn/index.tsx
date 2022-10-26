@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -20,38 +20,44 @@ import { useNavigation } from '@react-navigation/native';
 import { SIGNUP } from 'utils/route';
 import { Logo } from 'assets';
 import spacingStyles from 'styles/spacing';
+import api from 'utils/openUrl/api';
 
 const SignIn = () => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { dispatch } = store;
   const { navigate } = useNavigation();
 
-  const SignInAttempt = () => {
-    fetch('http://localhost:3000/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.error) {
-          Alert.alert(data.error);
+  const login = () =>
+    api
+      .post('/users/login', {
+        email,
+        password,
+      })
+      .then((data: any) => {
+        if (data?.response?.status === 400) {
+          throw data?.response?.data?.error;
         }
-        if (data.token) {
-          dispatch(
-            loginSuccess({
-              accessToken: data.token,
-            }),
-          );
-        }
+        return data;
       });
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setError('Todos los campos son obligatorios');
+      return;
+    }
+    try {
+      const { data } = await login();
+      dispatch(
+        loginSuccess({
+          accessToken: data.token,
+        }),
+      );
+    } catch (error: any) {
+      setError(error);
+    }
   };
 
   return (
@@ -74,6 +80,7 @@ const SignIn = () => {
               placeholderTextColor={colors.placeholder}
               onChangeText={text => setEmail(text)}
               value={email}
+              autoCapitalize="none"
             />
             <Text style={styles.label}>{i18n.t('signin.password')}:</Text>
             <TextInput
@@ -82,13 +89,12 @@ const SignIn = () => {
               placeholderTextColor={colors.placeholder}
               onChangeText={text => setPassword(text)}
               value={password}
+              autoCapitalize="none"
+              secureTextEntry
             />
 
             <View style={styles.buttonContainer}>
-              <Button
-                label={i18n.t('signin.submit')}
-                onPress={() => SignInAttempt()}
-              />
+              <Button label={i18n.t('signin.submit')} onPress={handleLogin} />
             </View>
             <View style={styles.createAccountContainer}>
               <Text style={styles.createLabel}>

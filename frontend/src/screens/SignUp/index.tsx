@@ -6,10 +6,9 @@ import {
   StatusBar,
   useColorScheme,
   ScrollView,
-  Alert,
   TextInput,
-  useWindowDimensions,
 } from 'react-native';
+import api from 'utils/openUrl/api';
 
 import Button from 'components/Button';
 import i18n from 'translations';
@@ -19,53 +18,57 @@ import { loginSuccess } from 'redux/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
 import spacingStyles from 'styles/spacing';
 import { styles } from './styles';
+import { useMutation } from 'react-query';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [region, setRegion] = useState('');
   const [phone, setPhone] = useState('');
+  const [error, setError] = useState('');
   const { dispatch } = store;
   const { navigate } = useNavigation();
 
-  const SignUpAttempt = () => {
-    fetch('http://localhost:3000/users/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: username,
-        region: region,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.error) {
-          Alert.alert(data.error);
+  const singup = () =>
+    api
+      .post('/users/signup', {
+        name,
+        email,
+        password,
+        region,
+      })
+      .then((data: any) => {
+        if (data?.response?.status === 400) {
+          throw data?.response?.data?.error;
         }
-        if (data.token) {
-          Alert.alert('Success');
-          dispatch(
-            loginSuccess({
-              accessToken: data.token,
-            }),
-          );
-        }
+        return data;
       });
+
+  const handleSignUp = async () => {
+    if (!name || !email || !password || !region) {
+      setError('Todos los campos son obligatorios');
+      return;
+    }
+    try {
+      const { data } = await singup();
+      dispatch(
+        loginSuccess({
+          accessToken: data.token,
+        }),
+      );
+    } catch (error: any) {
+      setError(error);
+    }
   };
 
   const fields = [
     {
-      label: 'username',
-      value: username,
-      onChange: setUsername,
-      placeholder: 'usernamePlaceholder',
+      label: 'name',
+      value: name,
+      onChange: setName,
+      placeholder: 'namePlaceholder',
     },
     {
       label: 'email',
@@ -97,11 +100,6 @@ const SignUp = () => {
     <SafeAreaView style={spacingStyles.mainScreen}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        {/* <View style={styles.logoContainer}>
-          <Text style={styles.logoText}>{i18n.t('signin.stickerwap')}</Text>
-          <Image source={Logo} style={styles.logo} />
-        </View> */}
-
         <View style={styles.formContainer}>
           <Text style={styles.subtitle}>{i18n.t('signup.title')}</Text>
 
@@ -115,16 +113,18 @@ const SignUp = () => {
                 placeholder={i18n.t('signup.' + field.placeholder)}
                 value={field.value}
                 onChangeText={field.onChange}
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoCompleteType="off"
+                secureTextEntry={field.label === 'password'}
               />
             </View>
           ))}
 
           <View style={styles.buttonContainer}>
-            <Button
-              label={i18n.t('signup.submit')}
-              onPress={() => SignUpAttempt()}
-            />
+            <Button label={i18n.t('signup.submit')} onPress={handleSignUp} />
           </View>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </ScrollView>
     </SafeAreaView>

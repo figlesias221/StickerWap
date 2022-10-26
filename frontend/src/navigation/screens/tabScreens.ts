@@ -10,14 +10,7 @@ import {
   SWIPE,
   SWIPE_STACK,
 } from 'utils/route';
-import {
-  Cubes,
-  CubesInactive,
-  Home,
-  HomeInactive,
-  InfoCircle,
-  InfoCircleInactive,
-} from 'assets';
+import { Chat, Menu, Profile, Swap } from 'assets';
 import i18n from 'translations';
 
 import IScreens from './IScreens';
@@ -30,7 +23,6 @@ export interface ITabScreens extends IScreens {
   default: string;
   images: {
     active: ImageSourcePropType;
-    inactive: ImageSourcePropType;
   };
   title: string;
 }
@@ -40,8 +32,7 @@ const tabScreens: ITabScreens[] = [
     component: CollectionStack,
     default: COLLECTION,
     images: {
-      active: Home,
-      inactive: HomeInactive,
+      active: Menu,
     },
     name: COLLECTION_STACK,
     title: i18n.t('collection.title'),
@@ -50,8 +41,7 @@ const tabScreens: ITabScreens[] = [
     component: SwipeStack,
     default: SWIPE,
     images: {
-      active: Cubes,
-      inactive: CubesInactive,
+      active: Swap,
     },
     name: SWIPE_STACK,
     title: i18n.t('swipe.title'),
@@ -60,8 +50,7 @@ const tabScreens: ITabScreens[] = [
     component: ChatStack,
     default: CHAT,
     images: {
-      active: InfoCircle,
-      inactive: InfoCircleInactive,
+      active: Chat,
     },
     name: CHAT_STACK,
     title: i18n.t('chat.title'),
@@ -70,8 +59,7 @@ const tabScreens: ITabScreens[] = [
     component: SettingsStack,
     default: SETTINGS,
     images: {
-      active: InfoCircle,
-      inactive: InfoCircleInactive,
+      active: Profile,
     },
     name: SETTINGS_STACK,
     title: i18n.t('settings.title'),

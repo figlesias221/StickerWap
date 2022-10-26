@@ -19,6 +19,7 @@ const auth_1 = __importDefault(require("../middleware/auth"));
 const router = express_1.default.Router();
 router.post("/signup", function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log(req.body);
         if (!req.body.name ||
             !req.body.email ||
             !req.body.password ||
@@ -31,17 +32,23 @@ router.post("/signup", function (req, res) {
             user._id = new mongoose_1.default.Types.ObjectId();
             yield user.save();
             const token = yield user.generateAuthToken();
-            res.status(201).send(res.send({
+            res.status(201).send({
                 id: user._id,
                 name: user.name,
                 email: user.email,
                 region: user.region,
                 token: token,
-            }));
+            });
         }
         catch (error) {
             if (error.code === 11000) {
                 res.status(400).send({ error: "Usuario ya existe" });
+            }
+            else if (error._message) {
+                res.status(400).send({ error: "Email ya en uso" });
+            }
+            else {
+                res.status(500).send({ error: "Algo salio mal" });
             }
         }
     });
