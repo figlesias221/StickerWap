@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { gray, primary } from 'styles/theme';
+import { black, gray, green, primary } from 'styles/theme';
 import { smallestFontSize } from 'styles/typography';
 
 const styles = StyleSheet.create({
@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 20,
+    marginLeft: 0,
   },
   textActive: {
     fontSize: smallestFontSize,
@@ -19,6 +20,12 @@ const styles = StyleSheet.create({
     fontSize: smallestFontSize,
     color: gray,
     marginTop: 9,
+  },
+  activeIcon: {
+    tintColor: '#58DBDB',
+  },
+  inactiveIcon: {
+    tintColor: gray,
   },
 });
 
