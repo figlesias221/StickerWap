@@ -485,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DCBC7FD643DC1F97A2E8538C /* Pods-StickerWap.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -511,6 +512,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17E028AB7B784909071FD9F5 /* Pods-StickerWap.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -594,6 +596,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D04939A4993022DF2C37EC6 /* Pods-StickerWap.staging.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
