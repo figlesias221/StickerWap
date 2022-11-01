@@ -21,6 +21,7 @@ import { SIGNUP } from 'utils/route';
 import { Logo } from 'assets';
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -50,6 +51,7 @@ const SignIn = () => {
     }
     try {
       const { data } = await login();
+      await AsyncStorage.setItem('token', data.token);
       dispatch(
         loginSuccess({
           accessToken: data.token,
