@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { signOut } from 'redux/slices/authSlice';
 import { store } from 'redux/store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { dispatch } = store;
 
@@ -13,25 +14,13 @@ export const api = axios.create({
   },
 });
 
-// api.interceptors.request.use(async config => {
-//   const headers = {
-//     Accept: '*/*',
-//     'access-token': await AsyncStorage.getItem('accessToken'),
-//   };
-//   return { ...config, headers };
-// });
-
-api.interceptors.response.use(
-  response => {
-    return response;
-  },
-  error => {
-    if (error.response.status === 401) {
-      dispatch(signOut());
-    }
-    return error;
-  },
-);
+api.interceptors.request.use(async config => {
+  const headers = {
+    Accept: '*/*',
+    Authorization: `Bearer ${await AsyncStorage.getItem('token')}`,
+  };
+  return { ...config, headers };
+});
 
 export const getData = async (endpoint: string, options = {}) => {
   const { data } = await api.get(endpoint, options);
