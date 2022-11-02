@@ -1,6 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Text, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, Modal, Pressable, Alert, Button } from 'react-native';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
@@ -12,7 +13,6 @@ const Collection = () => {
   const [data, setData] = useState([]);
   const [userStickers, setUserStickers] = useState([]);
   const [name, setName] = useState();
-  const [error, setError] = useState('');
 
   const getCollection = () =>
     api.get('/stickers').then((data: any) => {
@@ -20,7 +20,6 @@ const Collection = () => {
         throw data?.response?.data?.error;
       }
       setUserStickers(data?.data?.album);
-      console.log(data?.data?.album);
     });
 
   const getAlbum = async () =>
@@ -56,11 +55,15 @@ const Collection = () => {
               <Text>{category}</Text>
               {(data[category] as any).map((sticker: any) => {
                 const cant = userStickers[sticker.key];
-
                 return (
                   <View key={sticker._id}>
                     <Text>{sticker.name}</Text>
                     <Text>{cant}</Text>
+                    <Button
+                      onPress={() => showAlert(sticker)}
+                      title="+/-"
+                      color="#009933"
+                    />
                   </View>
                 );
               })}
@@ -70,6 +73,63 @@ const Collection = () => {
       </ScrollView>
     </SafeAreaView>
   );
+
+  function showAlert(sticker: any) {
+    const cant = userStickers[sticker.key];
+    Alert.alert(
+      'Add/Remove ' + sticker._id + ' Stickers',
+      'Now, you have ' + cant,
+      cant > 0 ?
+      [
+        {
+          text: 'Add One',
+          onPress: () => addSticker(sticker.key),
+          style: 'cancel',
+        },
+        {
+          text: 'Remove One',
+          onPress: () => removeSticker(sticker.key),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {},
+          style: 'cancel'
+        },
+      ] : 
+      [
+        {
+          text: 'Add One',
+          onPress: () => addSticker(sticker.key),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {},
+        },
+      ]
+    );
+  }
+
+  function addSticker(id: number) {
+    api.post('/stickers/' + id).then((data: any) => {
+      if (data?.response?.status === 400) {
+        throw data?.response?.data?.error;
+      }
+      getCollection();
+    })
+  }
+
+  function removeSticker(id: number) {
+    api.delete('/stickers/' + id).then((data: any) => {
+      if (data?.response?.status === 400) {
+        throw data?.response?.data?.error;
+      }
+      getCollection();
+    })
+  }
 };
+
+
 
 export default Collection;
