@@ -1,6 +1,13 @@
-
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View, Text, ScrollView, Alert, Button } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ScrollView,
+  Alert,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
@@ -54,37 +61,53 @@ const Collection = () => {
           >
             <Text style={styles.bigHeader}>{i18n.t('collection.title')}</Text>
           </LinearGradient>
-          {Object.keys(data).map((category: any) => (
-            <View style={styles.categorySection} key={category}>
-              <Text style={styles.categoryTitle}>{category}</Text>
-              <View style={styles.stickerContainer}>
-                {(data[category] as any).map((sticker: any) => {
-                  let count = userStickers[sticker.key]
-                  let width = count > 1 ? 1 : 0
-                  return (
-                    <View style={{ 
-                      ...styles.sticker, 
-                      backgroundColor: newShade(colorMap(category), count > 0 ? 160 : 80),
-                      borderWidth: width,
-                    }
-                    } key={sticker._id}>
-                      <Text style={styles.stickerTitle}>{sticker.name.split("_")[1]}</Text>
-                      {
-                        count > 0 && <Text style={styles.stickerCount}>{count}</Text>
-                      }
-                      <Button
-                        onPress={() => showAlert(sticker)}
-                        title="."
-
-                        color="#000000"
-                        
-                      />
-                    </View>
-                  );
-                })}
+          {Object.keys(data).map((category: any) => {
+            const catInfo = cateogryMap(category);
+            return (
+              <View style={styles.categorySection} key={category}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text style={styles.categoryTitle}>{category}</Text>
+                  <Text style={styles.categoryAbreviation}>
+                    {catInfo.abreviation}
+                  </Text>
+                </View>
+                <View style={styles.stickerContainer}>
+                  {(data[category] as any).map((sticker: any) => {
+                    let count = userStickers[sticker.key];
+                    let width = count > 1 ? 1 : 0;
+                    return (
+                      <TouchableOpacity onPress={() => showAlert(sticker)}>
+                        <View
+                          style={{
+                            ...styles.sticker,
+                            backgroundColor: newShade(
+                              catInfo.color,
+                              count > 0 ? 160 : 80,
+                            ),
+                            borderWidth: width,
+                          }}
+                          key={sticker._id}
+                        >
+                          <Text style={styles.stickerTitle}>
+                            {sticker.name.split('_')[1]}
+                          </Text>
+                          {count > 0 && (
+                            <Text style={styles.stickerCount}>{count}</Text>
+                          )}
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
               </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -95,35 +118,35 @@ const Collection = () => {
     Alert.alert(
       i18n.t('collection-alert.title') + sticker.name,
       i18n.t('collection-alert.subtitle') + cant,
-      cant > 0 ?
-        [
-          {
-            text: i18n.t('collection-alert.add'),
-            onPress: () => addSticker(sticker.key),
-            style: 'cancel',
-          },
-          {
-            text: i18n.t('collection-alert.remove'),
-            onPress: () => removeSticker(sticker.key),
-            style: 'cancel',
-          },
-          {
-            text: i18n.t('collection-alert.ok'),
-            onPress: () => { },
-            style: 'cancel'
-          },
-        ] :
-        [
-          {
-            text: i18n.t('collection-alert.add'),
-            onPress: () => addSticker(sticker.key),
-            style: 'cancel',
-          },
-          {
-            text: i18n.t('collection-alert.ok'),
-            onPress: () => { },
-          },
-        ]
+      cant > 0
+        ? [
+            {
+              text: i18n.t('collection-alert.add'),
+              onPress: () => addSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.remove'),
+              onPress: () => removeSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.ok'),
+              onPress: () => {},
+              style: 'cancel',
+            },
+          ]
+        : [
+            {
+              text: i18n.t('collection-alert.add'),
+              onPress: () => addSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.ok'),
+              onPress: () => {},
+            },
+          ],
     );
   }
 
@@ -133,7 +156,7 @@ const Collection = () => {
         throw data?.response?.data?.error;
       }
       getCollection();
-    })
+    });
   }
 
   function removeSticker(id: number) {
@@ -142,80 +165,192 @@ const Collection = () => {
         throw data?.response?.data?.error;
       }
       getCollection();
-    })
+    });
   }
 };
 
-const colorMap = (category: string) => {
+const cateogryMap = (category: string) => {
   switch (category) {
-    case "Qatar":
-      return "#003366";
-    case "Ecuador":
-      return "#009933";
-    case "Senegal":
-      return "#FFCC00";
-    case "Netherlands":
-      return "#FF0000";
-    case "England":
-      return "#003366";
-    case "Iran":
-      return "#FFCC00";
-    case "United States":
-      return "#FF0000";
-    case "Wales":
-      return "#003366";
-    case "Argentina":
-      return "#009933";
-    case "Saudi Arabia":
-      return "#FFCC00";
-    case "Mexico":
-      return "#FF0000";
-    case "Poland":
-      return "#003366";
-    case "France":
-      return "#009933";
-    case "Australia":
-      return "#FFCC00";
-    case "Denmark":
-      return "#FF0000";
-    case "Tunisia":
-      return "#003366";
-    case "Spain":
-      return "#009933";
-    case "Costa Rica":
-      return "#FFCC00";
-    case "Germany":
-      return "#FF0000";
-    case "Japan":
-      return "#003366";
-    case "Belgium":
-      return "#009933";
-    case "Canada":
-      return "#FFCC00";
-    case "Morocco":
-      return "#FF0000";
-    case "Croatia":
-      return "#003366";
-    case "Brazil":
-      return "#009933";
-    case "Serbia":
-      return "#FFCC00";
-    case "Switzerland":
-      return "#FF0000";
-    case "Cameroon":
-      return "#003366";
-    case "Portugal":
-      return "#009933";
-    case "Ghana":
-      return "#FFCC00";
-    case "Uruguay":
-      return "#FF0000";
-    case "South Korea":
-      return "#003366";
-    case "FWC":
-      return "#ffd700";
+    case 'Qatar':
+      return {
+        abreviation: 'QAT',
+        color: '#003366',
+      };
+    case 'Ecuador':
+      return {
+        abreviation: 'ECU',
+        color: '#009B3A',
+      };
+    case 'Senegal':
+      return {
+        abreviation: 'SEN',
+        color: '#D21034',
+      };
+    case 'Netherlands':
+      return {
+        abreviation: 'NED',
+        color: '#FDBB30',
+      };
+    case 'England':
+      return {
+        abreviation: 'ENG',
+        color: '#FFFFFF',
+      };
+    case 'Iran':
+      return {
+        abreviation: 'IRN',
+        color: '#FF0000',
+      };
+    case 'United States':
+      return {
+        abreviation: 'USA',
+        color: '#FF0000',
+      };
+    case 'Wales':
+      return {
+        abreviation: 'WAL',
+        color: '#FFFFFF',
+      };
+    case 'Argentina':
+      return {
+        abreviation: 'ARG',
+        color: '#FFFFFF',
+      };
+    case 'Saudi Arabia':
+      return {
+        abreviation: 'KSA',
+        color: '#FFFFFF',
+      };
+    case 'Mexico':
+      return {
+        abreviation: 'MEX',
+        color: '#FFFFFF',
+      };
+    case 'Poland':
+      return {
+        abreviation: 'POL',
+        color: '#FFFFFF',
+      };
+    case 'France':
+      return {
+        abreviation: 'FRA',
+        color: '#FFFFFF',
+      };
+    case 'Australia':
+      return {
+        abreviation: 'AUS',
+        color: '#FFFFFF',
+      };
+    case 'Denmark':
+      return {
+        abreviation: 'DEN',
+        color: '#FFFFFF',
+      };
+    case 'Tunisia':
+      return {
+        abreviation: 'TUN',
+        color: '#FFFFFF',
+      };
+    case 'Spain':
+      return {
+        abreviation: 'ESP',
+        color: '#FFFFFF',
+      };
+    case 'Costa Rica':
+      return {
+        abreviation: 'CRC',
+        color: '#FFFFFF',
+      };
+    case 'Germany':
+      return {
+        abreviation: 'GER',
+        color: '#FFFFFF',
+      };
+    case 'Japan':
+      return {
+        abreviation: 'JPN',
+        color: '#FFFFFF',
+      };
+    case 'Belgium':
+      return {
+        abreviation: 'BEL',
+        color: '#FFFFFF',
+      };
+    case 'Canada':
+      return {
+        abreviation: 'CAN',
+        color: '#FFFFFF',
+      };
+    case 'Morocco':
+      return {
+        abreviation: 'MAR',
+        color: '#FFFFFF',
+      };
+    case 'Croatia':
+      return {
+        abreviation: 'CRO',
+        color: '#FFFFFF',
+      };
+    case 'Brazil':
+      return {
+        abreviation: 'BRA',
+        color: '#FFFFFF',
+      };
+    case 'Serbia':
+      return {
+        abreviation: 'SRB',
+        color: '#FFFFFF',
+      };
+    case 'Switzerland':
+      return {
+        abreviation: 'SUI',
+        color: '#FFFFFF',
+      };
+    case 'Cameroon':
+      return {
+        abreviation: 'CMR',
+        color: '#FFFFFF',
+      };
+    case 'Portugal':
+      return {
+        abreviation: 'POR',
+        color: '#FFFFFF',
+      };
+    case 'Ghana':
+      return {
+        abreviation: 'GHA',
+        color: '#FFFFFF',
+      };
+    case 'Uruguay':
+      return {
+        abreviation: 'URU',
+        color: '#FFFFFF',
+      };
+    case 'South Korea':
+      return {
+        abreviation: 'KOR',
+        color: '#FFFFFF',
+      };
+    case 'FWC':
+      return {
+        abreviation: 'FWC',
+        color: '#FFFFFF',
+      };
+    case 'STADIUM':
+      return {
+        abreviation: 'STADIUM',
+        color: '#FFFFFF',
+      };
+    case 'MUSEUM':
+      return {
+        abreviation: 'STA',
+        color: '#FFFFFF',
+      };
     default:
-      return "#009933";
+      return {
+        abreviation: 'QAT',
+        color: '#003366',
+      };
   }
 };
 

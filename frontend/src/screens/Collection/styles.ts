@@ -18,6 +18,14 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFF0F0',
     borderBottomWidth: 8,
   },
+  categoryAbreviation: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'grey',
+    fontFamily: 'Raleway',
+    marginLeft: 10,
+    marginBottom: 3,
+  },
   categoryTitle: {
     fontSize: 24,
     fontWeight: '700',
@@ -36,7 +44,7 @@ const styles = StyleSheet.create({
     height: 55,
     margin: 5,
     borderRadius: 12,
-    borderColor: "#04B600"
+    borderColor: '#04B600',
   },
   stickerTitle: {
     fontSize: 24,
@@ -45,7 +53,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
   },
-  stickerCount: { 
+  stickerCount: {
     fontSize: 12,
     textAlign: 'center',
     marginLeft: 30,
@@ -72,7 +80,7 @@ const styles = StyleSheet.create({
     height: 90,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-  }
+  },
 });
 
 export default styles;
