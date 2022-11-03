@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontSize: 24,
-    fontWeight: '800',
+    fontWeight: '700',
+    fontFamily: 'Raleway',
     marginBottom: 10,
   },
   stickerContainer: {
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   },
   stickerTitle: {
     fontSize: 24,
+    fontFamily: 'Raleway',
     fontWeight: '600',
     textAlign: 'center',
     paddingTop: 5,
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    fontFamily: 'Raleway',
   },
   linearGradient: {
     flex: 1,
