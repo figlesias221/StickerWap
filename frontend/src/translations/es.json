@@ -38,5 +38,12 @@
     "regionPlaceholder": "Región",
     "phone": "Teléfono",
     "phonePlaceholder": "Teléfono"
+  },
+  "collection-alert": {
+    "title": "Agrear/Eliminar Figurita: ",
+    "subtitle": "Actualmente, tienes ",
+    "add": "Agregar una",
+    "remove": "Eliminar una",
+    "ok": "OK"
   }
 }

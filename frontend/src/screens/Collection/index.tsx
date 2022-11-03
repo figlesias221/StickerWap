@@ -6,9 +6,9 @@ import { SafeAreaView, View, Text, ScrollView, Modal, Pressable, Alert, Button }
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
 import styles from './styles';
+import i18n from 'translations';
 
 const Collection = () => {
-  const { t } = useTranslation();
 
   const [data, setData] = useState([]);
   const [userStickers, setUserStickers] = useState([]);
@@ -51,14 +51,12 @@ const Collection = () => {
         <View style={styles.container}>
           <Text>{name}</Text>
           {Object.keys(data).map((category: any) => (
-            <View key={category}>
+            <View style={styles.categorySection} key={category}>
               <Text>{category}</Text>
               {(data[category] as any).map((sticker: any) => {
-                const cant = userStickers[sticker.key];
                 return (
                   <View key={sticker._id}>
-                    <Text>{sticker.name}</Text>
-                    <Text>{cant}</Text>
+                    <Text>{sticker.name} - {userStickers[sticker.key]}</Text>
                     <Button
                       onPress={() => showAlert(sticker)}
                       title="+/-"
@@ -67,6 +65,9 @@ const Collection = () => {
                   </View>
                 );
               })}
+              <View style={styles.line}>
+                <Text>pepe</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -77,34 +78,34 @@ const Collection = () => {
   function showAlert(sticker: any) {
     const cant = userStickers[sticker.key];
     Alert.alert(
-      'Add/Remove ' + sticker._id + ' Stickers',
-      'Now, you have ' + cant,
+      i18n.t('collection-alert.title') + sticker.name,
+      i18n.t('collection-alert.subtitle') + cant,
       cant > 0 ?
       [
         {
-          text: 'Add One',
+          text: i18n.t('collection-alert.add'),
           onPress: () => addSticker(sticker.key),
           style: 'cancel',
         },
         {
-          text: 'Remove One',
+          text: i18n.t('collection-alert.remove'),
           onPress: () => removeSticker(sticker.key),
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: i18n.t('collection-alert.ok'),
           onPress: () => {},
           style: 'cancel'
         },
       ] : 
       [
         {
-          text: 'Add One',
+          text: i18n.t('collection-alert.add'),
           onPress: () => addSticker(sticker.key),
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: i18n.t('collection-alert.ok'),
           onPress: () => {},
         },
       ]
