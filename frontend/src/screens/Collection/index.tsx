@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Text, ScrollView, Modal, Pressable, Alert, Button } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, Alert, Button } from 'react-native';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
