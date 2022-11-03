@@ -60,10 +60,18 @@ const Collection = () => {
               <View style={styles.stickerContainer}>
                 {(data[category] as any).map((sticker: any) => {
                   let count = userStickers[sticker.key]
+                  let width = count > 1 ? 1 : 0
                   return (
-                    <View style={{ ...styles.sticker, backgroundColor: newShade(colorMap(category), count > 0 ? 180 : 80) }} key={sticker._id}>
+                    <View style={{ 
+                      ...styles.sticker, 
+                      backgroundColor: newShade(colorMap(category), count > 0 ? 160 : 80),
+                      borderWidth: width,
+                    }
+                    } key={sticker._id}>
                       <Text style={styles.stickerTitle}>{sticker.name.split("_")[1]}</Text>
-                      <Text style={styles.stickerCount}>{userStickers[sticker.key]}</Text>
+                      {
+                        count > 0 && <Text style={styles.stickerCount}>{count}</Text>
+                      }
                       <Button
                         onPress={() => showAlert(sticker)}
                         title="."

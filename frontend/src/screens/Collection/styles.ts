@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     height: 55,
     margin: 5,
     borderRadius: 10,
+    borderColor: "#04B600"
   },
   stickerTitle: {
     fontSize: 24,
@@ -42,15 +43,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 5,
   },
-  stickerCount: {
+  stickerCount: { 
     fontSize: 12,
     textAlign: 'center',
     marginLeft: 30,
     width: 16,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'red',
-
+    borderColor: '#04B600',
   },
   bigHeader: {
     fontSize: 40,
