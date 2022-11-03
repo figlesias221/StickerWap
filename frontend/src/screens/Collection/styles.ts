@@ -11,7 +11,10 @@ const styles = StyleSheet.create({
   categorySection: {
     backgroundColor: '#F2F2F2',
     width: '100%',
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 5,
+    paddingTop: 10,
     borderBottomColor: '#FFF0F0',
     borderBottomWidth: 8,
   },
@@ -29,11 +32,12 @@ const styles = StyleSheet.create({
   },
   sticker: {
     width: 55,
-    height: 80,
+    height: 55,
     margin: 5,
+    borderRadius: 10,
   },
   stickerTitle: {
-    fontSize: 12,
+    fontSize: 24,
     fontWeight: '600',
     textAlign: 'center',
     paddingTop: 5,
@@ -41,7 +45,12 @@ const styles = StyleSheet.create({
   stickerCount: {
     fontSize: 12,
     textAlign: 'center',
-    margin: 2,
+    marginLeft: 30,
+    width: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'red',
+
   },
   bigHeader: {
     fontSize: 40,

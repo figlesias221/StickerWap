@@ -62,12 +62,14 @@ const Collection = () => {
                   let count = userStickers[sticker.key]
                   return (
                     <View style={{ ...styles.sticker, backgroundColor: newShade(colorMap(category), count > 0 ? 180 : 80) }} key={sticker._id}>
-                      <Text style={styles.stickerTitle}>{sticker.name}</Text>
+                      <Text style={styles.stickerTitle}>{sticker.name.split("_")[1]}</Text>
                       <Text style={styles.stickerCount}>{userStickers[sticker.key]}</Text>
                       <Button
                         onPress={() => showAlert(sticker)}
-                        title="+/-"
+                        title="."
+
                         color="#000000"
+                        
                       />
                     </View>
                   );
