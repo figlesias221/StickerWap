@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     width: 55,
     height: 55,
     margin: 5,
-    borderRadius: 10,
+    borderRadius: 12,
     borderColor: "#04B600"
   },
   stickerTitle: {
