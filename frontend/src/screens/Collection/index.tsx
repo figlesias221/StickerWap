@@ -5,26 +5,74 @@ import {
   Text,
   ScrollView,
   Alert,
-  Button,
   TouchableOpacity,
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
 import styles from './styles';
 import i18n from 'translations';
 import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setAlbum,
+  setUserStickers as setUserStickersAction,
+  addUserSticker,
+  deleteUserSticker,
+  AlbumType,
+  Sticker,
+} from 'redux/slices/collectionSlice';
+import { cateogryMap, newShade } from './utils';
 
 const Collection = () => {
-  const [data, setData] = useState([]);
-  const [userStickers, setUserStickers] = useState([]);
+  const { album, userStickers: stickers } = useSelector(
+    (state: RootState) => state.collection,
+  );
+
+  const [data, setData] = useState<AlbumType[]>(album);
+  const [userStickers, setUserStickers] = useState(stickers);
+  const [items, setItems] = useState();
   const [name, setName] = useState();
+
+  const handleSelect = (value: any) => {
+    const country = album.filter(item => item.category === value);
+    setData(country.length === 0 ? album : country);
+  };
+
+  const Dropdown = (items: any) => {
+    return (
+      <RNPickerSelect
+        style={{
+          inputIOS: {
+            color: 'black',
+            fontSize: 16,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: 'gray',
+            marginLeft: 10,
+            width: '50%',
+          },
+        }}
+        onValueChange={value => handleSelect(value)}
+        items={items ? items : []}
+        placeholder={{
+          label: `${i18n.t('collection.filterPlaceholder')}`,
+          value: null,
+        }}
+      />
+    );
+  };
+
+  const dispatch = useDispatch();
 
   const getCollection = () =>
     api.get('/stickers').then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
+      dispatch(setUserStickersAction(data?.data?.album));
       setUserStickers(data?.data?.album);
     });
 
@@ -33,17 +81,39 @@ const Collection = () => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
+
       setName(data.data.album.name);
       const list = data?.data?.album?.stickerList;
-      const stickersByCategory: any = {};
+      const stickersByCategory: AlbumType[] = [];
+
       Object.keys(list).forEach(key => {
         const sticker = list[key];
-        if (!stickersByCategory[sticker.category]) {
-          stickersByCategory[sticker.category] = [];
+        sticker.key = key;
+        const category = sticker.category;
+        const categoryIndex = stickersByCategory.findIndex(
+          item => item.category === category,
+        );
+        if (categoryIndex === -1) {
+          stickersByCategory.push({
+            category,
+            stickers: [sticker],
+          });
+        } else {
+          stickersByCategory[categoryIndex].stickers.push(sticker);
         }
-        stickersByCategory[sticker.category].push({ ...sticker, key });
       });
+
       setData(stickersByCategory);
+      dispatch(setAlbum(stickersByCategory));
+
+      const items: any = [];
+      stickersByCategory.forEach(item => {
+        items.push({
+          label: item.category,
+          value: item.category,
+        });
+      });
+      setItems(items);
     });
 
   useEffect(() => {
@@ -61,10 +131,18 @@ const Collection = () => {
           >
             <Text style={styles.bigHeader}>{i18n.t('collection.title')}</Text>
           </LinearGradient>
-          {Object.keys(data).map((category: any) => {
-            const catInfo = cateogryMap(category);
+          <View style={styles.filterContainer}>
+            <View style={styles.filterSection}>
+              <Text style={styles.filterText}>
+                {i18n.t('collection.filter')}
+              </Text>
+              {Dropdown(items)}
+            </View>
+          </View>
+          {data?.map((elem: AlbumType) => {
+            const catInfo = cateogryMap(elem.category);
             return (
-              <View style={styles.categorySection} key={category}>
+              <View style={styles.categorySection} key={elem.category}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -72,17 +150,20 @@ const Collection = () => {
                     alignItems: 'center',
                   }}
                 >
-                  <Text style={styles.categoryTitle}>{category}</Text>
+                  <Text style={styles.categoryTitle}>{elem.category}</Text>
                   <Text style={styles.categoryAbreviation}>
                     {catInfo.abreviation}
                   </Text>
                 </View>
                 <View style={styles.stickerContainer}>
-                  {(data[category] as any).map((sticker: any) => {
+                  {elem.stickers.map((sticker: Sticker) => {
                     let count = userStickers[sticker.key];
                     let width = count > 1 ? 1 : 0;
                     return (
-                      <TouchableOpacity onPress={() => showAlert(sticker)}>
+                      <TouchableOpacity
+                        onPress={() => showAlert(sticker)}
+                        key={sticker._id}
+                      >
                         <View
                           style={{
                             ...styles.sticker,
@@ -92,7 +173,6 @@ const Collection = () => {
                             ),
                             borderWidth: width,
                           }}
-                          key={sticker._id}
                         >
                           <Text style={styles.stickerTitle}>
                             {sticker.name.split('_')[1]}
@@ -151,225 +231,23 @@ const Collection = () => {
   }
 
   function addSticker(id: number) {
+    setUserStickers({ ...userStickers, [id]: userStickers[id] + 1 });
+    dispatch(addUserSticker(id));
     api.post('/stickers/' + id).then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
-      getCollection();
     });
   }
 
   function removeSticker(id: number) {
+    setUserStickers({ ...userStickers, [id]: userStickers[id] - 1 });
+    dispatch(deleteUserSticker(id));
     api.delete('/stickers/' + id).then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
-      getCollection();
     });
-  }
-};
-
-const cateogryMap = (category: string) => {
-  switch (category) {
-    case 'Qatar':
-      return {
-        abreviation: 'QAT',
-        color: '#003366',
-      };
-    case 'Ecuador':
-      return {
-        abreviation: 'ECU',
-        color: '#009B3A',
-      };
-    case 'Senegal':
-      return {
-        abreviation: 'SEN',
-        color: '#D21034',
-      };
-    case 'Netherlands':
-      return {
-        abreviation: 'NED',
-        color: '#FDBB30',
-      };
-    case 'England':
-      return {
-        abreviation: 'ENG',
-        color: '#FFFFFF',
-      };
-    case 'Iran':
-      return {
-        abreviation: 'IRN',
-        color: '#FF0000',
-      };
-    case 'United States':
-      return {
-        abreviation: 'USA',
-        color: '#FF0000',
-      };
-    case 'Wales':
-      return {
-        abreviation: 'WAL',
-        color: '#FFFFFF',
-      };
-    case 'Argentina':
-      return {
-        abreviation: 'ARG',
-        color: '#FFFFFF',
-      };
-    case 'Saudi Arabia':
-      return {
-        abreviation: 'KSA',
-        color: '#FFFFFF',
-      };
-    case 'Mexico':
-      return {
-        abreviation: 'MEX',
-        color: '#FFFFFF',
-      };
-    case 'Poland':
-      return {
-        abreviation: 'POL',
-        color: '#FFFFFF',
-      };
-    case 'France':
-      return {
-        abreviation: 'FRA',
-        color: '#FFFFFF',
-      };
-    case 'Australia':
-      return {
-        abreviation: 'AUS',
-        color: '#FFFFFF',
-      };
-    case 'Denmark':
-      return {
-        abreviation: 'DEN',
-        color: '#FFFFFF',
-      };
-    case 'Tunisia':
-      return {
-        abreviation: 'TUN',
-        color: '#FFFFFF',
-      };
-    case 'Spain':
-      return {
-        abreviation: 'ESP',
-        color: '#FFFFFF',
-      };
-    case 'Costa Rica':
-      return {
-        abreviation: 'CRC',
-        color: '#FFFFFF',
-      };
-    case 'Germany':
-      return {
-        abreviation: 'GER',
-        color: '#FFFFFF',
-      };
-    case 'Japan':
-      return {
-        abreviation: 'JPN',
-        color: '#FFFFFF',
-      };
-    case 'Belgium':
-      return {
-        abreviation: 'BEL',
-        color: '#FFFFFF',
-      };
-    case 'Canada':
-      return {
-        abreviation: 'CAN',
-        color: '#FFFFFF',
-      };
-    case 'Morocco':
-      return {
-        abreviation: 'MAR',
-        color: '#FFFFFF',
-      };
-    case 'Croatia':
-      return {
-        abreviation: 'CRO',
-        color: '#FFFFFF',
-      };
-    case 'Brazil':
-      return {
-        abreviation: 'BRA',
-        color: '#FFFFFF',
-      };
-    case 'Serbia':
-      return {
-        abreviation: 'SRB',
-        color: '#FFFFFF',
-      };
-    case 'Switzerland':
-      return {
-        abreviation: 'SUI',
-        color: '#FFFFFF',
-      };
-    case 'Cameroon':
-      return {
-        abreviation: 'CMR',
-        color: '#FFFFFF',
-      };
-    case 'Portugal':
-      return {
-        abreviation: 'POR',
-        color: '#FFFFFF',
-      };
-    case 'Ghana':
-      return {
-        abreviation: 'GHA',
-        color: '#FFFFFF',
-      };
-    case 'Uruguay':
-      return {
-        abreviation: 'URU',
-        color: '#FFFFFF',
-      };
-    case 'South Korea':
-      return {
-        abreviation: 'KOR',
-        color: '#FFFFFF',
-      };
-    case 'FWC':
-      return {
-        abreviation: 'FWC',
-        color: '#FFFFFF',
-      };
-    case 'STADIUM':
-      return {
-        abreviation: 'STADIUM',
-        color: '#FFFFFF',
-      };
-    case 'MUSEUM':
-      return {
-        abreviation: 'STA',
-        color: '#FFFFFF',
-      };
-    default:
-      return {
-        abreviation: 'QAT',
-        color: '#003366',
-      };
-  }
-};
-
-const newShade = (hexColor: string, magnitude: number) => {
-  hexColor = hexColor.replace(`#`, ``);
-  if (hexColor.length === 6) {
-    const decimalColor = parseInt(hexColor, 16);
-    let r = (decimalColor >> 16) + magnitude;
-    r > 255 && (r = 255);
-    r < 0 && (r = 0);
-    let g = (decimalColor & 0x0000ff) + magnitude;
-    g > 255 && (g = 255);
-    g < 0 && (g = 0);
-    let b = ((decimalColor >> 8) & 0x00ff) + magnitude;
-    b > 255 && (b = 255);
-    b < 0 && (b = 0);
-    return `#${(g | (b << 8) | (r << 16)).toString(16)}`;
-  } else {
-    return hexColor;
   }
 };
 

@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     borderBottomColor: '#FFF0F0',
     borderBottomWidth: 8,
   },
+  filterContainer: {
+    width: '100%',
+    flex: 1,
+    marginTop: 1,
+    backgroundColor: '#F2F2F2',
+  },
   categoryAbreviation: {
     fontSize: 16,
     fontWeight: 'bold',
@@ -30,6 +36,22 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '700',
     fontFamily: 'Raleway',
+    marginBottom: 10,
+  },
+  filterSection: {
+    width: '100%',
+    flex: 1,
+    marginTop: 20,
+    marginLeft: 10,
+    marginBottom: 20,
+    backgroundColor: '#F2F2F2',
+  },
+  filterText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'grey',
+    fontFamily: 'Raleway',
+    marginLeft: 10,
     marginBottom: 10,
   },
   stickerContainer: {
@@ -56,7 +78,7 @@ const styles = StyleSheet.create({
   stickerCount: {
     fontSize: 12,
     textAlign: 'center',
-    marginLeft: 30,
+    marginLeft: 34,
     width: 16,
     borderRadius: 8,
     borderWidth: 1,
@@ -77,9 +99,9 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
     width: '100%',
-    height: 90,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    height: 120,
+
+    borderRadius: 20,
   },
 });
 

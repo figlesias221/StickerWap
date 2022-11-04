@@ -1,6 +1,8 @@
 {
   "collection": {
-    "title": "Tu Colección"
+    "title": "Tu Colección",
+    "fitler": "Filtro",
+    "filterPlaceholder": "Filtrar por categoría..."
   },
   "swipe": {
     "title": "Swipe"

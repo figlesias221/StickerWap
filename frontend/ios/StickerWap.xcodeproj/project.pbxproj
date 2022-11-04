@@ -11,7 +11,6 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		147D5A9FDD876F94CA60F597 /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */; };
 		2BFD15881A762606B21ADC78 /* libPods-StickerWap-StickerWapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BD86FB45E37C2D7068AB30 /* libPods-StickerWap-StickerWapTests.a */; };
 		5E0F1F89291434200013EC1A /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F80291434200013EC1A /* Raleway-Medium.ttf */; };
 		5E0F1F8A291434200013EC1A /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F81291434200013EC1A /* Raleway-Regular.ttf */; };
@@ -23,6 +22,7 @@
 		5E0F1F90291434200013EC1A /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F87291434200013EC1A /* Raleway-SemiBold.ttf */; };
 		5E0F1F91291434200013EC1A /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F88291434200013EC1A /* Raleway-Thin.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		828175726C39F33C4586019E /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,11 +75,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+		53FA9F3F6C1B17E4267D50E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				147D5A9FDD876F94CA60F597 /* libPods-StickerWap.a in Frameworks */,
+				828175726C39F33C4586019E /* libPods-StickerWap.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,11 +218,11 @@
 				9E4772B2EE941960EE32E1BD /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
-				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				3CEC11B6F5B675A4FBEE31FF /* [CP] Embed Pods Frameworks */,
 				EC0AD1638C1E0025E987C3BB /* [CP] Copy Pods Resources */,
+				53FA9F3F6C1B17E4267D50E3 /* Frameworks */,
 			);
 			buildRules = (
 			);

@@ -1,6 +1,8 @@
 {
   "collection": {
-    "title": "Your Collection"
+    "title": "Your Collection",
+    "filter": "Filter",
+    "filterPlaceholder": "Filter your collection"
   },
   "swipe": {
     "title": "Swipe"
