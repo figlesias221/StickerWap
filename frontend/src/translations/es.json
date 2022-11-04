@@ -1,7 +1,7 @@
 {
   "collection": {
     "title": "Tu Colección",
-    "fitler": "Filtro",
+    "filter": "Filtro",
     "filterPlaceholder": "Filtrar por categoría..."
   },
   "swipe": {

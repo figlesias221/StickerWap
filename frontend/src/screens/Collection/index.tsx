@@ -51,8 +51,9 @@ const Collection = () => {
             paddingHorizontal: 10,
             borderWidth: 1,
             borderColor: 'gray',
+            borderRadius: 12,
             marginLeft: 10,
-            width: '50%',
+            width: '100',
           },
         }}
         onValueChange={value => handleSelect(value)}
