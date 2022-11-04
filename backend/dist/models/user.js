@@ -28,6 +28,7 @@ const userSchema = mongoose.Schema({
     },
     password: { type: String, required: true },
     region: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     matches: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     album: { type: {}, default: (0, createStickers_1.buildAlbum)() },
     tokens: [],

@@ -35,6 +35,7 @@ const SignUp = () => {
         email,
         password,
         region,
+        phoneNumber: phone,
       })
       .then((data: any) => {
         if (data?.response?.status === 400) {
@@ -44,7 +45,7 @@ const SignUp = () => {
       });
 
   const handleSignUp = async () => {
-    if (!name || !email || !password || !region) {
+    if (!name || !email || !password || !region || !phone) {
       setError('Todos los campos son obligatorios');
       return;
     }
@@ -56,7 +57,7 @@ const SignUp = () => {
         }),
       );
     } catch (error: any) {
-      setError(error);
+      setError(error?.response?.data.error);
     }
   };
 
@@ -121,7 +122,7 @@ const SignUp = () => {
           <View style={styles.buttonContainer}>
             <Button label={i18n.t('signup.submit')} onPress={handleSignUp} />
           </View>
-          {error ? <Text style={styles.error}>{error}</Text> : null}
+          {!!error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </ScrollView>
     </SafeAreaView>

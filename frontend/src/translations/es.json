@@ -9,7 +9,8 @@
   },
   "settings": {
     "title": "Perfil",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "edit": "Editar"
   },
   "chat": {
     "title": "Mensajes"

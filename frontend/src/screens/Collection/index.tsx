@@ -6,6 +6,7 @@ import {
   ScrollView,
   Alert,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -53,7 +54,7 @@ const Collection = () => {
             borderColor: 'gray',
             borderRadius: 12,
             marginLeft: 10,
-            width: '100',
+            width: '100%',
           },
         }}
         onValueChange={value => handleSelect(value)}
@@ -118,8 +119,10 @@ const Collection = () => {
     });
 
   useEffect(() => {
+    const controller = new AbortController();
     getAlbum();
     getCollection();
+    return () => controller.abort();
   }, []);
 
   return (
@@ -140,55 +143,62 @@ const Collection = () => {
               {Dropdown(items)}
             </View>
           </View>
-          {data?.map((elem: AlbumType) => {
-            const catInfo = cateogryMap(elem.category);
-            return (
-              <View style={styles.categorySection} key={elem.category}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Text style={styles.categoryTitle}>{elem.category}</Text>
-                  <Text style={styles.categoryAbreviation}>
-                    {catInfo.abreviation}
-                  </Text>
-                </View>
-                <View style={styles.stickerContainer}>
-                  {elem.stickers.map((sticker: Sticker) => {
-                    let count = userStickers[sticker.key];
-                    let width = count > 1 ? 1 : 0;
-                    return (
-                      <TouchableOpacity
-                        onPress={() => showAlert(sticker)}
-                        key={sticker._id}
-                      >
-                        <View
-                          style={{
-                            ...styles.sticker,
-                            backgroundColor: newShade(
-                              catInfo.color,
-                              count > 0 ? 160 : 80,
-                            ),
-                            borderWidth: width,
-                          }}
+
+          {data.length === 0 ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#04B600" />
+            </View>
+          ) : (
+            data?.map((elem: AlbumType) => {
+              const catInfo = cateogryMap(elem.category);
+              return (
+                <View style={styles.categorySection} key={elem.category}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Text style={styles.categoryTitle}>{elem.category}</Text>
+                    <Text style={styles.categoryAbreviation}>
+                      {catInfo.abreviation}
+                    </Text>
+                  </View>
+                  <View style={styles.stickerContainer}>
+                    {elem.stickers.map((sticker: Sticker) => {
+                      let count = userStickers[sticker.key];
+                      let width = count > 1 ? 1 : 0;
+                      return (
+                        <TouchableOpacity
+                          onPress={() => showAlert(sticker)}
+                          key={sticker._id}
                         >
-                          <Text style={styles.stickerTitle}>
-                            {sticker.name.split('_')[1]}
-                          </Text>
-                          {count > 0 && (
-                            <Text style={styles.stickerCount}>{count}</Text>
-                          )}
-                        </View>
-                      </TouchableOpacity>
-                    );
-                  })}
+                          <View
+                            style={{
+                              ...styles.sticker,
+                              backgroundColor: newShade(
+                                catInfo.color,
+                                count > 0 ? 160 : 80,
+                              ),
+                              borderWidth: width,
+                            }}
+                          >
+                            <Text style={styles.stickerTitle}>
+                              {sticker.name.split('_')[1]}
+                            </Text>
+                            {count > 0 && (
+                              <Text style={styles.stickerCount}>{count}</Text>
+                            )}
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
                 </View>
-              </View>
-            );
-          })}
+              );
+            })
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

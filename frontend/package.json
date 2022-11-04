@@ -20,6 +20,7 @@
     "react-emojis": "^1.0.6",
     "react-i18next": "^11.14.2",
     "react-native": "0.66.2",
+    "react-native-animated-loader": "^1.0.0",
     "react-native-config": "^1.4.5",
     "react-native-emoji": "^1.8.0",
     "react-native-gesture-handler": "^1.8.0",

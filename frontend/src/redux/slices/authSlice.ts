@@ -6,12 +6,14 @@ export interface UserTokens {
 }
 export interface AuthSliceState {
   user: UserTokens;
+  data: any;
 }
 
 const authInitialState: AuthSliceState = {
   user: {
-    accessToken: ''
+    accessToken: '',
   },
+  data: {},
 };
 
 const auth = createSlice({
@@ -22,11 +24,17 @@ const auth = createSlice({
       state.user = payload;
     },
     signOut(state) {
-      state.user = authInitialState.user;
+      state.user = {
+        accessToken: '',
+      };
+      state.data = {};
+    },
+    setUserData(state, { payload }: PayloadAction<any>) {
+      state.data = payload;
     },
   },
 });
 
-export const { loginSuccess, signOut } = auth.actions;
+export const { loginSuccess, signOut, setUserData } = auth.actions;
 
 export default auth.reducer;

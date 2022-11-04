@@ -17,20 +17,26 @@ const styles = StyleSheet.create({
     height: screenHeight * 0.05,
     width: screenHeight * 0.05,
   },
+  error: {
+    color: 'red',
+    fontSize: baseFontSize,
+    marginTop: screenHeight * 0.01,
+    fontFamily: 'Raleway-Medium',
+  },
   logoText: {
     fontSize: screenHeight * 0.03,
-    fontWeight: 'bold',
     color: green,
-    fontFamily: 'Avenir',
+    fontFamily: 'Raleway-Bold',
   },
   componentContainer: {
     paddingVertical: 20,
   },
   subtitle: {
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     color: green,
     marginBottom: screenHeight * 0.03,
     fontSize: screenHeight * 0.05,
+    fontFamily: 'Raleway-Bold',
   },
   title: {
     fontSize: largeHeaderFontSize,
@@ -38,17 +44,15 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: screenHeight * 0.02,
-    fontWeight: '300',
     marginBottom: screenHeight * 0.012,
     marginTop: screenHeight * 0.012,
-    fontFamily: 'Avenir',
+    fontFamily: 'Raleway',
   },
   createLabel: {
     fontSize: screenHeight * 0.02,
-    fontWeight: '300',
     marginBottom: screenHeight * 0.012,
     marginTop: screenHeight * 0.012,
-    fontFamily: 'Avenir',
+    fontFamily: 'Raleway',
     color: '#898989',
   },
   input: {
@@ -59,12 +63,13 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     padding: 12,
     borderRadius: 4,
+    fontFamily: 'Raleway-Bold',
   },
   link: {
     fontSize: screenHeight * 0.015,
-    fontWeight: '600',
     color: black,
     marginLeft: '2%',
+    fontFamily: 'Raleway-Bold',
   },
   buttonContainer: {
     marginTop: screenHeight * 0.04,

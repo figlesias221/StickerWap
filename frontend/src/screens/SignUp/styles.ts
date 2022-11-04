@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { black, green, screenHeight } from 'styles/theme';
-import { largeHeaderFontSize } from 'styles/typography';
+import { green, screenHeight } from 'styles/theme';
 
 const styles = StyleSheet.create({
   formContainer: {
@@ -8,49 +7,36 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '15%',
   },
-  title: {
-    fontSize: largeHeaderFontSize,
-    fontWeight: '600',
-  },
   label: {
     fontSize: screenHeight * 0.02,
-    fontWeight: '300',
     marginBottom: screenHeight * 0.012,
     marginTop: screenHeight * 0.012,
-    fontFamily: 'Avenir',
+    fontFamily: 'Raleway',
   },
   error: {
     color: 'red',
     fontSize: screenHeight * 0.02,
-    fontWeight: '300',
     marginBottom: screenHeight * 0.012,
     marginTop: screenHeight * 0.012,
-    fontFamily: 'Avenir',
+    fontFamily: 'Raleway',
   },
   subtitle: {
-    fontWeight: 'bold',
     color: green,
     marginBottom: screenHeight * 0.03,
     fontSize: screenHeight * 0.05,
+    fontFamily: 'Raleway-Bold',
   },
   input: {
     fontSize: screenHeight * 0.018,
-    fontWeight: '400',
     marginBottom: screenHeight * 0.005,
     marginTop: screenHeight * 0.005,
     borderWidth: 0.5,
     padding: 12,
     borderRadius: 4,
-  },
-  link: {
-    fontSize: screenHeight * 0.015,
-    fontWeight: '600',
-    color: black,
-    marginLeft: '2%',
+    fontFamily: 'Raleway',
   },
   buttonContainer: {
     marginTop: screenHeight * 0.04,
-
     width: '100%',
   },
   createAccountContainer: {

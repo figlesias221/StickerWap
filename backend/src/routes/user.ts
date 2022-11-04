@@ -11,9 +11,10 @@ router.post("/signup", async function (req, res) {
     !req.body.name ||
     !req.body.email ||
     !req.body.password ||
-    !req.body.region
+    !req.body.region ||
+    !req.body.phoneNumber
   ) {
-    res.status(400).send({ message: "Campos incompletos" });
+    res.status(400).send({ error: "Campos incompletos" });
     return;
   }
   try {
@@ -26,6 +27,7 @@ router.post("/signup", async function (req, res) {
       name: user.name,
       email: user.email,
       region: user.region,
+      phoneNumber: user.phoneNumber,
       token: token,
     });
   } catch (error) {
@@ -83,6 +85,7 @@ router.get("/me", auth, async (req: any, res) => {
       name: user.name,
       email: user.email,
       region: user.region,
+      phoneNumber: user.phoneNumber,
     });
   } catch (e) {
     res.status(500).send();
@@ -91,7 +94,7 @@ router.get("/me", auth, async (req: any, res) => {
 
 router.put("/me", auth, async (req: any, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "password", "region"];
+  const allowedUpdates = ["name", "email", "region", "phoneNumber"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -107,6 +110,7 @@ router.put("/me", auth, async (req: any, res) => {
       name: user.name,
       email: user.email,
       region: user.region,
+      phoneNumber: user.phoneNumber,
     });
   } catch (e) {
     res.status(400).send(e);
