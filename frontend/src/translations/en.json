@@ -1,6 +1,8 @@
 {
   "collection": {
-    "title": "Collection"
+    "title": "Your Collection",
+    "filter": "Filter",
+    "filterPlaceholder": "Filter your collection"
   },
   "swipe": {
     "title": "Swipe"
@@ -38,5 +40,12 @@
     "regionPlaceholder": "Region",
     "phone": "Phone",
     "phonePlaceholder": "Phone"
+  },
+  "collection-alert": {
+    "title": "Add/Remove Sticker: ",
+    "subtitle": "Currently, you have ",
+    "add": "Add one",
+    "remove": "Remove one",
+    "ok": "OK"
   }
 }

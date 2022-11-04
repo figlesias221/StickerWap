@@ -1,24 +1,78 @@
-
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Text, ScrollView, Modal, Pressable, Alert, Button } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ScrollView,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
 import styles from './styles';
+import i18n from 'translations';
+import LinearGradient from 'react-native-linear-gradient';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setAlbum,
+  setUserStickers as setUserStickersAction,
+  addUserSticker,
+  deleteUserSticker,
+  AlbumType,
+  Sticker,
+} from 'redux/slices/collectionSlice';
+import { cateogryMap, newShade } from './utils';
 
 const Collection = () => {
-  const { t } = useTranslation();
+  const { album, userStickers: stickers } = useSelector(
+    (state: RootState) => state.collection,
+  );
 
-  const [data, setData] = useState([]);
-  const [userStickers, setUserStickers] = useState([]);
+  const [data, setData] = useState<AlbumType[]>(album);
+  const [userStickers, setUserStickers] = useState(stickers);
+  const [items, setItems] = useState();
   const [name, setName] = useState();
+
+  const handleSelect = (value: any) => {
+    const country = album.filter(item => item.category === value);
+    setData(country.length === 0 ? album : country);
+  };
+
+  const Dropdown = (items: any) => {
+    return (
+      <RNPickerSelect
+        style={{
+          inputIOS: {
+            color: 'black',
+            fontSize: 16,
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 1,
+            borderColor: 'gray',
+            marginLeft: 10,
+            width: '50%',
+          },
+        }}
+        onValueChange={value => handleSelect(value)}
+        items={items ? items : []}
+        placeholder={{
+          label: `${i18n.t('collection.filterPlaceholder')}`,
+          value: null,
+        }}
+      />
+    );
+  };
+
+  const dispatch = useDispatch();
 
   const getCollection = () =>
     api.get('/stickers').then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
+      dispatch(setUserStickersAction(data?.data?.album));
       setUserStickers(data?.data?.album);
     });
 
@@ -27,17 +81,39 @@ const Collection = () => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
+
       setName(data.data.album.name);
       const list = data?.data?.album?.stickerList;
-      const stickersByCategory: any = {};
+      const stickersByCategory: AlbumType[] = [];
+
       Object.keys(list).forEach(key => {
         const sticker = list[key];
-        if (!stickersByCategory[sticker.category]) {
-          stickersByCategory[sticker.category] = [];
+        sticker.key = key;
+        const category = sticker.category;
+        const categoryIndex = stickersByCategory.findIndex(
+          item => item.category === category,
+        );
+        if (categoryIndex === -1) {
+          stickersByCategory.push({
+            category,
+            stickers: [sticker],
+          });
+        } else {
+          stickersByCategory[categoryIndex].stickers.push(sticker);
         }
-        stickersByCategory[sticker.category].push({ ...sticker, key });
       });
+
       setData(stickersByCategory);
+      dispatch(setAlbum(stickersByCategory));
+
+      const items: any = [];
+      stickersByCategory.forEach(item => {
+        items.push({
+          label: item.category,
+          value: item.category,
+        });
+      });
+      setItems(items);
     });
 
   useEffect(() => {
@@ -49,26 +125,69 @@ const Collection = () => {
     <SafeAreaView style={spacingStyles.mainScreen}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
-          <Text>{name}</Text>
-          {Object.keys(data).map((category: any) => (
-            <View key={category}>
-              <Text>{category}</Text>
-              {(data[category] as any).map((sticker: any) => {
-                const cant = userStickers[sticker.key];
-                return (
-                  <View key={sticker._id}>
-                    <Text>{sticker.name}</Text>
-                    <Text>{cant}</Text>
-                    <Button
-                      onPress={() => showAlert(sticker)}
-                      title="+/-"
-                      color="#009933"
-                    />
-                  </View>
-                );
-              })}
+          <LinearGradient
+            colors={['#04B600', '#0094FF']}
+            style={styles.linearGradient}
+          >
+            <Text style={styles.bigHeader}>{i18n.t('collection.title')}</Text>
+          </LinearGradient>
+          <View style={styles.filterContainer}>
+            <View style={styles.filterSection}>
+              <Text style={styles.filterText}>
+                {i18n.t('collection.filter')}
+              </Text>
+              {Dropdown(items)}
             </View>
-          ))}
+          </View>
+          {data?.map((elem: AlbumType) => {
+            const catInfo = cateogryMap(elem.category);
+            return (
+              <View style={styles.categorySection} key={elem.category}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Text style={styles.categoryTitle}>{elem.category}</Text>
+                  <Text style={styles.categoryAbreviation}>
+                    {catInfo.abreviation}
+                  </Text>
+                </View>
+                <View style={styles.stickerContainer}>
+                  {elem.stickers.map((sticker: Sticker) => {
+                    let count = userStickers[sticker.key];
+                    let width = count > 1 ? 1 : 0;
+                    return (
+                      <TouchableOpacity
+                        onPress={() => showAlert(sticker)}
+                        key={sticker._id}
+                      >
+                        <View
+                          style={{
+                            ...styles.sticker,
+                            backgroundColor: newShade(
+                              catInfo.color,
+                              count > 0 ? 160 : 80,
+                            ),
+                            borderWidth: width,
+                          }}
+                        >
+                          <Text style={styles.stickerTitle}>
+                            {sticker.name.split('_')[1]}
+                          </Text>
+                          {count > 0 && (
+                            <Text style={styles.stickerCount}>{count}</Text>
+                          )}
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </View>
+              </View>
+            );
+          })}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -77,59 +196,59 @@ const Collection = () => {
   function showAlert(sticker: any) {
     const cant = userStickers[sticker.key];
     Alert.alert(
-      'Add/Remove ' + sticker._id + ' Stickers',
-      'Now, you have ' + cant,
-      cant > 0 ?
-      [
-        {
-          text: 'Add One',
-          onPress: () => addSticker(sticker.key),
-          style: 'cancel',
-        },
-        {
-          text: 'Remove One',
-          onPress: () => removeSticker(sticker.key),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {},
-          style: 'cancel'
-        },
-      ] : 
-      [
-        {
-          text: 'Add One',
-          onPress: () => addSticker(sticker.key),
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => {},
-        },
-      ]
+      i18n.t('collection-alert.title') + sticker.name,
+      i18n.t('collection-alert.subtitle') + cant,
+      cant > 0
+        ? [
+            {
+              text: i18n.t('collection-alert.add'),
+              onPress: () => addSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.remove'),
+              onPress: () => removeSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.ok'),
+              onPress: () => {},
+              style: 'cancel',
+            },
+          ]
+        : [
+            {
+              text: i18n.t('collection-alert.add'),
+              onPress: () => addSticker(sticker.key),
+              style: 'cancel',
+            },
+            {
+              text: i18n.t('collection-alert.ok'),
+              onPress: () => {},
+            },
+          ],
     );
   }
 
   function addSticker(id: number) {
+    setUserStickers({ ...userStickers, [id]: userStickers[id] + 1 });
+    dispatch(addUserSticker(id));
     api.post('/stickers/' + id).then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
-      getCollection();
-    })
+    });
   }
 
   function removeSticker(id: number) {
+    setUserStickers({ ...userStickers, [id]: userStickers[id] - 1 });
+    dispatch(deleteUserSticker(id));
     api.delete('/stickers/' + id).then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }
-      getCollection();
-    })
+    });
   }
 };
-
-
 
 export default Collection;

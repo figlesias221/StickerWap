@@ -1,6 +1,8 @@
 {
   "collection": {
-    "title": "Colección"
+    "title": "Tu Colección",
+    "fitler": "Filtro",
+    "filterPlaceholder": "Filtrar por categoría..."
   },
   "swipe": {
     "title": "Swipe"
@@ -38,5 +40,12 @@
     "regionPlaceholder": "Región",
     "phone": "Teléfono",
     "phonePlaceholder": "Teléfono"
+  },
+  "collection-alert": {
+    "title": "Agrear/Eliminar Figurita: ",
+    "subtitle": "Actualmente, tienes ",
+    "add": "Agregar una",
+    "remove": "Eliminar una",
+    "ok": "OK"
   }
 }

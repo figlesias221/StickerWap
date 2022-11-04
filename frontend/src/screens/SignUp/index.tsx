@@ -15,10 +15,8 @@ import i18n from 'translations';
 
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
-import { useNavigation } from '@react-navigation/native';
 import spacingStyles from 'styles/spacing';
 import { styles } from './styles';
-import { useMutation } from 'react-query';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -29,7 +27,6 @@ const SignUp = () => {
   const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const { dispatch } = store;
-  const { navigate } = useNavigation();
 
   const singup = () =>
     api
