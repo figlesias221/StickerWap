@@ -3,22 +3,22 @@ export const cateogryMap = (category: string) => {
     case 'Qatar':
       return {
         abreviation: 'QAT',
-        color: '#003366',
+        color: '#FF7E62',
       };
     case 'Ecuador':
       return {
         abreviation: 'ECU',
-        color: '#009B3A',
+        color: '#FFC800',
       };
     case 'Senegal':
       return {
         abreviation: 'SEN',
-        color: '#D21034',
+        color: '#05950A',
       };
     case 'Netherlands':
       return {
         abreviation: 'NED',
-        color: '#FDBB30',
+        color: '#FF7E00',
       };
     case 'England':
       return {
@@ -28,7 +28,7 @@ export const cateogryMap = (category: string) => {
     case 'Iran':
       return {
         abreviation: 'IRN',
-        color: '#FF0000',
+        color: '#D56B03',
       };
     case 'United States':
       return {
@@ -38,77 +38,77 @@ export const cateogryMap = (category: string) => {
     case 'Wales':
       return {
         abreviation: 'WAL',
-        color: '#FFFFFF',
+        color: '#F9CCCC',
       };
     case 'Argentina':
       return {
         abreviation: 'ARG',
-        color: '#FFFFFF',
+        color: '#65FFFE',
       };
     case 'Saudi Arabia':
       return {
         abreviation: 'KSA',
-        color: '#FFFFFF',
+        color: '#025E0B',
       };
     case 'Mexico':
       return {
         abreviation: 'MEX',
-        color: '#FFFFFF',
+        color: '#54FF00',
       };
     case 'Poland':
       return {
         abreviation: 'POL',
-        color: '#FFFFFF',
+        color: '#FF5C5C',
       };
     case 'France':
       return {
         abreviation: 'FRA',
-        color: '#FFFFFF',
+        color: '#0332F8',
       };
     case 'Australia':
       return {
         abreviation: 'AUS',
-        color: '#FFFFFF',
+        color: '#F7FF01',
       };
     case 'Denmark':
       return {
         abreviation: 'DEN',
-        color: '#FFFFFF',
+        color: '#E10000',
       };
     case 'Tunisia':
       return {
         abreviation: 'TUN',
-        color: '#FFFFFF',
+        color: '#FF5C5C',
       };
     case 'Spain':
       return {
         abreviation: 'ESP',
-        color: '#FFFFFF',
+        color: '#FF0000',
       };
     case 'Costa Rica':
       return {
         abreviation: 'CRC',
-        color: '#FFFFFF',
+        color: '#AE1E00',
       };
     case 'Germany':
       return {
         abreviation: 'GER',
-        color: '#FFFFFF',
+        color: '#D6D600',
       };
     case 'Japan':
       return {
         abreviation: 'JPN',
-        color: '#FFFFFF',
+        color: '#073EFF',
       };
     case 'Belgium':
       return {
         abreviation: 'BEL',
-        color: '#FFFFFF',
+        color: '#A53F00',
       };
     case 'Canada':
       return {
         abreviation: 'CAN',
-        color: '#FFFFFF',
+        color: '#DA0F0F',
       };
     case 'Morocco':
       return {
@@ -118,67 +118,67 @@ export const cateogryMap = (category: string) => {
     case 'Croatia':
       return {
         abreviation: 'CRO',
-        color: '#FFFFFF',
+        color: '#DA0F0F',
       };
     case 'Brazil':
       return {
         abreviation: 'BRA',
-        color: '#FFFFFF',
+        color: '#FFF500',
       };
     case 'Serbia':
       return {
         abreviation: 'SRB',
-        color: '#FFFFFF',
+        color: '#FD2232',
       };
     case 'Switzerland':
       return {
         abreviation: 'SUI',
-        color: '#FFFFFF',
+        color: '#DD0010',
       };
     case 'Cameroon':
       return {
         abreviation: 'CMR',
-        color: '#FFFFFF',
+        color: '#009305',
       };
     case 'Portugal':
       return {
         abreviation: 'POR',
-        color: '#FFFFFF',
+        color: '#3FF301',
       };
     case 'Ghana':
       return {
         abreviation: 'GHA',
-        color: '#FFFFFF',
+        color: '#FFC973',
       };
     case 'Uruguay':
       return {
         abreviation: 'URU',
-        color: '#FFFFFF',
+        color: '#3AD6FF',
       };
     case 'South Korea':
       return {
         abreviation: 'KOR',
-        color: '#FFFFFF',
+        color: '#FF5939',
       };
     case 'FWC':
       return {
         abreviation: 'FWC',
-        color: '#FFFFFF',
+        color: '#FFD024',
       };
     case 'STADIUM':
       return {
         abreviation: 'STADIUM',
-        color: '#FFFFFF',
+        color: '#B1B1B1',
       };
     case 'MUSEUM':
       return {
         abreviation: 'STA',
-        color: '#FFFFFF',
+        color: '#633800',
       };
     default:
       return {
         abreviation: 'QAT',
-        color: '#003366',
+        color: '#B1B1B1',
       };
   }
 };
