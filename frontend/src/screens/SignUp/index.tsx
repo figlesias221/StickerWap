@@ -24,7 +24,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [region, setRegion] = useState('');
-  const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const { dispatch } = store;
 
@@ -35,7 +34,6 @@ const SignUp = () => {
         email,
         password,
         region,
-        phoneNumber: phone,
       })
       .then((data: any) => {
         if (data?.response?.status === 400) {
@@ -45,7 +43,7 @@ const SignUp = () => {
       });
 
   const handleSignUp = async () => {
-    if (!name || !email || !password || !region || !phone) {
+    if (!name || !email || !password || !region) {
       setError('Todos los campos son obligatorios');
       return;
     }
@@ -85,12 +83,6 @@ const SignUp = () => {
       value: region,
       onChange: setRegion,
       placeholder: 'regionPlaceholder',
-    },
-    {
-      label: 'phone',
-      value: phone,
-      onChange: setPhone,
-      placeholder: 'phonePlaceholder',
     },
   ];
 

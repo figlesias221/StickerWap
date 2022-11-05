@@ -71,7 +71,12 @@ var randomSticker = async function (req) {
 
   const album = await Album.findOne({ name: "Qatar" });
   const sticker = album.stickerList[randomSticker];
-  return { user_id, randomSticker, sticker };
+  return {
+    user_id,
+    randomSticker,
+    sticker,
+    flag: `https://countryflagsapi.com/png/${sticker.category}`,
+  };
 };
 
 var randomStickerId = function (obj) {

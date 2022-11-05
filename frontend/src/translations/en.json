@@ -13,7 +13,9 @@
     "edit": "Edit"
   },
   "chat": {
-    "title": "Chat"
+    "title": "Chat",
+    "no-messages": "No messages yet",
+    "placeHolder": "Type a message"
   },
   "signin": {
     "title": "Sign In",
@@ -38,9 +40,7 @@
     "name": "Username",
     "namePlaceholder": "Username",
     "region": "Region",
-    "regionPlaceholder": "Region",
-    "phone": "Phone",
-    "phonePlaceholder": "Phone"
+    "regionPlaceholder": "Region"
   },
   "collection-alert": {
     "title": "Add/Remove Sticker: ",

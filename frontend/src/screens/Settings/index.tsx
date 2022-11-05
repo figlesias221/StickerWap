@@ -35,7 +35,6 @@ const Settings = () => {
       setName(data.data.name);
       setEmail(data.data.email);
       setRegion(data.data.region);
-      setPhone(data.data.phoneNumber);
       dispatch(setUserData(data.data));
     });
 
@@ -48,7 +47,6 @@ const Settings = () => {
   const [email, setEmail] = useState(data.email);
   const [name, setName] = useState(data.name);
   const [region, setRegion] = useState(data.region);
-  const [phone, setPhone] = useState(data.phoneNumber);
   const [error, setError] = useState('');
 
   const handleEdit = () => {
@@ -57,7 +55,6 @@ const Settings = () => {
         name,
         email,
         region,
-        phoneNumber: phone,
       })
       .then((data: any) => {
         if (data?.response?.status === 400) {
@@ -86,12 +83,6 @@ const Settings = () => {
       value: region,
       onChange: setRegion,
       placeholder: 'regionPlaceholder',
-    },
-    {
-      label: 'phone',
-      value: phone,
-      onChange: setPhone,
-      placeholder: 'phonePlaceholder',
     },
   ];
 

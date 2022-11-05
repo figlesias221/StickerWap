@@ -6,13 +6,11 @@ import auth from "../middleware/auth";
 const router = express.Router();
 
 router.post("/signup", async function (req, res) {
-  console.log(req.body);
   if (
     !req.body.name ||
     !req.body.email ||
     !req.body.password ||
-    !req.body.region ||
-    !req.body.phoneNumber
+    !req.body.region
   ) {
     res.status(400).send({ error: "Campos incompletos" });
     return;
@@ -27,7 +25,6 @@ router.post("/signup", async function (req, res) {
       name: user.name,
       email: user.email,
       region: user.region,
-      phoneNumber: user.phoneNumber,
       token: token,
     });
   } catch (error) {
@@ -85,7 +82,6 @@ router.get("/me", auth, async (req: any, res) => {
       name: user.name,
       email: user.email,
       region: user.region,
-      phoneNumber: user.phoneNumber,
     });
   } catch (e) {
     res.status(500).send();
@@ -94,7 +90,7 @@ router.get("/me", auth, async (req: any, res) => {
 
 router.put("/me", auth, async (req: any, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "region", "phoneNumber"];
+  const allowedUpdates = ["name", "email", "region"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
@@ -110,7 +106,6 @@ router.put("/me", auth, async (req: any, res) => {
       name: user.name,
       email: user.email,
       region: user.region,
-      phoneNumber: user.phoneNumber,
     });
   } catch (e) {
     res.status(400).send(e);

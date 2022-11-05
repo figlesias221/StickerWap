@@ -5,3 +5,6 @@ export { default as Menu } from './menu.png';
 export { default as Profile } from './profile.png';
 export { default as Swap } from './swap.png';
 export { default as Logo } from './logo.png';
+export { default as Cross } from './cross.png';
+export { default as Tick } from './tick.png';
+export { default as Send } from './send.png';
