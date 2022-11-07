@@ -1,5 +1,6 @@
 import Chat from 'screens/Chat';
 import Collection from 'screens/Collection';
+import Messaging from 'screens/Chat/Messaging';
 import Settings from 'screens/Settings';
 import SignIn from 'screens/SignIn';
 import Swipe from 'screens/Swipe';
@@ -22,6 +23,10 @@ const authScreens: IScreens[] = [
   {
     name: CHAT,
     component: Chat,
+  },
+  {
+    name: 'Messaging',
+    component: Messaging,
   },
 ];
 

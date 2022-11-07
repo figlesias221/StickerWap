@@ -8,6 +8,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  loadingContainer: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: '50%',
+  },
   categorySection: {
     backgroundColor: '#F2F2F2',
     width: '100%',
@@ -15,7 +24,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 5,
     paddingTop: 10,
-    marginBottom : 10,
+    marginBottom: 10,
     borderRadius: 12,
   },
   filterContainer: {
@@ -23,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     backgroundColor: '#F2F2F2',
-    marginBottom : 10,
+    marginBottom: 10,
     borderRadius: 12,
   },
   categoryAbreviation: {
@@ -108,7 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: 120,
-
     borderRadius: 20,
   },
 });

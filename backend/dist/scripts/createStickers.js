@@ -82,7 +82,7 @@ const createQatarStickerList = () => {
         const sticker = new Sticker({
             _id: new mongoose_1.default.Types.ObjectId(),
             name: "FWC_" + i,
-            category: "FWC",
+            category: "Special",
             id: j,
         });
         stickers[j] = sticker;
@@ -93,7 +93,7 @@ const createQatarStickerList = () => {
         const sticker = new Sticker({
             _id: new mongoose_1.default.Types.ObjectId(),
             name: "STADIUM_" + i,
-            category: "STADIUM",
+            category: "Stadiums",
             id: j,
         });
         stickers[j] = sticker;
@@ -107,6 +107,9 @@ const createQatarStickerList = () => {
                 _id: new mongoose_1.default.Types.ObjectId(),
                 name: countryAbreviationDictonary[country] + "_" + i,
                 category: country,
+                emoji: `flag-${countryAbreviationDictonary[country]
+                    .toLowerCase()
+                    .splice(0, 1)}`,
                 id: j,
             });
             stickers[j] = sticker;

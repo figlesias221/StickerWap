@@ -24,7 +24,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [region, setRegion] = useState('');
-  const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const { dispatch } = store;
 
@@ -56,7 +55,7 @@ const SignUp = () => {
         }),
       );
     } catch (error: any) {
-      setError(error);
+      setError(error?.response?.data.error);
     }
   };
 
@@ -84,12 +83,6 @@ const SignUp = () => {
       value: region,
       onChange: setRegion,
       placeholder: 'regionPlaceholder',
-    },
-    {
-      label: 'phone',
-      value: phone,
-      onChange: setPhone,
-      placeholder: 'phonePlaceholder',
     },
   ];
 
@@ -121,7 +114,7 @@ const SignUp = () => {
           <View style={styles.buttonContainer}>
             <Button label={i18n.t('signup.submit')} onPress={handleSignUp} />
           </View>
-          {error ? <Text style={styles.error}>{error}</Text> : null}
+          {!!error ? <Text style={styles.error}>{error}</Text> : null}
         </View>
       </ScrollView>
     </SafeAreaView>

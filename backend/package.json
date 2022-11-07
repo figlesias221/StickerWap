@@ -4,7 +4,7 @@
   "description": "Tinder like application for sticker trade",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && nodemon dist/app.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,6 +32,8 @@
     "bcrypt": "^5.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.5"
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.5.3"
   }
 }

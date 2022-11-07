@@ -9,11 +9,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 24,
-    fontFamily: 'Avenir',
     textAlign: 'center',
     margin: 10,
     color: '#111111',
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Bold',
   },
   container: {
     borderRadius: 4,

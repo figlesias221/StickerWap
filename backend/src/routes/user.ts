@@ -6,14 +6,13 @@ import auth from "../middleware/auth";
 const router = express.Router();
 
 router.post("/signup", async function (req, res) {
-  console.log(req.body);
   if (
     !req.body.name ||
     !req.body.email ||
     !req.body.password ||
     !req.body.region
   ) {
-    res.status(400).send({ message: "Campos incompletos" });
+    res.status(400).send({ error: "Campos incompletos" });
     return;
   }
   try {
@@ -91,7 +90,7 @@ router.get("/me", auth, async (req: any, res) => {
 
 router.put("/me", auth, async (req: any, res) => {
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "password", "region"];
+  const allowedUpdates = ["name", "email", "region"];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );

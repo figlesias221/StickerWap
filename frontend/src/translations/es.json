@@ -9,10 +9,13 @@
   },
   "settings": {
     "title": "Perfil",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "edit": "Editar"
   },
   "chat": {
-    "title": "Mensajes"
+    "title": "Mensajes",
+    "no-messages": "No hay mensajes",
+    "placeHolder": "Escribe un mensaje"
   },
   "signin": {
     "title": "Iniciar sesión",
@@ -37,9 +40,7 @@
     "name": "Nombre de usuario",
     "namePlaceholder": "Nombre de usuario",
     "region": "Región",
-    "regionPlaceholder": "Región",
-    "phone": "Teléfono",
-    "phonePlaceholder": "Teléfono"
+    "regionPlaceholder": "Región"
   },
   "collection-alert": {
     "title": "Agrear/Eliminar Figurita: ",

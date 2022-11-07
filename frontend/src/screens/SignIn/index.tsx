@@ -6,7 +6,6 @@ import {
   StatusBar,
   useColorScheme,
   ScrollView,
-  Alert,
   TextInput,
   Image,
 } from 'react-native';
@@ -58,7 +57,7 @@ const SignIn = () => {
         }),
       );
     } catch (error: any) {
-      setError(error);
+      setError(error.response?.data?.error);
     }
   };
 
@@ -74,7 +73,6 @@ const SignIn = () => {
 
           <View style={styles.formContainer}>
             <Text style={styles.subtitle}>{i18n.t('signin.title')}</Text>
-
             <Text style={styles.label}>{i18n.t('signin.email')}:</Text>
             <TextInput
               style={styles.input}
@@ -94,7 +92,7 @@ const SignIn = () => {
               autoCapitalize="none"
               secureTextEntry
             />
-
+            {!!error && <Text style={styles.error}>{error}</Text>}
             <View style={styles.buttonContainer}>
               <Button label={i18n.t('signin.submit')} onPress={handleLogin} />
             </View>

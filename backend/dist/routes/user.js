@@ -19,12 +19,11 @@ const auth_1 = __importDefault(require("../middleware/auth"));
 const router = express_1.default.Router();
 router.post("/signup", function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(req.body);
         if (!req.body.name ||
             !req.body.email ||
             !req.body.password ||
             !req.body.region) {
-            res.status(400).send({ message: "Campos incompletos" });
+            res.status(400).send({ error: "Campos incompletos" });
             return;
         }
         try {
@@ -102,7 +101,7 @@ router.get("/me", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0
 }));
 router.put("/me", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ["name", "email", "password", "region"];
+    const allowedUpdates = ["name", "email", "region"];
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
     if (!isValidOperation) {
         return res.status(400).send({ error: "Campos inválidos" });
