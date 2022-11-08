@@ -54,8 +54,6 @@ socketIO.on("connection", (socket) => {
   socket.on("newMessage", (data) => {
     const { chat_id, message, user, timestamp } = data;
 
-    console.log("⚡: user -> data", user);
-
     let result = chatList.filter((chat) => chat.id == chat_id);
 
     const newMessage = {
