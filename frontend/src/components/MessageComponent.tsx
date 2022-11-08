@@ -2,9 +2,11 @@ import { View, Text } from 'react-native';
 import React from 'react';
 
 import { styles } from 'utils/stylesChat';
+import { useSelector } from 'react-redux';
 
 export default function MessageComponent({ item, user }: any) {
-  const status = item.user !== user;
+  const { id } = useSelector((state: RootState) => state.auth.data);
+  const status = item.user !== id;
 
   return (
     <View>

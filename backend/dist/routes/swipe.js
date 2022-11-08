@@ -45,16 +45,16 @@ router.post("/", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0,
         if (!user2) {
             return res.status(404).send();
         }
-        if (user2.album[sticker_id] > 0) {
-            return res.status(400).send();
-        }
-        if (user.matches[user_id]) {
-            return res.status(400).send();
-        }
-        if (!user.matches.includes(user_id)) {
-            user.matches.push(user_id);
-            user.save();
-        }
+        // if (user2.album[sticker_id] > 0) {
+        //   return res.status(400).send();
+        // }
+        // if (user.matches[user_id]) {
+        //   return res.status(400).send();
+        // }
+        // if (!user.matches.includes(user_id)) {
+        //   user.matches.push(user_id);
+        //   user.save();
+        // }
         yield user.save();
         res.send(user.matches);
     }

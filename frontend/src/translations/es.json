@@ -2,7 +2,10 @@
   "collection": {
     "title": "Tu Colección",
     "filter": "Filtro",
-    "filterPlaceholder": "Filtrar por categoría..."
+    "filterPlaceholder": "Filtrar por categoría...",
+    "specials": "Especiales",
+    "museum": "Museo",
+    "stadiums": "Estadios y Pelota"
   },
   "swipe": {
     "title": "Swipe"

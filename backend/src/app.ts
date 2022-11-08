@@ -24,15 +24,21 @@ const socketIO = require("socket.io")(http, {
 });
 
 const generateID = () => Math.random().toString(36).substring(2, 10);
-let chatRooms = [];
+let chatList = [];
 
 socketIO.on("connection", (socket) => {
   console.log(`⚡: ${socket.id} user just connected!`);
 
-  socket.on("createRoom", (roomName) => {
-    socket.join(roomName);
-    chatRooms.unshift({ id: generateID(), roomName, messages: [] });
-    socket.emit("roomsList", chatRooms);
+  socket.on("createChat", (chatName, user1, user2) => {
+    socket.join(chatName);
+    chatList.unshift({
+      id: generateID(),
+      chatName,
+      messages: [],
+      users: [user1, user2],
+    });
+
+    socket.emit("chatList", chatList);
   });
 
   socket.on("disconnect", () => {
@@ -40,33 +46,36 @@ socketIO.on("connection", (socket) => {
     console.log("🔥: A user disconnected");
   });
 
-  socket.on("findRoom", (id) => {
-    let result = chatRooms.filter((room) => room.id == id);
-    socket.emit("foundRoom", result[0].messages);
+  socket.on("findChat", (id) => {
+    let result = chatList.filter((chat) => chat.id == id);
+    socket.emit("foundChat", result[0]?.messages);
   });
 
   socket.on("newMessage", (data) => {
-    const { room_id, message, user, timestamp } = data;
+    const { chat_id, message, user, timestamp } = data;
 
-    let result = chatRooms.filter((room) => room.id == room_id);
+    console.log("⚡: user -> data", user);
+
+    let result = chatList.filter((chat) => chat.id == chat_id);
 
     const newMessage = {
       id: generateID(),
       text: message,
-      user,
+      user: user,
       time: `${timestamp.hour}:${timestamp.mins}`,
     };
 
-    socket.to(result[0].name).emit("roomMessage", newMessage);
+    socket.to(result[0].chatName).emit("chatMessage", newMessage);
     result[0].messages.push(newMessage);
 
-    socket.emit("roomsList", chatRooms);
-    socket.emit("foundRoom", result[0].messages);
+    socket.emit("chatList", chatList);
+    socket.emit("foundChat", result[0]?.messages);
   });
 });
 
-app.get("/rooms", (req, res) => {
-  res.json(chatRooms);
+app.get("/chats", (req, res) => {
+  res.json(chatList);
+  console.log("⚡: chatList", chatList);
 });
 
 db.mongoose

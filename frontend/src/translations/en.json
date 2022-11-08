@@ -2,7 +2,10 @@
   "collection": {
     "title": "Your Collection",
     "filter": "Filter",
-    "filterPlaceholder": "Filter your collection"
+    "filterPlaceholder": "Filter your collection",
+    "specials": "Specials",
+    "museum": "Museum",
+    "stadiums": "Stadiums and Ball"
   },
   "swipe": {
     "title": "Swipe"
