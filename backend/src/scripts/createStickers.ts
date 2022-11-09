@@ -76,10 +76,10 @@ export const createQatarStickerList = () => {
   let j = 0;
 
   // Create 8 special stickers
-  for (let i = 0; i <= 7; i++) {
+  for (let k = 0; k <= 7; k++) {
     const sticker = new Sticker({
       _id: new mongoose.Types.ObjectId(),
-      name: "FWC_" + i,
+      name: "FWC_" + k,
       category: "Special",
       id: j,
     });
@@ -88,11 +88,23 @@ export const createQatarStickerList = () => {
   }
 
   // Create 10 stadium stickers and Ball
-  for (let i = 0; i <= 10; i++) {
+  for (let i = 8; i <= 18; i++) {
     const sticker = new Sticker({
       _id: new mongoose.Types.ObjectId(),
-      name: "STADIUM_" + i,
-      category: "Stadiums",
+      name: "FWC_" + i,
+      category: "StadiumsAndBall",
+      id: j,
+    });
+    stickers[j] = sticker;
+    j++;
+  }
+
+  // Create 11 museum stickers
+  for (let i = 19; i <= 29; i++) {
+    const sticker = new Sticker({
+      _id: new mongoose.Types.ObjectId(),
+      name: "FWC_" + i,
+      category: "Museum",
       id: j,
     });
     stickers[j] = sticker;
@@ -109,7 +121,7 @@ export const createQatarStickerList = () => {
         category: country,
         emoji: `flag-${countryAbreviationDictonary[country]
           .toLowerCase()
-          .splice(0, 1)}`,
+          .slice(0, 1)}`,
         id: j,
       });
       stickers[j] = sticker;
@@ -117,17 +129,6 @@ export const createQatarStickerList = () => {
     }
   }
 
-  // Create 11 museum stickers
-  for (let i = 0; i <= 11; i++) {
-    const sticker = new Sticker({
-      _id: new mongoose.Types.ObjectId(),
-      name: "MUSEUM_" + i,
-      category: "MUSEUM",
-      id: j,
-    });
-    stickers[j] = sticker;
-    j++;
-  }
   return stickers;
 };
 

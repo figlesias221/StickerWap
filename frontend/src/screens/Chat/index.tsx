@@ -10,18 +10,18 @@ import spacingStyles from 'styles/spacing';
 
 const Chat = () => {
   const { t } = useTranslation();
-  const [rooms, setRooms] = useState<any>([]);
+  const [chats, setChats] = useState<any>([]);
 
-  const handleCreateRoom = (name: string) => {
-    socket.emit('createRoom', name);
+  const handleCreateChat = (name: string) => {
+    socket.emit('createChat', name);
   };
 
   useLayoutEffect(() => {
     function fetchGroups() {
-      fetch('http://localhost:3000/api')
+      fetch('http://localhost:3000/chats')
         .then(res => {
           res.json().then(data => {
-            setRooms(data);
+            setChats(data);
           });
         })
         .catch(err => console.error(err));
@@ -30,8 +30,9 @@ const Chat = () => {
   }, []);
 
   useEffect(() => {
-    socket.on('roomsList', rooms => {
-      setRooms(rooms);
+    socket.on('chatList', chats => {
+      console.log('chats', chats);
+      setChats(chats);
     });
   }, [socket]);
 
@@ -40,9 +41,9 @@ const Chat = () => {
       <Text style={styles.subtitle}>{i18n.t('chat.title')}</Text>
 
       <View style={styles.chatlistContainer}>
-        {rooms.length > 0 ? (
+        {chats.length > 0 ? (
           <FlatList
-            data={rooms}
+            data={chats}
             renderItem={({ item }) => <ChatComponent item={item} />}
             keyExtractor={item => item.id}
           />

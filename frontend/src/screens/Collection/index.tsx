@@ -160,7 +160,9 @@ const Collection = () => {
                       alignItems: 'center',
                     }}
                   >
-                    <Text style={styles.categoryTitle}>{elem.category}</Text>
+                    <Text style={styles.categoryTitle}>
+                      {!!catInfo.title ? catInfo.title : elem.category}
+                    </Text>
                     <Text style={styles.categoryAbreviation}>
                       {catInfo.abreviation}
                     </Text>

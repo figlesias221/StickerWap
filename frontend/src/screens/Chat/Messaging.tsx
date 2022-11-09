@@ -10,7 +10,7 @@ import {
   Image,
   useColorScheme,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import i18n from 'translations';
 
 import { styles } from 'utils/stylesChat';
@@ -18,24 +18,39 @@ import MessageComponent from 'components/MessageComponent';
 import spacingStyles from 'styles/spacing';
 import socket from 'utils/socket';
 import { Send } from 'assets';
+import api from 'utils/openUrl/api';
+import { setUserData } from 'redux/slices/authSlice';
 
 const Messaging = ({ route, navigation }: any) => {
-  const { username } = useSelector((state: RootState) => state.auth.data);
+  const { id } = useSelector((state: RootState) => state.auth.data);
   const [chatMessages, setChatMessages] = useState<any>([]);
   const [message, setMessage] = useState('');
-  const [user, setUser] = useState(username);
+  const [user, setUser] = useState(id);
+  const dispatch = useDispatch();
   const isDarkMode = useColorScheme() === 'dark';
 
-  const { name, id } = route.params;
+  const getUserData = () =>
+    api.get('/users/me').then((data: any) => {
+      if (data?.response?.status === 400) {
+        throw data?.response?.data?.error;
+      }
+      dispatch(setUserData(data.data));
+    });
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
+  const { name, chatId } = route.params;
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: name });
-    socket.emit('findRoom', id);
-    socket.on('foundRoom', roomChats => setChatMessages(roomChats));
+    socket.emit('findChat', chatId);
+    socket.on('foundChat', messages => setChatMessages(messages));
   }, []);
 
   useEffect(() => {
-    socket.on('foundRoom', roomChats => setChatMessages(roomChats));
+    socket.on('foundChat', messages => setChatMessages(messages));
   }, [socket]);
 
   const handleNewMessage = () => {
@@ -51,11 +66,13 @@ const Messaging = ({ route, navigation }: any) => {
 
     socket.emit('newMessage', {
       message,
-      room_id: id,
-      user,
+      chat_id: chatId,
+      user: id,
       timestamp: { hour, mins },
     });
   };
+
+  console.log(chatMessages);
 
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>

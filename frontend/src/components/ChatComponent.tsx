@@ -16,7 +16,7 @@ const ChatComponent = ({ item }: any) => {
     navigation.navigate(
       'Messaging' as never,
       {
-        id: item.id,
+        chatId: item.id,
         name: item.name,
       } as never,
     );
@@ -26,7 +26,7 @@ const ChatComponent = ({ item }: any) => {
     <Pressable style={styles.cchat} onPress={handleNavigation}>
       <View style={styles.crightContainer}>
         <View>
-          <Text style={styles.cusername}>{item.roomName}</Text>
+          <Text style={styles.cusername}>{item.chatName}</Text>
           <Text style={styles.cmessage}>{messages?.text}</Text>
         </View>
         <View>

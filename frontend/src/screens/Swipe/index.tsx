@@ -16,12 +16,32 @@ import spacingStyles from 'styles/spacing';
 import { Cross, Tick } from 'assets';
 import api from 'utils/openUrl/api';
 import { cateogryMap, newShade } from 'screens/Collection/utils';
+import socket from 'utils/socket';
+import { useSelector } from 'react-redux';
 
 const Swipe = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const [swipeData, setSwipeData] = useState<any>();
   const [ad, setAd] = useState<any>();
   const [countryData, setCountryData] = useState<any>();
+  const { id } = useSelector((state: RootState) => state.auth.data);
+
+  const handleChat = (name: string, user1: string, user2: string) => {
+    socket.emit('createChat', name, user1, user2);
+  };
+
+  const handleSwipeSuccess = () => {
+    api
+      .post('/swipe', {
+        user_id: '6369ac9cda56ac6f887f6438',
+        randomSticker: 3,
+      })
+      .then(res => {
+        handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
+      })
+      .catch(err => console.log(err));
+    getStickerData();
+  };
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
@@ -107,7 +127,10 @@ const Swipe = () => {
               </LinearGradient>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonRed} onPress={getStickerData}>
+            <TouchableOpacity
+              style={styles.buttonRed}
+              onPress={handleSwipeSuccess}
+            >
               <LinearGradient
                 colors={['#58DBDB', '#58DB72']}
                 style={styles.linearGradientButton}

@@ -1,3 +1,5 @@
+import i18n from 'translations';
+
 export const cateogryMap = (category: string) => {
   switch (category) {
     case 'Qatar':
@@ -160,20 +162,23 @@ export const cateogryMap = (category: string) => {
         abreviation: 'KOR',
         color: '#FF5939',
       };
-    case 'FWC':
+    case 'Special':
       return {
         abreviation: 'FWC',
         color: '#FFD024',
+        title: i18n.t('collection.specials'),
       };
-    case 'STADIUM':
+    case 'StadiumsAndBall':
       return {
-        abreviation: 'STADIUM',
+        abreviation: 'FWC',
         color: '#B1B1B1',
+        title: i18n.t('collection.stadiums'),
       };
-    case 'MUSEUM':
+    case 'Museum':
       return {
-        abreviation: 'STA',
+        abreviation: 'FWC',
         color: '#633800',
+        title: i18n.t('collection.museum'),
       };
     default:
       return {
