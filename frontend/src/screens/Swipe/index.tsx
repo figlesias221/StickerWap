@@ -18,6 +18,8 @@ import api from 'utils/openUrl/api';
 import { cateogryMap, newShade } from 'screens/Collection/utils';
 import socket from 'utils/socket';
 import { useSelector } from 'react-redux';
+import TinderCard from 'react-tinder-card'
+import Sticker from 'components/Sticker';
 
 const Swipe = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -30,16 +32,20 @@ const Swipe = () => {
     socket.emit('createChat', name, user1, user2);
   };
 
-  const handleSwipeSuccess = () => {
+  const handleSwipeTick = () => {
     api
       .post('/swipe', {
-        user_id: '6369ac9cda56ac6f887f6438',
-        randomSticker: 3,
+        user_id: swipeData.user_id,
+        randomSticker: swipeData.sticker,
       })
       .then(res => {
         handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
       })
       .catch(err => console.log(err));
+    getStickerData();
+  };
+
+  const handleSwipeCross = () => {
     getStickerData();
   };
 
@@ -61,6 +67,33 @@ const Swipe = () => {
     getStickerData();
   }, []);
 
+  const onSwipe = (direction: any) => {
+    // console.log('You swiped: ' + direction)
+    switch (direction) {
+      case 'left':
+        handleSwipeCross();
+        break;
+      case 'right':
+        handleSwipeTick();
+        break;
+    }
+
+    // getStickerData();
+  }
+
+  const onCardLeftScreen = (myIdentifier: any) => {
+    switch (myIdentifier) {
+      case 'left':
+        handleSwipeCross();
+        break;
+      case 'right':
+        handleSwipeTick();
+        break;
+    }
+    console.log(myIdentifier + ' left the screen')
+    getStickerData();
+  }
+
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -71,51 +104,21 @@ const Swipe = () => {
           >
             <Text style={styles.bigHeader}>{i18n.t('swipe.title')}</Text>
           </LinearGradient>
-          <View style={styles.stickerContainer}>
-            <View style={styles.sticker}>
-              {ad ? (
-                <View style={styles.adContainer}>
-                  <Text>{ad?.title}</Text>
-                  <Text>{ad?.description}</Text>
-                  <Image
-                    source={{ uri: ad?.image }}
-                    style={{ width: 200, height: 300 }}
-                  />
-                  <Text>{ad?.link}</Text>
-                </View>
-              ) : (
-                <View
-                  style={[
-                    styles.cardContainer,
-                    {
-                      backgroundColor: newShade(
-                        countryData ? countryData.color : '#000',
-                        180,
-                      ),
-                    },
-                  ]}
-                >
-                  <Text style={styles.stickerText}>
-                    {countryData?.abreviation}
-                  </Text>
-                  <Image
-                    source={{
-                      uri: swipeData?.flag,
-                    }}
-                    style={{ width: 100, height: 60 }}
-                  />
-                  <Text style={styles.stickerText}>
-                    {swipeData?.sticker?.name}
-                  </Text>
-                  <Text style={styles.stickerText}>
-                    {swipeData?.sticker?.category}
-                  </Text>
-                </View>
-              )}
-            </View>
-          </View>
+
+          <TinderCard
+            onSwipe={onSwipe}
+            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+            preventSwipe={['right', 'left']} swipeThreshold={0.5}
+            swipeRequirementType={'position'}
+          >
+            <Sticker ad={ad} swipeData={swipeData} countryData={countryData} />
+          </TinderCard>
+
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.buttonGreen}>
+            <TouchableOpacity
+              style={styles.buttonGreen}
+              onPress={handleSwipeCross}
+            >
               <LinearGradient
                 colors={['#FF8A00', '#E12900']}
                 style={styles.linearGradientButton}
@@ -129,7 +132,7 @@ const Swipe = () => {
 
             <TouchableOpacity
               style={styles.buttonRed}
-              onPress={handleSwipeSuccess}
+              onPress={handleSwipeTick}
             >
               <LinearGradient
                 colors={['#58DBDB', '#58DB72']}
