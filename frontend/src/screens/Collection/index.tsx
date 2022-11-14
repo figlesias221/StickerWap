@@ -9,13 +9,13 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import { useDispatch, useSelector } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
 import styles from './styles';
 import i18n from 'translations';
-import LinearGradient from 'react-native-linear-gradient';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   setAlbum,
   setUserStickers as setUserStickersAction,

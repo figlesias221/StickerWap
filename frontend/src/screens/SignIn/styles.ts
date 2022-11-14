@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { green, black, screenHeight } from 'styles/theme';
 import { baseFontSize, largeHeaderFontSize } from 'styles/typography';
 
@@ -32,7 +33,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   subtitle: {
-    //fontWeight: 'bold',
     color: green,
     marginBottom: screenHeight * 0.03,
     fontSize: screenHeight * 0.05,

@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { Image, View } from 'react-native';
+
 import { BackArrow } from 'assets';
 import { primary } from 'styles/theme';
 

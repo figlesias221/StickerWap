@@ -1,10 +1,5 @@
 import axios from 'axios';
-
-import { signOut } from 'redux/slices/authSlice';
-import { store } from 'redux/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const { dispatch } = store;
 
 export const api = axios.create({
   baseURL: 'http://localhost:3000',

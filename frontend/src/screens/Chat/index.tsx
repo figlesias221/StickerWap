@@ -1,7 +1,7 @@
 import ChatComponent from 'components/ChatComponent';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Text, Pressable, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, FlatList } from 'react-native';
 
 import i18n from 'translations';
 import socket from 'utils/socket';

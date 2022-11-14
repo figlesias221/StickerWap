@@ -12,4 +12,4 @@ export const SIGNIN = 'signin_screen';
 export const SIGNIN_STACK = 'signin_stack';
 export const SIGNUP = 'signup_screen';
 export const SIGNUP_STACK = 'signup_stack';
-
+export const MESSAGING = 'messaging_screen';

@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
 
 import screenOptions from 'navigation/screenOptions';
 import unauthScreens from 'navigation/screens/unauthScreens';
-import { SIGNIN, SIGNUP } from 'utils/route';
+import { SIGNIN } from 'utils/route';
 
 const Stack = createStackNavigator();
 

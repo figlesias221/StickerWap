@@ -9,18 +9,18 @@ import {
   TextInput,
   Image,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 import Button from 'components/Button';
 import i18n from 'translations';
 import { styles, colors } from './styles';
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
-import { useNavigation } from '@react-navigation/native';
 import { SIGNUP } from 'utils/route';
 import { Logo } from 'assets';
 import spacingStyles from 'styles/spacing';
 import api from 'utils/openUrl/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = () => {
   const isDarkMode = useColorScheme() === 'dark';

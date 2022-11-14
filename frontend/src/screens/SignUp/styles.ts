@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { green, screenHeight } from 'styles/theme';
 
 const styles = StyleSheet.create({

@@ -10,6 +10,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+
 import rootReducer from './rootReducer';
 
 const persistConfig = {

@@ -8,15 +8,14 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-import api from 'utils/openUrl/api';
 
 import Button from 'components/Button';
 import i18n from 'translations';
-
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
 import spacingStyles from 'styles/spacing';
 import { styles } from './styles';
+import api from 'utils/openUrl/api';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
