@@ -1,7 +1,7 @@
 const request = require("supertest");
 const mongoose = require("mongoose");
 const app = require("../app");
-const { userOne, setupDatabase } = require("./db");
+const { userOne, setupDatabase } = require("./constants");
 
 describe("Signup-Login-Logout-Stickers", () => {
   beforeEach(setupDatabase);
