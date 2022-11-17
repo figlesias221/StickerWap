@@ -105,8 +105,6 @@ const Settings = () => {
     dispatch(signOut());
   };
 
-  console.log(region);
-
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

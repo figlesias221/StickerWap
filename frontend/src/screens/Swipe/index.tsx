@@ -50,7 +50,7 @@ const Swipe = () => {
         setSwipeData(null);
         throw data?.response?.data?.error;
       }
-      console.log(data.data);
+
       if (data.data.ad) {
         setAd(data.data.ad);
       } else {

@@ -21,7 +21,6 @@ router.post("/:id", auth, async (req: any, res) => {
     await req.user.save();
     res.send(album);
   } catch (e) {
-    console.log(e);
     res.status(500).send();
   }
 });

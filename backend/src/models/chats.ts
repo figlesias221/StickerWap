@@ -25,7 +25,7 @@ chatSchema.statics.findAllChatsByUserId = async function (userId) {
 
 chatSchema.statics.getAllChats = async function () {
   const chats = await Chat.find();
-  console.log("🚀: getAllChats -> chats", chats);
+
   return chats;
 };
 

@@ -34,7 +34,6 @@ const ChatComponent = ({ item }: any) => {
   };
 
   useEffect(() => {
-    console.log('item', item);
     getUsernameById(item.userId1);
   }, []);
 

@@ -34,11 +34,7 @@ socketIO.on("connection", async (socket) => {
     chatList = chatsFromDB;
   });
 
-  console.log(`⚡: ${socket.id} user just connected!`);
-
   socket.on("createChat", (user1: any, user2: any) => {
-    console.log(user1, user2);
-
     const chat = new Chat({
       _id: new mongoose.Types.ObjectId(),
       messages: [],
@@ -96,7 +92,6 @@ socketIO.on("connection", async (socket) => {
 
   socket.on("disconnect", () => {
     socket.disconnect();
-    console.log("🔥: A user disconnected");
   });
 });
 
