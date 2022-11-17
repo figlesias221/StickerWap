@@ -18,7 +18,6 @@ const Chat = () => {
   useLayoutEffect(() => {
     socket.emit('chatList', id);
     socket.on('foundChatList', (chatList: any) => {
-      console.log(chatList);
       setChats(chatList);
     });
   }, []);
@@ -26,9 +25,12 @@ const Chat = () => {
   useEffect(() => {
     socket.emit('chatList', id);
     socket.on('foundChatList', (chatList: any) => {
-      console.log(chatList);
       setChats(chatList);
     });
+
+    return () => {
+      socket.off('foundChatList');
+    };
   }, [socket]);
 
   return (
