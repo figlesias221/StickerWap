@@ -58,9 +58,9 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.statics.getRandomUser = async function (region) {
+userSchema.statics.getRandomUser = async function (region, userId) {
   const user = await User.aggregate([
-    { $match: { region: region } },
+    { $match: { region, _id: { $ne: mongoose.Types.ObjectId(userId) } } },
     { $sample: { size: 1 } },
   ]);
   return user;

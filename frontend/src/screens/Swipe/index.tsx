@@ -26,21 +26,12 @@ const Swipe = () => {
   const [countryData, setCountryData] = useState<any>();
   const { id } = useSelector((state: RootState) => state.auth.data);
 
-  const handleChat = (name: string, user1: string, user2: string) => {
-    socket.emit('createChat', name, user1, user2);
+  const handleChat = (user1: string, user2: string) => {
+    socket.emit('createChat', user1, user2);
   };
 
   const handleSwipeSuccess = () => {
-    api
-      .post('/swipe', {
-        user_id: '6369ac9cda56ac6f887f6438',
-        randomSticker: 3,
-      })
-      .then(res => {
-        handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
-      })
-      .catch(err => console.log(err));
-    getStickerData();
+    handleChat('63757a7e01d340b65e8790d3', id);
   };
 
   const getStickerData = () =>

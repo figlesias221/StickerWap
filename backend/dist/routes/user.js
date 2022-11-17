@@ -37,6 +37,7 @@ router.post("/signup", function (req, res) {
                 email: user.email,
                 region: user.region,
                 token: token,
+                album: user.album,
             });
         }
         catch (error) {

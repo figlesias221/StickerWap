@@ -1,38 +1,33 @@
 import ChatComponent from 'components/ChatComponent';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaView, View, Text, Pressable, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, FlatList } from 'react-native';
 
 import i18n from 'translations';
 import socket from 'utils/socket';
 import styles from './styles';
 import spacingStyles from 'styles/spacing';
+import api from 'utils/openUrl/api';
+import { useSelector } from 'react-redux';
 
 const Chat = () => {
   const { t } = useTranslation();
   const [chats, setChats] = useState<any>([]);
-
-  const handleCreateChat = (name: string) => {
-    socket.emit('createChat', name);
-  };
+  const { id } = useSelector((state: RootState) => state.auth.data);
 
   useLayoutEffect(() => {
-    function fetchGroups() {
-      fetch('http://localhost:3000/chats')
-        .then(res => {
-          res.json().then(data => {
-            setChats(data);
-          });
-        })
-        .catch(err => console.error(err));
-    }
-    fetchGroups();
+    socket.emit('chatList', id);
+    socket.on('foundChatList', (chatList: any) => {
+      console.log(chatList);
+      setChats(chatList);
+    });
   }, []);
 
   useEffect(() => {
-    socket.on('chatList', chats => {
-      console.log('chats', chats);
-      setChats(chats);
+    socket.emit('chatList', id);
+    socket.on('foundChatList', (chatList: any) => {
+      console.log(chatList);
+      setChats(chatList);
     });
   }, [socket]);
 
@@ -45,7 +40,7 @@ const Chat = () => {
           <FlatList
             data={chats}
             renderItem={({ item }) => <ChatComponent item={item} />}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item._id}
           />
         ) : (
           <View style={styles.chatemptyContainer}>
