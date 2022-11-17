@@ -61,10 +61,10 @@ userSchema.pre("save", function (next) {
         next();
     });
 });
-userSchema.statics.getRandomUser = function (region) {
+userSchema.statics.getRandomUser = function (region, userId) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = yield User.aggregate([
-            { $match: { region: region } },
+            { $match: { region, _id: { $ne: mongoose.Types.ObjectId(userId) } } },
             { $sample: { size: 1 } },
         ]);
         return user;

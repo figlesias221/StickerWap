@@ -78,8 +78,6 @@ socketIO.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function
         socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user));
     });
     socket.on("chatList", (id) => {
-        console_1.default.log("🚀: chatList -> id", id);
-        console_1.default.log("🚀: chatList -> chatList", chatList);
         socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === id || chat.userId2 === id));
     });
     socket.on("disconnect", () => {
