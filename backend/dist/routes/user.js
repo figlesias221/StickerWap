@@ -100,6 +100,16 @@ router.get("/me", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).send();
     }
 }));
+router.get("/username/:id", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const user = yield User.getUsernameById(userId);
+        res.send({ user });
+    }
+    catch (e) {
+        res.status(500).send();
+    }
+}));
 router.put("/me", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const updates = Object.keys(req.body);
     const allowedUpdates = ["name", "email", "region"];

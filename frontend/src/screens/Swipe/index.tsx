@@ -31,14 +31,22 @@ const Swipe = () => {
   };
 
   const handleSwipeSuccess = () => {
-    handleChat('63757a7e01d340b65e8790d3', id);
+    if (ad) {
+      getStickerData();
+    } else {
+      handleChat(swipeData.user_id, id);
+      getStickerData();
+    }
   };
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
       if (data?.response?.status === 400) {
+        setAd(null);
+        setSwipeData(null);
         throw data?.response?.data?.error;
       }
+      console.log(data.data);
       if (data.data.ad) {
         setAd(data.data.ad);
       } else {
@@ -74,7 +82,7 @@ const Swipe = () => {
                   />
                   <Text>{ad?.link}</Text>
                 </View>
-              ) : (
+              ) : swipeData ? (
                 <View
                   style={[
                     styles.cardContainer,
@@ -101,6 +109,10 @@ const Swipe = () => {
                   <Text style={styles.stickerText}>
                     {swipeData?.sticker?.category}
                   </Text>
+                </View>
+              ) : (
+                <View style={styles.cardContainer}>
+                  <Text style={styles.stickerText}>No more stickers</Text>
                 </View>
               )}
             </View>

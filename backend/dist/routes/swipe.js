@@ -71,10 +71,6 @@ var randomSticker = function (req) {
         while (!randomSticker) {
             let users = yield User.getRandomUser(region, user._id);
             let randomUser = users[Math.floor(Math.random() * users.length)];
-            while (randomUser._id == user._id) {
-                users = yield User.getRandomUser(region);
-                randomUser = users[Math.floor(Math.random() * users.length)];
-            }
             user_id = randomUser._id;
             randomSticker = randomStickerId(randomUser.album);
             if (user.album[randomSticker] > 0) {
@@ -93,7 +89,7 @@ var randomSticker = function (req) {
 };
 var randomStickerId = function (obj) {
     var keys = Object.keys(obj);
-    keys = keys.filter((key) => obj[key] >= 0);
+    keys = keys.filter((key) => obj[key] > 1);
     return keys[Math.floor(keys.length * Math.random())];
 };
 exports.default = router;
