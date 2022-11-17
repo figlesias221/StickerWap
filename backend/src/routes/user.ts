@@ -26,6 +26,7 @@ router.post("/signup", async function (req, res) {
       email: user.email,
       region: user.region,
       token: token,
+      album: user.album,
     });
   } catch (error) {
     if (error.code === 11000) {
