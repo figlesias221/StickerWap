@@ -39,6 +39,10 @@ const Swipe = () => {
     }
   };
 
+  const handlePressCross = () => {
+    getStickerData();
+  };
+
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
       if (data?.response?.status === 400) {
@@ -118,7 +122,10 @@ const Swipe = () => {
             </View>
           </View>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.buttonGreen}>
+            <TouchableOpacity
+              style={styles.buttonGreen}
+              onPress={handlePressCross}
+            >
               <LinearGradient
                 colors={['#FF8A00', '#E12900']}
                 style={styles.linearGradientButton}
