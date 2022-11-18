@@ -69,8 +69,8 @@ const Collection = () => {
 
   const dispatch = useDispatch();
 
-  const getCollection = () =>
-    api.get('/stickers').then((data: any) => {
+  const getCollection = async () =>
+    await api.get('/stickers').then((data: any) => {
       if (data?.response?.status === 400) {
         throw data?.response?.data?.error;
       }

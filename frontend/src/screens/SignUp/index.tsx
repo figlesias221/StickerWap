@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,17 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import SelectDropdown from 'react-native-select-dropdown';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import api from 'utils/openUrl/api';
 import Button from 'components/Button';
 import i18n from 'translations';
 import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
 import spacingStyles from 'styles/spacing';
 import { styles } from './styles';
-import api from 'utils/openUrl/api';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,8 +26,23 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [region, setRegion] = useState('');
+  const [regions, setRegions] = useState([]);
   const [error, setError] = useState('');
   const { dispatch } = store;
+
+  const getRegions = () =>
+    api.get('/regions').then((data: any) => {
+      if (data?.response?.status === 400) {
+        throw data?.response?.data?.error;
+      }
+      return data;
+    });
+
+  useEffect(() => {
+    getRegions().then((data: any) => {
+      setRegions(data.data);
+    });
+  }, []);
 
   const singup = () =>
     api
@@ -48,6 +66,7 @@ const SignUp = () => {
     }
     try {
       const { data } = await singup();
+      AsyncStorage.setItem('token', data.token);
       dispatch(
         loginSuccess({
           accessToken: data.token,
@@ -97,16 +116,49 @@ const SignUp = () => {
               <Text style={styles.label}>
                 {i18n.t('signup.' + field.label)}:
               </Text>
-              <TextInput
-                style={styles.input}
-                placeholder={i18n.t('signup.' + field.placeholder)}
-                value={field.value}
-                onChangeText={field.onChange}
-                autoCapitalize="none"
-                autoCorrect={false}
-                autoCompleteType="off"
-                secureTextEntry={field.label === 'password'}
-              />
+              {field.label !== 'region' ? (
+                <TextInput
+                  style={styles.input}
+                  placeholder={i18n.t('signup.' + field.placeholder)}
+                  value={field.value}
+                  onChangeText={field.onChange}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="off"
+                  secureTextEntry={field.label === 'password'}
+                />
+              ) : (
+                <SelectDropdown
+                  buttonStyle={styles.dropStyle}
+                  dropdownStyle={styles.dropdown}
+                  dropdownIconPosition={'right'}
+                  renderDropdownIcon={isOpened => {
+                    return (
+                      <FontAwesome
+                        name={isOpened ? 'chevron-up' : 'chevron-down'}
+                        color={'#444'}
+                        size={14}
+                      />
+                    );
+                  }}
+                  data={regions}
+                  search
+                  defaultValue={region}
+                  onSelect={(selectedItem, index) => {
+                    setRegion(selectedItem);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    return item;
+                  }}
+                  searchPlaceHolder={i18n.t('signup.regionPlaceholder')}
+                  defaultButtonText={i18n.t('signup.regionPlaceholder')}
+                  buttonTextStyle={{ textAlign: 'left' }}
+                  rowTextStyle={{ textAlign: 'left' }}
+                />
+              )}
             </View>
           ))}
 

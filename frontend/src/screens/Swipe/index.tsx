@@ -6,6 +6,7 @@ import {
   useColorScheme,
   TouchableOpacity,
   Image,
+  Linking
 } from 'react-native';
 
 import styles from './styles';
@@ -17,8 +18,7 @@ import api from 'utils/openUrl/api';
 import { cateogryMap, newShade } from 'screens/Collection/utils';
 import socket from 'utils/socket';
 import { useSelector } from 'react-redux';
-import TinderCard from 'react-tinder-card';
-import Sticker from 'components/Sticker';
+import Sticker from 'screens/Swipe/Sticker';
 
 const Swipe = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,16 +31,24 @@ const Swipe = () => {
     socket.emit('createChat', name, user1, user2);
   };
 
-  const handleSwipeTick = () => {
-    api
-      .post('/swipe', {
-        user_id: swipeData.user_id,
-        randomSticker: swipeData.sticker,
-      })
-      .then(res => {
-        handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
-      })
-      .catch(err => console.log(err));
+  const handleSwipeTick = async () => {
+    if (ad) {
+      const supported = await Linking.canOpenURL(ad?.link);
+
+      if (supported) {
+        await Linking.openURL(ad?.link);
+      }
+    } else {
+      api
+        .post('/swipe', {
+          user_id: swipeData.user_id,
+          randomSticker: swipeData.sticker,
+        })
+        .then(res => {
+          handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
+        })
+        .catch(err => console.log(err));
+    }
     getStickerData();
   };
 
@@ -66,32 +74,6 @@ const Swipe = () => {
     getStickerData();
   }, []);
 
-  const onSwipe = (direction: any) => {
-    switch (direction) {
-      case 'left':
-        handleSwipeCross();
-        break;
-      case 'right':
-        handleSwipeTick();
-        break;
-    }
-
-    // getStickerData();
-  };
-
-  const onCardLeftScreen = (myIdentifier: any) => {
-    switch (myIdentifier) {
-      case 'left':
-        handleSwipeCross();
-        break;
-      case 'right':
-        handleSwipeTick();
-        break;
-    }
-    console.log(myIdentifier + ' left the screen');
-    getStickerData();
-  };
-
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
       {/* <ScrollView contentInsetAdjustmentBehavior="automatic"> */}
@@ -103,15 +85,7 @@ const Swipe = () => {
           <Text style={styles.bigHeader}>{i18n.t('swipe.title')}</Text>
         </LinearGradient>
 
-        <TinderCard
-          onSwipe={onSwipe}
-          onCardLeftScreen={() => onCardLeftScreen('fooBar')}
-          preventSwipe={['up', 'down']}
-          swipeThreshold={0.5}
-          swipeRequirementType={'position'}
-        >
-          <Sticker ad={ad} swipeData={swipeData} countryData={countryData} />
-        </TinderCard>
+        <Sticker ad={ad} swipeData={swipeData} countryData={countryData} />
 
         <View style={styles.buttonsContainer}>
           <TouchableOpacity

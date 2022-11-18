@@ -113,3 +113,5 @@ app.use("/regions", regionsRouter);
 http.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
 });
+
+module.exports = app;

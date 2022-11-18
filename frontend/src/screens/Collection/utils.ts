@@ -60,7 +60,7 @@ export const cateogryMap = (category: string) => {
     case 'Poland':
       return {
         abreviation: 'POL',
-        color: '#FF5C5C',
+        color: '#54FF00',
       };
     case 'France':
       return {
@@ -171,7 +171,7 @@ export const cateogryMap = (category: string) => {
     case 'StadiumsAndBall':
       return {
         abreviation: 'FWC',
-        color: '#B1B1B1',
+        color: '#90EE90',
         title: i18n.t('collection.stadiums'),
       };
     case 'Museum':

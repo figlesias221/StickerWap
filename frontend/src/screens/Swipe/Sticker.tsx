@@ -10,13 +10,16 @@ const Sticker = (props: any) => {
       <View style={styles.sticker}>
         {props.ad ? (
           <View style={styles.adContainer}>
-            <Text>{props.ad?.title}</Text>
-            <Text>{props.ad?.description}</Text>
+            <Text style={styles.stickerId}>
+              {props.ad?.title}
+            </Text>
             <Image
               source={{ uri: props.ad?.image }}
-              style={{ width: 200, height: 300 }}
+              style={{ width: 160, height: 240, borderRadius: 10 }}
             />
-            <Text>{props.ad?.link}</Text>
+            <Text style={styles.stickerCountry}>
+              {props.ad?.description}
+            </Text>
           </View>
         ) : (
           <View
@@ -34,7 +37,7 @@ const Sticker = (props: any) => {
               source={{
                 uri: props.swipeData?.flag,
               }}
-              style={{ width: 200, height: 120 }}
+              style={{ width: 200, height: 120, borderRadius: 10 }}
             />
             <Text style={styles.stickerId}>
               {props.swipeData?.sticker?.name}
