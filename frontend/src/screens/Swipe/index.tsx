@@ -3,21 +3,20 @@ import {
   View,
   Text,
   SafeAreaView,
-  useColorScheme,
   TouchableOpacity,
   Image,
-  Linking
+  Linking,
 } from 'react-native';
+import { useSelector } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './styles';
-import LinearGradient from 'react-native-linear-gradient';
 import i18n from 'translations';
 import spacingStyles from 'styles/spacing';
 import { Cross, Tick } from 'assets';
 import api from 'utils/openUrl/api';
 import { cateogryMap, newShade } from 'screens/Collection/utils';
 import socket from 'utils/socket';
-import { useSelector } from 'react-redux';
 import Sticker from 'screens/Swipe/Sticker';
 
 const Swipe = () => {
@@ -32,17 +31,15 @@ const Swipe = () => {
 
   const handleSwipeTick = async () => {
     if (ad) {
-      console.log("ad")
       const supported = await Linking.canOpenURL(ad?.link);
-
       if (supported) {
         await Linking.openURL(ad?.link);
       }
     } else {
-      console.log("noad")
       handleChat(swipeData.user_id, id);
     }
     getStickerData();
+    setTimeout(() => {}, 2000);
   };
 
   const handleSwipeCross = () => {
@@ -51,7 +48,6 @@ const Swipe = () => {
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
-      console.log(data)
       if (data?.response?.status === 400) {
         setAd(null);
         setSwipeData(null);
@@ -61,11 +57,12 @@ const Swipe = () => {
       if (data.data.ad) {
         setAd(data.data.ad);
       } else {
-        setSwipeData(data.data);
-        setCountryData(cateogryMap(data.data.sticker.category));
-        setAd(data.data.ad);
+        setTimeout(() => {
+          setSwipeData(data.data);
+          setCountryData(cateogryMap(data.data.sticker.category));
+          setAd(data.data.ad);
+        }, 700);
       }
-      console.log(data.data);
     });
 
   useEffect(() => {
@@ -74,7 +71,6 @@ const Swipe = () => {
 
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
-      {/* <ScrollView contentInsetAdjustmentBehavior="automatic"> */}
       <View style={styles.container}>
         <LinearGradient
           colors={['#04B600', '#0094FF']}
@@ -114,7 +110,6 @@ const Swipe = () => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

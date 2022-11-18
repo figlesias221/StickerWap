@@ -8,7 +8,8 @@
     "stadiums": "Stadiums and Ball"
   },
   "swipe": {
-    "title": "Swipe"
+    "title": "Swipe",
+    "empty": "No cards to swipe"
   },
   "settings": {
     "title": "Profile",

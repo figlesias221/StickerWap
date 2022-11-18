@@ -16,7 +16,6 @@ const express_1 = __importDefault(require("express"));
 const auth_1 = __importDefault(require("../middleware/auth"));
 const Album = require("../models/album");
 const router = express_1.default.Router();
-// Get stickers from album
 router.get("/", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const album = yield Album.findOne({ name: "Qatar" });
