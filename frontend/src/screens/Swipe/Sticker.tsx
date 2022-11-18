@@ -5,6 +5,7 @@ import styles from './styles';
 import { newShade } from 'screens/Collection/utils';
 
 const Sticker = (props: any) => {
+  console.log(props.swipeData?.sticker?.name)
   return (
     <View style={styles.stickerContainer}>
       <View style={styles.sticker}>

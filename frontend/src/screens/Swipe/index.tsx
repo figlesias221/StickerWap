@@ -21,33 +21,26 @@ import { useSelector } from 'react-redux';
 import Sticker from 'screens/Swipe/Sticker';
 
 const Swipe = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const [swipeData, setSwipeData] = useState<any>();
   const [ad, setAd] = useState<any>();
   const [countryData, setCountryData] = useState<any>();
   const { id } = useSelector((state: RootState) => state.auth.data);
 
-  const handleChat = (name: string, user1: string, user2: string) => {
-    socket.emit('createChat', name, user1, user2);
+  const handleChat = (user1: string, user2: string) => {
+    socket.emit('createChat', user1, user2);
   };
 
   const handleSwipeTick = async () => {
     if (ad) {
+      console.log("ad")
       const supported = await Linking.canOpenURL(ad?.link);
 
       if (supported) {
         await Linking.openURL(ad?.link);
       }
     } else {
-      api
-        .post('/swipe', {
-          user_id: swipeData.user_id,
-          randomSticker: swipeData.sticker,
-        })
-        .then(res => {
-          handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
-        })
-        .catch(err => console.log(err));
+      console.log("noad")
+      handleChat(swipeData.user_id, id);
     }
     getStickerData();
   };
@@ -58,9 +51,13 @@ const Swipe = () => {
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
+      console.log(data)
       if (data?.response?.status === 400) {
+        setAd(null);
+        setSwipeData(null);
         throw data?.response?.data?.error;
       }
+
       if (data.data.ad) {
         setAd(data.data.ad);
       } else {
@@ -68,6 +65,7 @@ const Swipe = () => {
         setCountryData(cateogryMap(data.data.sticker.category));
         setAd(data.data.ad);
       }
+      console.log(data.data);
     });
 
   useEffect(() => {

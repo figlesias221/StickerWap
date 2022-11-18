@@ -2,8 +2,6 @@ import express from "express";
 
 import auth from "../middleware/auth";
 const router = express.Router();
-
-// Get stickers from album
 router.get("/", auth, async (req: any, res) => {
   try {
     const album = req.user.album;
@@ -23,7 +21,6 @@ router.post("/:id", auth, async (req: any, res) => {
     await req.user.save();
     res.send(album);
   } catch (e) {
-    console.log(e);
     res.status(500).send();
   }
 });

@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+import { store } from 'redux/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const api = axios.create({
