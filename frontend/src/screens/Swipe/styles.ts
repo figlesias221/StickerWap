@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { screenHeight } from 'styles/theme';
 
 const styles = StyleSheet.create({
@@ -24,14 +25,15 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 25,
+    marginBottom: 25,
   },
   sticker: {
     width: '80%',
     height: screenHeight * 0.5,
-    backgroundColor: '#F2F2F2',
     borderRadius: 20,
-    borderColor: '#04B600',
-    borderWidth: 2,
+    borderColor: 'grey',
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
@@ -42,8 +44,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    width: '90%',
-    height: '90%',
+    width: '100%',
+    height: '100%',
     borderRadius: 20,
   },
   stickerTitle: {
@@ -87,8 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '90%',
-    marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 40,
   },
   buttonRed: {
     width: '45%',
@@ -144,6 +145,22 @@ const styles = StyleSheet.create({
     color: 'grey',
     fontFamily: 'Raleway',
   },
+  stickerCountry: {
+    fontSize: 36,
+    color: 'grey',
+    fontFamily: 'Raleway',
+    textAlign: 'center',
+    marginTop: 15,
+  },
+  stickerId: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: 'grey',
+    fontFamily: 'Raleway',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
   adContainer: {
     width: '100%',
     height: 100,
@@ -151,7 +168,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
   },
 });
 

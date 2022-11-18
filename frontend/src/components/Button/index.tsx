@@ -1,9 +1,8 @@
 import React from 'react';
 import { Pressable, Text } from 'react-native';
-import { primary as primaryColor, secondary } from 'styles/theme';
-import { buttonText } from 'styles/typography';
-import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+
+import styles from './styles';
 
 interface Props {
   label: string;

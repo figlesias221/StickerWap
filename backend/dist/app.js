@@ -42,9 +42,7 @@ socketIO.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function
     yield Chat.getAllChats().then((chatsFromDB) => {
         chatList = chatsFromDB;
     });
-    console_1.default.log(`⚡: ${socket.id} user just connected!`);
     socket.on("createChat", (user1, user2) => {
-        console_1.default.log(user1, user2);
         const chat = new Chat({
             _id: new mongoose_1.default.Types.ObjectId(),
             messages: [],
@@ -82,7 +80,6 @@ socketIO.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function
     });
     socket.on("disconnect", () => {
         socket.disconnect();
-        console_1.default.log("🔥: A user disconnected");
     });
 }));
 models_1.default.mongoose
@@ -120,4 +117,5 @@ app.use("/regions", regions_1.default);
 http.listen(port, () => {
     return console_1.default.log(`Express is listening at http://localhost:${port}`);
 });
+module.exports = app;
 //# sourceMappingURL=app.js.map

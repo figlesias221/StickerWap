@@ -1,4 +1,3 @@
-import Button from 'components/Button';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -15,12 +14,14 @@ import {
 import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useSelector } from 'react-redux';
+
 import { setUserData, signOut } from 'redux/slices/authSlice';
 import { store } from 'redux/store';
 import spacingStyles from 'styles/spacing';
 import i18n from 'translations';
 import api from 'utils/openUrl/api';
 import { styles } from './styles';
+import Button from 'components/Button';
 
 const Settings = () => {
   const { t } = useTranslation();

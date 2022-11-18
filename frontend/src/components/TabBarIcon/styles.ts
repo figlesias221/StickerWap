@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 import { gray, primary } from 'styles/theme';
 import { smallestFontSize } from 'styles/typography';
 

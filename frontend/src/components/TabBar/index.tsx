@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Pressable, View } from 'react-native';
 

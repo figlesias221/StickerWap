@@ -1,7 +1,5 @@
-// import SignInStack from 'navigation/stacks/SignInStack';
 import IScreens from './IScreens';
 import { SIGNIN, SIGNUP } from 'utils/route';
-import i18n from 'translations';
 import SignIn from 'screens/SignIn';
 import SignUp from 'screens/SignUp';
 

@@ -35,7 +35,6 @@ router.post("/:id", auth_1.default, (req, res) => __awaiter(void 0, void 0, void
         res.send(album);
     }
     catch (e) {
-        console.log(e);
         res.status(500).send();
     }
 }));

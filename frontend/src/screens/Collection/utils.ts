@@ -60,7 +60,7 @@ export const cateogryMap = (category: string) => {
     case 'Poland':
       return {
         abreviation: 'POL',
-        color: '#FF5C5C',
+        color: '#54FF00',
       };
     case 'France':
       return {

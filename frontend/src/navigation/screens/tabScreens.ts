@@ -12,7 +12,6 @@ import {
 } from 'utils/route';
 import { Chat, Menu, Profile, Swap } from 'assets';
 import i18n from 'translations';
-
 import IScreens from './IScreens';
 import CollectionStack from 'navigation/stacks/CollectionStack';
 import SwipeStack from 'navigation/stacks/SwipeStack';

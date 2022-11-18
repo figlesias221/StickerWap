@@ -17,12 +17,19 @@ target 'StickerWap' do
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   target 'StickerWapTests' do
     inherit! :complete
     # Pods for testing
   end
 
   post_install do |installer|
+      installer.pods_project.targets.each do |target|
+      if target.name == "react-native-config"
+        target.remove_from_project
+      end
+    end
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end

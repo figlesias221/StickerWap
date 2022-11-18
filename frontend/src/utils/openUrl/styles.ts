@@ -1,7 +1,6 @@
 import { primary, white } from 'styles/theme';
 
 const styles = {
-  // iOS Properties
   dismissButtonStyle: 'cancel',
   preferredBarTintColor: white,
   preferredControlTintColor: primary,
@@ -11,7 +10,6 @@ const styles = {
   modalTransitionStyle: 'coverVertical',
   modalEnabled: true,
   enableBarCollapsing: false,
-  // Android Properties
   showTitle: true,
   toolbarColor: primary,
   secondaryToolbarColor: 'black',

@@ -1,10 +1,9 @@
 import React from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
-
 import { NavigationContainer } from '@react-navigation/native';
-import { useAppSelector } from 'hooks/redux';
 import { Platform, StatusBar } from 'react-native';
+
+import { useAppSelector } from 'hooks/redux';
 import { UNAUTH_STACK } from 'utils/route';
 import AuthNavigator from './navigators/AuthNavigator';
 import UnauthNavigator from './navigators/UnauthNavigator';

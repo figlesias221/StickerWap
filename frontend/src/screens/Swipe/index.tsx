@@ -4,9 +4,9 @@ import {
   Text,
   SafeAreaView,
   useColorScheme,
-  ScrollView,
   TouchableOpacity,
   Image,
+  Linking
 } from 'react-native';
 
 import styles from './styles';
@@ -18,9 +18,9 @@ import api from 'utils/openUrl/api';
 import { cateogryMap, newShade } from 'screens/Collection/utils';
 import socket from 'utils/socket';
 import { useSelector } from 'react-redux';
+import Sticker from 'screens/Swipe/Sticker';
 
 const Swipe = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const [swipeData, setSwipeData] = useState<any>();
   const [ad, setAd] = useState<any>();
   const [countryData, setCountryData] = useState<any>();
@@ -30,21 +30,28 @@ const Swipe = () => {
     socket.emit('createChat', user1, user2);
   };
 
-  const handleSwipeSuccess = () => {
+  const handleSwipeTick = async () => {
     if (ad) {
-      getStickerData();
+      console.log("ad")
+      const supported = await Linking.canOpenURL(ad?.link);
+
+      if (supported) {
+        await Linking.openURL(ad?.link);
+      }
     } else {
+      console.log("noad")
       handleChat(swipeData.user_id, id);
-      getStickerData();
     }
+    getStickerData();
   };
 
-  const handlePressCross = () => {
+  const handleSwipeCross = () => {
     getStickerData();
   };
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
+      console.log(data)
       if (data?.response?.status === 400) {
         setAd(null);
         setSwipeData(null);
@@ -58,6 +65,7 @@ const Swipe = () => {
         setCountryData(cateogryMap(data.data.sticker.category));
         setAd(data.data.ad);
       }
+      console.log(data.data);
     });
 
   useEffect(() => {
@@ -66,94 +74,47 @@ const Swipe = () => {
 
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.container}>
-          <LinearGradient
-            colors={['#04B600', '#0094FF']}
-            style={styles.linearGradient}
-          >
-            <Text style={styles.bigHeader}>{i18n.t('swipe.title')}</Text>
-          </LinearGradient>
-          <View style={styles.stickerContainer}>
-            <View style={styles.sticker}>
-              {ad ? (
-                <View style={styles.adContainer}>
-                  <Text>{ad?.title}</Text>
-                  <Text>{ad?.description}</Text>
-                  <Image
-                    source={{ uri: ad?.image }}
-                    style={{ width: 200, height: 300 }}
-                  />
-                  <Text>{ad?.link}</Text>
-                </View>
-              ) : swipeData ? (
-                <View
-                  style={[
-                    styles.cardContainer,
-                    {
-                      backgroundColor: newShade(
-                        countryData ? countryData.color : '#000',
-                        180,
-                      ),
-                    },
-                  ]}
-                >
-                  <Text style={styles.stickerText}>
-                    {countryData?.abreviation}
-                  </Text>
-                  <Image
-                    source={{
-                      uri: swipeData?.flag,
-                    }}
-                    style={{ width: 100, height: 60 }}
-                  />
-                  <Text style={styles.stickerText}>
-                    {swipeData?.sticker?.name}
-                  </Text>
-                  <Text style={styles.stickerText}>
-                    {swipeData?.sticker?.category}
-                  </Text>
-                </View>
-              ) : (
-                <View style={styles.cardContainer}>
-                  <Text style={styles.stickerText}>No more stickers</Text>
-                </View>
-              )}
-            </View>
-          </View>
-          <View style={styles.buttonsContainer}>
-            <TouchableOpacity
-              style={styles.buttonGreen}
-              onPress={handlePressCross}
-            >
-              <LinearGradient
-                colors={['#FF8A00', '#E12900']}
-                style={styles.linearGradientButton}
-              >
-                <Image
-                  source={Cross}
-                  style={{ tintColor: 'white', width: 20, height: 20 }}
-                />
-              </LinearGradient>
-            </TouchableOpacity>
+      {/* <ScrollView contentInsetAdjustmentBehavior="automatic"> */}
+      <View style={styles.container}>
+        <LinearGradient
+          colors={['#04B600', '#0094FF']}
+          style={styles.linearGradient}
+        >
+          <Text style={styles.bigHeader}>{i18n.t('swipe.title')}</Text>
+        </LinearGradient>
 
-            <TouchableOpacity
-              style={styles.buttonRed}
-              onPress={handleSwipeSuccess}
+        <Sticker ad={ad} swipeData={swipeData} countryData={countryData} />
+
+        <View style={styles.buttonsContainer}>
+          <TouchableOpacity
+            style={styles.buttonGreen}
+            onPress={handleSwipeCross}
+          >
+            <LinearGradient
+              colors={['#FF8A00', '#E12900']}
+              style={styles.linearGradientButton}
             >
-              <LinearGradient
-                colors={['#58DBDB', '#58DB72']}
-                style={styles.linearGradientButton}
-              >
-                <Image
-                  source={Tick}
-                  style={{ tintColor: 'white', width: 25, height: 25 }}
-                />
-              </LinearGradient>
-            </TouchableOpacity>
-          </View>
+              <Image
+                source={Cross}
+                style={{ tintColor: 'white', width: 20, height: 20 }}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.buttonRed} onPress={handleSwipeTick}>
+            <LinearGradient
+              colors={['#58DBDB', '#58DB72']}
+              style={styles.linearGradientButton}
+            >
+              <Image
+                source={Tick}
+                style={{ tintColor: 'white', width: 25, height: 25 }}
+              />
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
