@@ -37,6 +37,7 @@ router.post("/signup", function (req, res) {
                 email: user.email,
                 region: user.region,
                 token: token,
+                album: user.album,
             });
         }
         catch (error) {
@@ -94,6 +95,16 @@ router.get("/me", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0
             email: user.email,
             region: user.region,
         });
+    }
+    catch (e) {
+        res.status(500).send();
+    }
+}));
+router.get("/username/:id", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = req.params.id;
+        const user = yield User.getUsernameById(userId);
+        res.send({ user });
     }
     catch (e) {
         res.status(500).send();

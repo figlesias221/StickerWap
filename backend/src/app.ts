@@ -3,11 +3,14 @@ import userRouter from "./routes/user";
 import stickersRouter from "./routes/stickers";
 import albumRouter from "./routes/album";
 import swipeRouter from "./routes/swipe";
-import messagesRouter from "./routes/messages";
+import messagesRouter from "./routes/chats";
 import regionsRouter from "./routes/regions";
 import db from "./models";
 import { createQatarStickerList } from "./scripts/createStickers";
+import console from "console";
+import mongoose from "mongoose";
 const Album = require("./models/album");
+const Chat = require("./models/chats");
 
 const app = express();
 const port = 3000;
@@ -26,28 +29,34 @@ const socketIO = require("socket.io")(http, {
 const generateID = () => Math.random().toString(36).substring(2, 10);
 let chatList = [];
 
-socketIO.on("connection", (socket) => {
-  console.log(`⚡: ${socket.id} user just connected!`);
-
-  socket.on("createChat", (chatName, user1, user2) => {
-    socket.join(chatName);
-    chatList.unshift({
-      id: generateID(),
-      chatName,
-      messages: [],
-      users: [user1, user2],
-    });
-
-    socket.emit("chatList", chatList);
+socketIO.on("connection", async (socket) => {
+  await Chat.getAllChats().then((chatsFromDB) => {
+    chatList = chatsFromDB;
   });
 
-  socket.on("disconnect", () => {
-    socket.disconnect();
-    console.log("🔥: A user disconnected");
+  socket.on("createChat", (user1: any, user2: any) => {
+    const chat = new Chat({
+      _id: new mongoose.Types.ObjectId(),
+      messages: [],
+      userId1: user1,
+      userId2: user2,
+    });
+
+    chatList.push(chat);
+
+    let chatListCopy = chatList;
+
+    chat.save();
+    socket.emit(
+      "foundChatList",
+      chatListCopy.filter(
+        (chat) => chat.userId1 === user1 || chat.userId2 === user1
+      )
+    );
   });
 
   socket.on("findChat", (id) => {
-    let result = chatList.filter((chat) => chat.id == id);
+    let result = chatList.filter((chat) => chat._id == id);
     socket.emit("foundChat", result[0]?.messages);
   });
 
@@ -65,15 +74,25 @@ socketIO.on("connection", (socket) => {
 
     socket.to(result[0].chatName).emit("chatMessage", newMessage);
     result[0].messages.push(newMessage);
+    Chat.AddMessage(chat_id, newMessage);
 
-    socket.emit("chatList", chatList);
     socket.emit("foundChat", result[0]?.messages);
+    socket.emit(
+      "foundChatList",
+      chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user)
+    );
   });
-});
 
-app.get("/chats", (req, res) => {
-  res.json(chatList);
-  console.log("⚡: chatList", chatList);
+  socket.on("chatList", (id: any) => {
+    socket.emit(
+      "foundChatList",
+      chatList.filter((chat) => chat.userId1 === id || chat.userId2 === id)
+    );
+  });
+
+  socket.on("disconnect", () => {
+    socket.disconnect();
+  });
 });
 
 db.mongoose

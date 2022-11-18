@@ -26,28 +26,31 @@ const Swipe = () => {
   const [countryData, setCountryData] = useState<any>();
   const { id } = useSelector((state: RootState) => state.auth.data);
 
-  const handleChat = (name: string, user1: string, user2: string) => {
-    socket.emit('createChat', name, user1, user2);
+  const handleChat = (user1: string, user2: string) => {
+    socket.emit('createChat', user1, user2);
   };
 
   const handleSwipeSuccess = () => {
-    api
-      .post('/swipe', {
-        user_id: '6369ac9cda56ac6f887f6438',
-        randomSticker: 3,
-      })
-      .then(res => {
-        handleChat('testtttt', '6369ac9cda56ac6f887f6438', id);
-      })
-      .catch(err => console.log(err));
+    if (ad) {
+      getStickerData();
+    } else {
+      handleChat(swipeData.user_id, id);
+      getStickerData();
+    }
+  };
+
+  const handlePressCross = () => {
     getStickerData();
   };
 
   const getStickerData = () =>
     api.get('/swipe').then(async (data: any) => {
       if (data?.response?.status === 400) {
+        setAd(null);
+        setSwipeData(null);
         throw data?.response?.data?.error;
       }
+
       if (data.data.ad) {
         setAd(data.data.ad);
       } else {
@@ -83,7 +86,7 @@ const Swipe = () => {
                   />
                   <Text>{ad?.link}</Text>
                 </View>
-              ) : (
+              ) : swipeData ? (
                 <View
                   style={[
                     styles.cardContainer,
@@ -111,11 +114,18 @@ const Swipe = () => {
                     {swipeData?.sticker?.category}
                   </Text>
                 </View>
+              ) : (
+                <View style={styles.cardContainer}>
+                  <Text style={styles.stickerText}>No more stickers</Text>
+                </View>
               )}
             </View>
           </View>
           <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.buttonGreen}>
+            <TouchableOpacity
+              style={styles.buttonGreen}
+              onPress={handlePressCross}
+            >
               <LinearGradient
                 colors={['#FF8A00', '#E12900']}
                 style={styles.linearGradientButton}

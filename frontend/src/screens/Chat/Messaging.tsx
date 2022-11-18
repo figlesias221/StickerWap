@@ -72,8 +72,6 @@ const Messaging = ({ route, navigation }: any) => {
     });
   };
 
-  console.log(chatMessages);
-
   return (
     <SafeAreaView style={spacingStyles.mainScreen}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

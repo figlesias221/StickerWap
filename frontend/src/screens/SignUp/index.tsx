@@ -67,6 +67,7 @@ const SignUp = () => {
     try {
       const { data } = await singup();
       AsyncStorage.setItem('token', data.token);
+      AsyncStorage.setItem('id', data.id);
       dispatch(
         loginSuccess({
           accessToken: data.token,
