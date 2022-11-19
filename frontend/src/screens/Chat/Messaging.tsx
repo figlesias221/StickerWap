@@ -92,7 +92,7 @@ const Messaging = ({ route, navigation }: any) => {
               keyExtractor={item => item.id}
             />
           ) : (
-            <Text>{i18n.t('chat.no-messages')}</Text>
+            <Text style={styles.noMessages}>{i18n.t('chat.no-messages')}</Text>
           )}
         </View>
 

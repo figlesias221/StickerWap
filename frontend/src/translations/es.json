@@ -19,7 +19,8 @@
   "chat": {
     "title": "Mensajes",
     "no-messages": "No hay mensajes",
-    "placeHolder": "Escribe un mensaje"
+    "placeHolder": "Escribe un mensaje",
+    "no-chats": "No tienes conversaciones."
   },
   "signin": {
     "title": "Iniciar sesión",

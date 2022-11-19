@@ -22,6 +22,7 @@ import i18n from 'translations';
 import api from 'utils/openUrl/api';
 import { styles } from './styles';
 import Button from 'components/Button';
+import { emptyAlbumState } from 'redux/slices/collectionSlice';
 
 const Settings = () => {
   const { t } = useTranslation();
@@ -104,6 +105,7 @@ const Settings = () => {
 
   const SignOut = () => {
     dispatch(signOut());
+    dispatch(emptyAlbumState())
   };
 
   return (

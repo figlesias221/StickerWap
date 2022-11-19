@@ -11,8 +11,8 @@ router.get("/", auth, async (req: any, res) => {
       res.send({ ...(await randomSticker(req)), ad: null });
     } else {
       const ad = {
-        title: "Haz Click Aquí",
-        description: "No te lo puedes perder",
+        title: "Ad Title",
+        description: "Ad Description",
         image: "https://picsum.photos/200/300",
         link: "https://www.google.com",
       };

@@ -19,7 +19,8 @@
   "chat": {
     "title": "Chat",
     "no-messages": "No messages yet",
-    "placeHolder": "Type a message"
+    "placeHolder": "Type a message",
+    "no-chats": "No chats."
   },
   "signin": {
     "title": "Sign In",

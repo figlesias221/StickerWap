@@ -46,7 +46,7 @@ const Chat = () => {
           />
         ) : (
           <View style={styles.chatemptyContainer}>
-            <Text style={styles.emptyText}>No chats</Text>
+            <Text style={styles.emptyText}>{i18n.t('chat.no-chats')}</Text>
           </View>
         )}
       </View>

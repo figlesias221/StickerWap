@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 20,
     fontFamily: 'Raleway',
+    fontWeight: "200",
   },
 });
 
