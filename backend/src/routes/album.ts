@@ -5,7 +5,6 @@ import auth from "../middleware/auth";
 const Album = require("../models/album");
 const router = express.Router();
 
-// Get stickers from album
 router.get("/", auth, async (req: any, res) => {
   try {
     const album = await Album.findOne({ name: "Qatar" });

@@ -43,16 +43,22 @@ socketIO.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function
         chatList = chatsFromDB;
     });
     socket.on("createChat", (user1, user2) => {
-        const chat = new Chat({
-            _id: new mongoose_1.default.Types.ObjectId(),
-            messages: [],
-            userId1: user1,
-            userId2: user2,
+        // Check if chat already exists in DB (user1 and user2 are in the same chat)
+        const chatExists = chatList.find((chat) => {
+            return ((chat.userId1 === user1 && chat.userId2 === user2) ||
+                (chat.userId1 === user2 && chat.userId2 === user1));
         });
-        chatList.push(chat);
-        let chatListCopy = chatList;
-        chat.save();
-        socket.emit("foundChatList", chatListCopy.filter((chat) => chat.userId1 === user1 || chat.userId2 === user1));
+        if (!chatExists) {
+            const chat = new Chat({
+                _id: new mongoose_1.default.Types.ObjectId(),
+                messages: [],
+                userId1: user1,
+                userId2: user2,
+            });
+            chatList.push(chat);
+            chat.save();
+        }
+        socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === user1 || chat.userId2 === user1));
     });
     socket.on("findChat", (id) => {
         var _a;

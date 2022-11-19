@@ -51,7 +51,7 @@ const SignIn = () => {
     try {
       const { data } = await login();
       await AsyncStorage.setItem('token', data.token);
-      AsyncStorage.setItem('id', data.id);
+      await AsyncStorage.setItem('id', data.id);
       dispatch(
         loginSuccess({
           accessToken: data.token,

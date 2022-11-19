@@ -35,21 +35,28 @@ socketIO.on("connection", async (socket) => {
   });
 
   socket.on("createChat", (user1: any, user2: any) => {
-    const chat = new Chat({
-      _id: new mongoose.Types.ObjectId(),
-      messages: [],
-      userId1: user1,
-      userId2: user2,
+    const chatExists = chatList.find((chat) => {
+      return (
+        (chat.userId1 === user1 && chat.userId2 === user2) ||
+        (chat.userId1 === user2 && chat.userId2 === user1)
+      );
     });
 
-    chatList.push(chat);
+    if (!chatExists) {
+      const chat = new Chat({
+        _id: new mongoose.Types.ObjectId(),
+        messages: [],
+        userId1: user1,
+        userId2: user2,
+      });
 
-    let chatListCopy = chatList;
+      chatList.push(chat);
+      chat.save();
+    }
 
-    chat.save();
     socket.emit(
       "foundChatList",
-      chatListCopy.filter(
+      chatList.filter(
         (chat) => chat.userId1 === user1 || chat.userId2 === user1
       )
     );

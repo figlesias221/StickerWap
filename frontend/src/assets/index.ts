@@ -8,3 +8,5 @@ export { default as Logo } from './logo.png';
 export { default as Cross } from './cross.png';
 export { default as Tick } from './tick.png';
 export { default as Send } from './send.png';
+export { default as Stadium } from './stadium.png';
+export { default as WC } from './wc.png';

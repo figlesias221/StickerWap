@@ -8,7 +8,8 @@
     "stadiums": "Estadios y Pelota"
   },
   "swipe": {
-    "title": "Swipe"
+    "title": "Swipe",
+    "empty": "No hay nada que mostrar"
   },
   "settings": {
     "title": "Perfil",
