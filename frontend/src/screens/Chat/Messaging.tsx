@@ -83,6 +83,7 @@ const Messaging = ({ route, navigation }: any) => {
             { paddingVertical: 15, paddingHorizontal: 10 },
           ]}
         >
+          <Text style={styles.messagingscreenTitle}>{name}</Text>
           {chatMessages[0] ? (
             <FlatList
               data={chatMessages}

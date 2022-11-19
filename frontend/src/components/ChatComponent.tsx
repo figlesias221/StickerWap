@@ -21,7 +21,7 @@ const ChatComponent = ({ item }: any) => {
       'Messaging' as never,
       {
         chatId: item._id,
-        name: item.name,
+        name: user,
       } as never,
     );
   };
