@@ -13,7 +13,6 @@
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
-    "@react-spring/native": "9.5.5",
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.26.0",
     "i18next": "^21.5.2",
@@ -22,7 +21,6 @@
     "react-i18next": "^11.14.2",
     "react-native": "0.66.2",
     "react-native-animated-loader": "^1.0.0",
-    "react-native-config": "^1.4.11",
     "react-native-emoji": "^1.8.0",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-inappbrowser-reborn": "^3.6.3",
@@ -36,7 +34,6 @@
     "react-native-vector-icons": "^9.2.0",
     "react-query": "^3.34.8",
     "react-redux": "^7.2.6",
-    "react-tinder-card": "^1.6.2",
     "redux-persist": "^6.0.0",
     "socket.io-client": "^4.5.3"
   },

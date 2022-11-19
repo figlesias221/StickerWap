@@ -70,58 +70,66 @@ const Collection = () => {
   const dispatch = useDispatch();
 
   const getCollection = async () =>
-    await api.get('/stickers').then((data: any) => {
-      if (data?.response?.status === 400) {
-        throw data?.response?.data?.error;
-      }
-      dispatch(setUserStickersAction(data?.data?.album));
-      setUserStickers(data?.data?.album);
-    });
+    await api
+      .get('/stickers')
+      .then((data: any) => {
+        if (data?.response?.status === 400) {
+          throw data?.response?.data?.error;
+        }
+        dispatch(setUserStickersAction(data?.data?.album));
+        setUserStickers(data?.data?.album);
+      })
+      .catch((error: any) => {});
 
   const getAlbum = async () =>
-    await api.get('/albums').then((data: any) => {
-      if (data?.response?.status === 400) {
-        throw data?.response?.data?.error;
-      }
-
-      setName(data.data.album.name);
-      const list = data?.data?.album?.stickerList;
-      const stickersByCategory: AlbumType[] = [];
-
-      Object.keys(list).forEach(key => {
-        const sticker = list[key];
-        sticker.key = key;
-        const category = sticker.category;
-        const categoryIndex = stickersByCategory.findIndex(
-          item => item.category === category,
-        );
-        if (categoryIndex === -1) {
-          stickersByCategory.push({
-            category,
-            stickers: [sticker],
-          });
-        } else {
-          stickersByCategory[categoryIndex].stickers.push(sticker);
+    await api
+      .get('/albums')
+      .then((data: any) => {
+        if (data?.response?.status === 400 || data?.response?.status === 500) {
+          throw data?.response?.data?.error;
         }
-      });
+        setName(data.data.album.name);
+        const list = data?.data?.album?.stickerList;
+        const stickersByCategory: AlbumType[] = [];
 
-      setData(stickersByCategory);
-      dispatch(setAlbum(stickersByCategory));
-
-      const items: any = [];
-      stickersByCategory.forEach(item => {
-        items.push({
-          label: item.category,
-          value: item.category,
+        Object.keys(list).forEach(key => {
+          const sticker = list[key];
+          sticker.key = key;
+          const category = sticker.category;
+          const categoryIndex = stickersByCategory.findIndex(
+            item => item.category === category,
+          );
+          if (categoryIndex === -1) {
+            stickersByCategory.push({
+              category,
+              stickers: [sticker],
+            });
+          } else {
+            stickersByCategory[categoryIndex].stickers.push(sticker);
+          }
         });
-      });
-      setItems(items);
-    });
+
+        setData(stickersByCategory);
+        dispatch(setAlbum(stickersByCategory));
+
+        const items: any = [];
+        stickersByCategory.forEach(item => {
+          items.push({
+            label: item.category,
+            value: item.category,
+          });
+        });
+        setItems(items);
+      })
+      .catch((error: any) => {});
 
   useEffect(() => {
     const controller = new AbortController();
-    getAlbum();
-    getCollection();
+    try {
+      getAlbum();
+      getCollection();
+    } catch (error) {}
+
     return () => controller.abort();
   }, []);
 
