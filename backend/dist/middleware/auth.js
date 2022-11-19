@@ -11,10 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+require("dotenv").config();
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = req.header("Authorization").replace("Bearer ", "");
-        const decoded = jwt.verify(token, "casanova");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = yield User.findOne({
             _id: decoded._id,
             "tokens.token": token,

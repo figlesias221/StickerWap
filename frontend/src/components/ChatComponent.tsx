@@ -4,11 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import { styles } from 'utils/stylesChat';
 import api from 'utils/openUrl/api';
+import { useSelector } from 'react-redux';
 
 const ChatComponent = ({ item }: any) => {
   const navigation = useNavigation();
   const [messages, setMessages] = useState<any>({});
   const [user, setUser] = useState<any>('');
+  const { id } = useSelector((state: RootState) => state.auth.data);
 
   useLayoutEffect(() => {
     setMessages(item.messages[item.messages.length - 1]);
@@ -19,7 +21,7 @@ const ChatComponent = ({ item }: any) => {
       'Messaging' as never,
       {
         chatId: item._id,
-        name: item.name,
+        name: user,
       } as never,
     );
   };
@@ -34,7 +36,8 @@ const ChatComponent = ({ item }: any) => {
   };
 
   useEffect(() => {
-    getUsernameById(item.userId1);
+    let idToFind = item.userId1 === id ? item.userId2 : item.userId1;
+    getUsernameById(idToFind);
   }, []);
 
   return (

@@ -37,10 +37,14 @@ const collection = createSlice({
     addUserSticker(state, { payload }: PayloadAction<any>) {
       state.userStickers[payload] += 1;
     },
+    emptyAlbumState(state) {
+      state.album = [];
+      state.userStickers = [];
+    }
   },
 });
 
-export const { setAlbum, setUserStickers, deleteUserSticker, addUserSticker } =
+export const { setAlbum, setUserStickers, deleteUserSticker, addUserSticker, emptyAlbumState } =
   collection.actions;
 
 export default collection.reducer;

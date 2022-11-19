@@ -5,6 +5,19 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginTop: 20,
   },
+  noMessages: {
+    fontFamily: 'Raleway',
+    fontSize: 20,
+    fontWeight: '200',
+    margin: 20,
+  },
+  messagingscreenTitle: {
+    fontFamily: 'Raleway',
+    fontSize: 30,
+    fontWeight: '600',
+    marginBottom: 20,
+    marginLeft: 20,
+  },
   messaginginputContainer: {
     width: '100%',
     minHeight: 100,
@@ -19,11 +32,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10,
     borderRadius: 10,
+    fontFamily: 'Raleway',
   },
   mmessageWrapper: {
-    width: '100%',
     alignItems: 'flex-start',
     marginBottom: 15,
+    marginLeft: 20,
+    marginRight: 20,
   },
   mmessage: {
     maxWidth: '50%',

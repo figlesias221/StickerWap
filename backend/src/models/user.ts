@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
-  const token = jwt.sign({ _id: user._id.toString() }, "casanova");
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
 
   user.tokens = user.tokens.concat({ token });
   await user.save();
@@ -65,7 +65,7 @@ userSchema.statics.getUsernameById = async function (userId) {
 
 userSchema.statics.getRandomUser = async function (region, userId) {
   const user = await User.aggregate([
-    { $match: { _id: { $ne: mongoose.Types.ObjectId(userId) } } },
+    { $match: { region, _id: { $ne: mongoose.Types.ObjectId(userId) } } },
     { $sample: { size: 1 } },
   ]);
   return user;

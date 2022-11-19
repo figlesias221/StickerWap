@@ -83,6 +83,7 @@ const Messaging = ({ route, navigation }: any) => {
             { paddingVertical: 15, paddingHorizontal: 10 },
           ]}
         >
+          <Text style={styles.messagingscreenTitle}>{name}</Text>
           {chatMessages[0] ? (
             <FlatList
               data={chatMessages}
@@ -92,7 +93,7 @@ const Messaging = ({ route, navigation }: any) => {
               keyExtractor={item => item.id}
             />
           ) : (
-            <Text>{i18n.t('chat.no-messages')}</Text>
+            <Text style={styles.noMessages}>{i18n.t('chat.no-messages')}</Text>
           )}
         </View>
 

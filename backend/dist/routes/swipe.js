@@ -24,8 +24,8 @@ router.get("/", auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, 
         }
         else {
             const ad = {
-                title: "Haz Click Aquí",
-                description: "No te lo puedes perder",
+                title: "Ad Title",
+                description: "Ad Description",
                 image: "https://picsum.photos/200/300",
                 link: "https://www.google.com",
             };
