@@ -1,7 +1,7 @@
 import express from "express";
-
 import auth from "../middleware/auth";
 const router = express.Router();
+
 router.get("/", auth, async (req: any, res) => {
   try {
     const album = req.user.album;
@@ -11,7 +11,6 @@ router.get("/", auth, async (req: any, res) => {
   }
 });
 
-// Post sticker to album
 router.post("/:id", auth, async (req: any, res) => {
   try {
     const stickerId = req.params.id;
@@ -25,7 +24,6 @@ router.post("/:id", auth, async (req: any, res) => {
   }
 });
 
-// Delete sticker from album
 router.delete("/:id", auth, async (req: any, res) => {
   try {
     const stickerId = req.params.id;
