@@ -39,11 +39,13 @@ socketIO.on("connection", async (socket) => {
       return (
         (chat.userId1 === user1 && chat.userId2 === user2) ||
         (chat.userId1 === user2 && chat.userId2 === user1) ||
-        !user1 || !user2
+        !user1 ||
+        !user2
       );
     });
 
     if (!chatExistsOrNullValue) {
+      console.log("creating chat", user1, user2);
       const chat = new Chat({
         _id: new mongoose.Types.ObjectId(),
         messages: [],
@@ -68,7 +70,7 @@ socketIO.on("connection", async (socket) => {
     socket.emit("foundChat", result[0]?.messages);
   });
 
-  socket.on("newMessage", (data) => {
+  socket.on("newMessage", (data: any) => {
     const { chat_id, message, user, timestamp } = data;
 
     let result = chatList.filter((chat) => chat.id == chat_id);

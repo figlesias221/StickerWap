@@ -22,7 +22,7 @@
 		5E0F1F90291434200013EC1A /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F87291434200013EC1A /* Raleway-SemiBold.ttf */; };
 		5E0F1F91291434200013EC1A /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E0F1F88291434200013EC1A /* Raleway-Thin.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		828175726C39F33C4586019E /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */; };
+		EDEA1E6029294107008B1886 /* libPods-StickerWap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEA1E5F29294107008B1886 /* libPods-StickerWap.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +64,7 @@
 		B78DD04939309928318ED045 /* Pods-StickerWap-StickerWapTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap-StickerWapTests.staging.xcconfig"; path = "Target Support Files/Pods-StickerWap-StickerWapTests/Pods-StickerWap-StickerWapTests.staging.xcconfig"; sourceTree = "<group>"; };
 		DCBC7FD643DC1F97A2E8538C /* Pods-StickerWap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickerWap.debug.xcconfig"; path = "Target Support Files/Pods-StickerWap/Pods-StickerWap.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EDEA1E5F29294107008B1886 /* libPods-StickerWap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-StickerWap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				828175726C39F33C4586019E /* libPods-StickerWap.a in Frameworks */,
+				EDEA1E6029294107008B1886 /* libPods-StickerWap.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +120,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EDEA1E5F29294107008B1886 /* libPods-StickerWap.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				2F6FE1E2A38C49BEB7D26816 /* libPods-StickerWap.a */,
 				A5BD86FB45E37C2D7068AB30 /* libPods-StickerWap-StickerWapTests.a */,
@@ -239,7 +241,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -484,7 +486,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = StickerWapTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -508,7 +510,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = StickerWapTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -619,7 +621,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -668,7 +670,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = StickerWapTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -734,7 +736,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -793,7 +795,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

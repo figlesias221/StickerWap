@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
+import i18n from 'translations';
 
 import styles from './styles';
 import { newShade } from 'screens/Collection/utils';
-import i18n from 'translations';
 import { Stadium, WC } from 'assets';
 
 const Sticker = (props: any) => {

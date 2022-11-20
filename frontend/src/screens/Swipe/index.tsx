@@ -38,32 +38,39 @@ const Swipe = () => {
     } else {
       handleChat(swipeData.user_id, id);
     }
-    getStickerData();
-    setTimeout(() => {}, 2000);
+
+    try {
+      getStickerData();
+    } catch (error) {}
+    setTimeout(() => {}, 1000);
   };
 
   const handleSwipeCross = () => {
-    getStickerData();
+    try {
+      getStickerData();
+    } catch (error) {}
   };
 
   const getStickerData = () =>
-    api.get('/swipe').then(async (data: any) => {
-      if (data?.response?.status === 400) {
-        setAd(null);
-        setSwipeData(null);
-        throw data?.response?.data?.error;
-      }
+    api
+      .get('/swipe')
+      .then(async (data: any) => {
+        if (data?.response?.status === 400) {
+          setAd(null);
+          setSwipeData(null);
+        }
 
-      if (data.data.ad) {
-        setAd(data.data.ad);
-      } else {
-        setTimeout(() => {
-          setSwipeData(data.data);
-          setCountryData(cateogryMap(data.data.sticker.category));
+        if (data.data.ad) {
           setAd(data.data.ad);
-        }, 700);
-      }
-    });
+        } else {
+          setTimeout(() => {
+            setSwipeData(data.data);
+            setCountryData(cateogryMap(data.data.sticker.category));
+            setAd(data.data.ad);
+          }, 700);
+        }
+      })
+      .catch(error => {});
 
   useEffect(() => {
     getStickerData();

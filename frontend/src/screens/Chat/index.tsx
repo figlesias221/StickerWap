@@ -1,17 +1,14 @@
 import ChatComponent from 'components/ChatComponent';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { SafeAreaView, View, Text, FlatList } from 'react-native';
-
+import { useSelector } from 'react-redux';
 import i18n from 'translations';
+
 import socket from 'utils/socket';
 import styles from './styles';
 import spacingStyles from 'styles/spacing';
-import api from 'utils/openUrl/api';
-import { useSelector } from 'react-redux';
 
 const Chat = () => {
-  const { t } = useTranslation();
   const [chats, setChats] = useState<any>([]);
   const { id } = useSelector((state: RootState) => state.auth.data);
 
