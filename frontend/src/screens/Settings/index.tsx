@@ -11,7 +11,6 @@ import {
   Button as RNButton,
   Alert,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useSelector } from 'react-redux';
 
@@ -22,7 +21,8 @@ import i18n from 'translations';
 import api from 'utils/openUrl/api';
 import { styles } from './styles';
 import Button from 'components/Button';
-import { emptyAlbumState } from 'redux/slices/collectionSlice';
+import { emptyAlbumState, setRegions } from 'redux/slices/collectionSlice';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const Settings = () => {
   const { t } = useTranslation();
@@ -30,7 +30,13 @@ const Settings = () => {
   const { dispatch } = store;
 
   const { data } = useSelector((state: RootState) => state.auth);
-  const [regions, setRegions] = useState([]);
+  const { regions } = useSelector((state: RootState) => state.collection);
+  const [regionList, setRegionsState] = useState(regions);
+  const [isFocus, setIsFocus] = useState(false);
+  const [email, setEmail] = useState(data?.email);
+  const [name, setName] = useState(data?.name);
+  const [region, setRegion] = useState(data?.region);
+  const [error, setError] = useState('');
 
   const getUserData = () =>
     api.get('/users/me').then((data: any) => {
@@ -46,11 +52,6 @@ const Settings = () => {
   useEffect(() => {
     getUserData();
   }, []);
-
-  const [email, setEmail] = useState(data?.email);
-  const [name, setName] = useState(data?.name);
-  const [region, setRegion] = useState(data?.region);
-  const [error, setError] = useState('');
 
   const handleEdit = () => {
     api
@@ -99,13 +100,19 @@ const Settings = () => {
 
   useEffect(() => {
     getRegions().then((data: any) => {
-      setRegions(data.data);
+      const regions = data.data.map((region: any) => ({
+        label: region,
+        value: region,
+      }));
+
+      setRegionsState(regions);
+      dispatch(setRegions(regions));
     });
   }, []);
 
   const SignOut = () => {
     dispatch(signOut());
-    dispatch(emptyAlbumState())
+    dispatch(emptyAlbumState());
   };
 
   return (
@@ -132,36 +139,40 @@ const Settings = () => {
                   secureTextEntry={field.label === 'password'}
                 />
               ) : (
-                <SelectDropdown
-                  buttonStyle={styles.dropStyle}
-                  dropdownStyle={styles.dropdown}
-                  dropdownIconPosition={'right'}
-                  renderDropdownIcon={isOpened => {
-                    return (
+                <>
+                  <Dropdown
+                    style={[
+                      styles.dropdown,
+                      isFocus && { borderColor: 'blue' },
+                    ]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    data={regionList}
+                    search
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder={!isFocus ? i18n.t('signup.region') : ''}
+                    searchPlaceholder="Search..."
+                    value={region}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={item => {
+                      setRegion(item.value);
+                      setIsFocus(false);
+                    }}
+                    renderRightIcon={() => (
                       <FontAwesome
-                        name={isOpened ? 'chevron-up' : 'chevron-down'}
+                        name={isFocus ? 'chevron-up' : 'chevron-down'}
                         color={'#444'}
                         size={14}
+                        style={{ marginRight: 10 }}
                       />
-                    );
-                  }}
-                  data={regions}
-                  search
-                  defaultValue={region}
-                  onSelect={(selectedItem, index) => {
-                    setRegion(selectedItem);
-                  }}
-                  buttonTextAfterSelection={(selectedItem, index) => {
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={(item, index) => {
-                    return item;
-                  }}
-                  searchPlaceHolder={i18n.t('signup.regionPlaceholder')}
-                  defaultButtonText={i18n.t('signup.regionPlaceholder')}
-                  buttonTextStyle={{ textAlign: 'left' }}
-                  rowTextStyle={{ textAlign: 'left' }}
-                />
+                    )}
+                  />
+                </>
               )}
             </View>
           ))}

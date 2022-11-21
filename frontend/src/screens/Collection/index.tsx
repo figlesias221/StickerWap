@@ -88,7 +88,6 @@ const Collection = () => {
         if (data?.response?.status === 400 || data?.response?.status === 500) {
           throw data?.response?.data?.error;
         }
-        setName(data.data.album.name);
         const list = data?.data?.album?.stickerList;
         const stickersByCategory: AlbumType[] = [];
 
@@ -124,13 +123,15 @@ const Collection = () => {
       .catch((error: any) => {});
 
   useEffect(() => {
-    const controller = new AbortController();
     try {
       getAlbum();
       getCollection();
     } catch (error) {}
 
-    return () => controller.abort();
+    return () => {
+      setAlbum([]);
+      setUserStickersAction([]);
+    };
   }, []);
 
   return (

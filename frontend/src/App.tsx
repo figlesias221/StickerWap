@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import 'translations';
 import SplashScreen from 'react-native-splash-screen';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { LogBox } from 'react-native';
 
 const App = () => {
   const queryClient = new QueryClient();
@@ -13,6 +14,9 @@ const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
+
+  LogBox.ignoreLogs(['Warning: ...']);
+  LogBox.ignoreAllLogs();
 
   return (
     <QueryClientProvider client={queryClient}>

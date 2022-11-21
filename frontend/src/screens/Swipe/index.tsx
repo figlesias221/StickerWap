@@ -36,6 +36,9 @@ const Swipe = () => {
         await Linking.openURL(ad?.link);
       }
     } else {
+      if (!swipeData) {
+        return;
+      }
       handleChat(swipeData.user_id, id);
     }
 
