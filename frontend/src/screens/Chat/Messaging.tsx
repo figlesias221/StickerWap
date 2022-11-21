@@ -90,7 +90,7 @@ const Messaging = ({ route, navigation }: any) => {
               renderItem={({ item }) => (
                 <MessageComponent item={item} user={user} />
               )}
-              keyExtractor={item => item.id}
+              keyExtractor={item => item.text}
             />
           ) : (
             <Text style={styles.noMessages}>{i18n.t('chat.no-messages')}</Text>

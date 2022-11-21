@@ -14,11 +14,13 @@ export interface AlbumType {
 export interface CollectionSliceState {
   album: AlbumType[];
   userStickers: number[];
+  regions: any;
 }
 
 const collectionInitialState: CollectionSliceState = {
   album: [],
   userStickers: [],
+  regions: [],
 };
 
 const collection = createSlice({
@@ -27,6 +29,9 @@ const collection = createSlice({
   reducers: {
     setAlbum(state, { payload }: PayloadAction<any>) {
       state.album = payload;
+    },
+    setRegions(state, { payload }: PayloadAction<any>) {
+      state.regions = payload;
     },
     setUserStickers(state, { payload }: PayloadAction<any>) {
       state.userStickers = payload;
@@ -40,11 +45,17 @@ const collection = createSlice({
     emptyAlbumState(state) {
       state.album = [];
       state.userStickers = [];
-    }
+    },
   },
 });
 
-export const { setAlbum, setUserStickers, deleteUserSticker, addUserSticker, emptyAlbumState } =
-  collection.actions;
+export const {
+  setAlbum,
+  setUserStickers,
+  deleteUserSticker,
+  addUserSticker,
+  emptyAlbumState,
+  setRegions,
+} = collection.actions;
 
 export default collection.reducer;

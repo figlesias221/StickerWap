@@ -9,7 +9,6 @@ import {
   TextInput,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SelectDropdown from 'react-native-select-dropdown';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import api from 'utils/openUrl/api';
@@ -19,6 +18,7 @@ import { store } from 'redux/store';
 import { loginSuccess } from 'redux/slices/authSlice';
 import spacingStyles from 'styles/spacing';
 import { styles } from './styles';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const SignUp = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,6 +28,7 @@ const SignUp = () => {
   const [region, setRegion] = useState('');
   const [regions, setRegions] = useState([]);
   const [error, setError] = useState('');
+  const [isFocus, setIsFocus] = useState(false);
   const { dispatch } = store;
 
   const getRegions = () =>
@@ -40,7 +41,11 @@ const SignUp = () => {
 
   useEffect(() => {
     getRegions().then((data: any) => {
-      setRegions(data.data);
+      const regions = data.data.map((region: any) => {
+        return { label: region, value: region };
+      });
+
+      setRegions(regions);
     });
   }, []);
 
@@ -129,36 +134,40 @@ const SignUp = () => {
                   secureTextEntry={field.label === 'password'}
                 />
               ) : (
-                <SelectDropdown
-                  buttonStyle={styles.dropStyle}
-                  dropdownStyle={styles.dropdown}
-                  dropdownIconPosition={'right'}
-                  renderDropdownIcon={isOpened => {
-                    return (
+                <>
+                  <Dropdown
+                    style={[
+                      styles.dropdown,
+                      isFocus && { borderColor: 'blue' },
+                    ]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    inputSearchStyle={styles.inputSearchStyle}
+                    iconStyle={styles.iconStyle}
+                    data={regions}
+                    search
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder={!isFocus ? i18n.t('signup.region') : ''}
+                    searchPlaceholder="Search..."
+                    value={region}
+                    onFocus={() => setIsFocus(true)}
+                    onBlur={() => setIsFocus(false)}
+                    onChange={item => {
+                      setRegion(item.value);
+                      setIsFocus(false);
+                    }}
+                    renderRightIcon={() => (
                       <FontAwesome
-                        name={isOpened ? 'chevron-up' : 'chevron-down'}
+                        name={isFocus ? 'chevron-up' : 'chevron-down'}
                         color={'#444'}
                         size={14}
+                        style={{ marginRight: 10 }}
                       />
-                    );
-                  }}
-                  data={regions}
-                  search
-                  defaultValue={region}
-                  onSelect={(selectedItem, index) => {
-                    setRegion(selectedItem);
-                  }}
-                  buttonTextAfterSelection={(selectedItem, index) => {
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={(item, index) => {
-                    return item;
-                  }}
-                  searchPlaceHolder={i18n.t('signup.regionPlaceholder')}
-                  defaultButtonText={i18n.t('signup.regionPlaceholder')}
-                  buttonTextStyle={{ textAlign: 'left' }}
-                  rowTextStyle={{ textAlign: 'left' }}
-                />
+                    )}
+                  />
+                </>
               )}
             </View>
           ))}
