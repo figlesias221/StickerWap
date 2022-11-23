@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "637e0ab8603c06d7b2b930f2"
+  },
+  "userId1": "637e0a4a603c06d7b2b930a1",
+  "userId2": "637e0a90603c06d7b2b930ca",
+  "messages": [
+    {
+      "text": "¡Hola Valentín!",
+      "user": "637e0a90603c06d7b2b930ca",
+      "time": "08:58"
+    },
+    {
+      "text": "¡Qué linda App!",
+      "user": "637e0a90603c06d7b2b930ca",
+      "time": "08:58"
+    },
+    {
+      "text": "¿Me cambiás una figurita?",
+      "user": "637e0a90603c06d7b2b930ca",
+      "time": "08:58"
+    },
+    {
+      "text": "¡Sí claro!",
+      "user": "637e0a4a603c06d7b2b930a1",
+      "time": "15:33"
+    }
+  ],
+  "__v": 4
+},{
+  "_id": {
+    "$oid": "637e66ba151f9622b8d2a66d"
+  },
+  "userId1": "637e0a4a603c06d7b2b930a1",
+  "userId2": "637e6697151f9622b8d2a64c",
+  "messages": [
+    {
+      "text": "Hola Valentín, te cambio un estadio :)",
+      "user": "637e6697151f9622b8d2a64c",
+      "time": "15:30"
+    },
+    {
+      "text": "Déjamelo pensar",
+      "user": "637e0a4a603c06d7b2b930a1",
+      "time": "15:34"
+    }
+  ],
+  "__v": 2
+}]
