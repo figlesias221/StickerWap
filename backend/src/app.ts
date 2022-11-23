@@ -91,6 +91,11 @@ socketIO.on("connection", async (socket) => {
       "foundChatList",
       chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user)
     );
+
+    socket.emit(
+      "foundChatList",
+      chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user)
+    );
   });
 
   socket.on("chatList", (id: any) => {

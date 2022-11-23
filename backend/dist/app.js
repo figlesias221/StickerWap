@@ -73,6 +73,7 @@ socketIO.on("connection", async (socket) => {
         Chat.AddMessage(chat_id, newMessage);
         socket.emit("foundChat", (_a = result[0]) === null || _a === void 0 ? void 0 : _a.messages);
         socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user));
+        socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === user || chat.userId2 === user));
     });
     socket.on("chatList", (id) => {
         socket.emit("foundChatList", chatList.filter((chat) => chat.userId1 === id || chat.userId2 === id));

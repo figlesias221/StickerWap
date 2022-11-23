@@ -24,10 +24,6 @@ const Chat = () => {
     socket.on('foundChatList', (chatList: any) => {
       setChats(chatList);
     });
-
-    return () => {
-      socket.off('foundChatList');
-    };
   }, [socket]);
 
   return (

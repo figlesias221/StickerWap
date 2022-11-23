@@ -12,9 +12,9 @@ const ChatComponent = ({ item }: any) => {
   const [user, setUser] = useState<any>('');
   const { id } = useSelector((state: RootState) => state.auth.data);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMessages(item.messages[item.messages.length - 1]);
-  }, []);
+  }, [item]);
 
   const handleNavigation = () => {
     navigation.navigate(
